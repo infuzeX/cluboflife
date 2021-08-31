@@ -1,0 +1,132 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+nav {
+    background-color: black;
+    color: #fff;
+}
+nav ul{
+    display: flex;
+    list-style: none;
+    padding: 8px;
+    margin: 0px;
+    align-items: center;
+}
+nav ul li{
+    padding: 9px 24px;
+    cursor: pointer;
+}
+nav ul li a{
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 100;   
+    text-transform: uppercase; 
+}
+.left{
+    margin-left: auto;
+}
+
+/* next section */
+#con-welcome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 70vh; */
+}
+.con-main{
+    text-align: center;
+    width: 56vw;
+}
+.con-main h1{
+    font-size: 3.2rem;
+    font-weight: 400;
+
+}
+.input-parent{
+    width: 100%;
+    text-align: left;
+    font-size: 1.8rem;
+}
+.input-parent input{
+    display: block;
+    width: 100%;
+    font-size: 1.3rem;
+    padding: 8px;
+    background-color: #e5e5e5;
+    border: none;
+    margin-bottom: 16px;
+}
+#extra-btn{
+    display: flex;
+}
+#extra-btn span.left a{
+    color: #1ea8e1;
+}
+.signin{
+    display: flex;
+    margin-top: 23px;   
+}
+.signin input{
+    padding: 10px 32px;
+    background-color: #4A4A4A;
+    color: white;
+    border-radius: 24px;
+    font-size: 20px;
+}
+
+.con-new-account{
+    margin-top: 16px;
+}
+
+.con-new-account a{
+    color: #1ea8e1;
+}
+
+
+
+
+
+
+@media screen and (max-width: 768px) {
+    nav ul li {
+        padding: 10px 6px;
+    }
+    nav ul li a {
+        font-size: 1.1rem !important;
+    }
+    .con-main{
+        width: 82%;
+    }
+    .con-main h1 {
+        font-size: 2.9rem;
+        font-weight: 400;
+        margin-top: 4rem;
+        margin-bottom: 4rem;
+    }
+    .signin {
+        display: block;
+        margin-top: 54px;
+    }
+    .signin input {
+        padding: 18px 120px;
+        background-color: #4A4A4A;
+        color: white;
+        border-radius: 16px;
+        font-size: 23px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .signin input{
+        padding: 18px 92px;
+    }
+    .con-main h1{
+        margin-top: 2rem;
+        font-size: 2.6rem;
+        margin-bottom: 3rem;
+    }
+}
