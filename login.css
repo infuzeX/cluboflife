@@ -2,7 +2,7 @@ body{
     margin: 0px;
     padding: 0px;
 }
-
+/* Nav section */
 nav {
     background-color: black;
     color: #fff;
@@ -90,6 +90,7 @@ nav ul li a{
 
 
 
+/* media Querries */
 
 @media screen and (max-width: 768px) {
     nav ul li {
