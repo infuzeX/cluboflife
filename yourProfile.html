@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./yourprofile.css">
+    <title>Your Profile</title>
+
+</head>
+<body>
+    <section id="nav">
+        <nav>
+            <ul>
+                <li><a href="#" style="font-size:1.3rem">ooBlue</a></li>
+                <li class="left"><a href="#">ALL COURSES</a></li>
+                <li><a href="#">MY DASHBOARD</a></li>
+                <li><a href="#">VITORIO D</a></li>
+                <li id="font" onclick="show()">
+                    <a href="#" style="font-size:2rem">
+                        <i class="far fa-user-circle"></i>
+                    </a>
+                    <a class="font1" href="#">
+                        <i class="fas fa-caret-down"></i>
+                    </a>
+                </li>
+                <div class="dropdown none">
+                    <ul>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Sign Out</a></li>
+                    </ul>
+                </div>
+            </ul>
+        </nav>
+    </section>
+    <main>
+        <aside>
+            <div class="asideSelected">Profile</div>
+            <div>Notification</div>
+            <div>Order History</div>
+        </aside>
+        <section id="details">
+            <h1>Your Profile</h1>
+            <div class="details-flex-parent">
+                <div class="icon">
+                    <i class="fas fa-user"></i>
+                    <a href="#">Upload New Image</a>
+                </div>
+                <div class="form">
+                    <form action="">
+                        <div class="input">
+                            Email
+                            <input class="text-input" type="email" name="email" required>
+                        </div>
+                        <div class="input2">
+                            <div class="input">
+                                First Name
+                                <input class="text-input" type="text" name="first name" required>
+                            </div>
+                            <div class="input">
+                                Last Name
+                                <input class="text-input" type="text" name="lastename" required>
+                            </div>
+                        </div>
+                        <div class="input">
+                            Company
+                            <input class="text-input" type="text" name="company" required>
+                        </div>
+                        <div class="input">
+                            Professional Title
+                            <input class="text-input" type="text" name="title" required>
+                        </div>
+                        <div class="input">
+                            Timezone
+                            <select class="text-input" name="" id="" required>
+                                <option value="op0">Your time zone</option>
+                                <option value="op1">option 1</option>
+                                <option value="op2">option 2</option>
+                                <option value="op3">Option 3</option>
+                                <option value="op4">Option 4</option>
+                            </select>
+                        </div>
+                        <div class="input submit">
+                            <input type="submit" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <script>
+            var liButton = document.querySelector('.dropdown');
+            console.log(liButton);
+            function show() {
+                liButton.classList.toggle('none');
+            }
+        </script>
+        <script>
+            var asideBtn = document.querySelectorAll('aside div');
+            asideBtn.forEach(item => {
+                item.addEventListener('click', function(){
+                    item.classList.toggle('asideSelected');
+                })
+            })
+        </script>
+</body>
+</html>
