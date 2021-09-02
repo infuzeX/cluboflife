@@ -85,10 +85,10 @@ aside div{
     text-align: center;
 }
 .icon i{
-    font-size: 8rem;
+    font-size: 5rem;
     font-weight: 100;
-    margin-bottom: 10px;
-    border: 15px solid black;
+    margin-bottom: 14px;
+    border: 10px solid black;
     padding: 45px 54px;
     border-radius: 50%;
 }
@@ -100,8 +100,10 @@ aside div{
     font-weight: 600;
 }
 .form{
-    margin-left: 39px;
-    width: 57%;
+    /* margin-left: 39px;
+    width: 57%; */
+        /* margin-left: 39px; */
+        width: 60%;
 }
 form{
     display: flex;
@@ -127,10 +129,14 @@ form .input{
 }
 
 .submit input{
-    padding: 6px;
-    background: #c6c6c6;
+    padding: 7px;
+    background: #555555;
+    color: white;
     border: 2px solid black;
     cursor: pointer;
+    width: 30%;
+    font-size: 1.4rem;
+    border-radius: 26px;
 }
 
 
@@ -191,6 +197,11 @@ form .input{
         border-bottom: 4px solid dimgray;
     }
     
+    .submit input{
+        width: 49%;
+        margin: auto;
+        padding: 13px;
+    }
 }
 
 @media screen and (max-width: 320px) {
