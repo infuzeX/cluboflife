@@ -106,7 +106,7 @@ form{
     background-color: white;
     padding: 9px;
 }
-.search button[type="submit"]{
+.search button{
     font-size: 2rem;
     padding: 0px 20px;
     background-color: rgb(16,12,89);
