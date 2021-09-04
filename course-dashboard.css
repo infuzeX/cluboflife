@@ -80,9 +80,9 @@ body{
 .heading h3{
     text-align: center;
     font-size: 3rem;
+    font-weight: 400;
     margin: 12px;
     padding: 10px;
-    border-bottom: 2px solid rgb(16,12,89);
 }
 /* main */
 #main{
@@ -120,20 +120,25 @@ form{
     display: flex;
     flex-direction: column;
     width: 86%;
-    margin: auto;
+    /* margin: auto; */
     margin-top: 89px;
+    margin-left: 118px;
 }
+/* .course-child-parent{
+    display: flex;
+} */
 .course-child-parent{
     display: flex;
+    flex-wrap: wrap;
 }
-.course-child{
+.course-child {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     background-color: white;
     margin-bottom: 30px;
-    flex-basis: 98%;
+    flex-basis: 89%;
 }
 .course-child img{
     
@@ -177,8 +182,8 @@ form{
     position: relative;
     /* position: absolute; */
     right: 32px;
-    top: 88px;
-    /* top: 368px; */
+    top: 50px;
+    height: fit-content;
     padding: 0px 19px;
     box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
 }
@@ -195,4 +200,74 @@ form{
 }
 .none{
     display: none;
+}
+
+
+@media screen and (max-width: 768px) {
+    .course-child img {
+        width: 100%;
+        height: fit-content;
+        margin: 0;
+    }
+    .course-child {
+        display: flex;
+        text-align: center;
+        flex-wrap: wrap;
+    }
+    .course-txt h3 {
+        margin-top: 14px;
+        font-size: 1.3rem;
+        font-weight: 500;
+        text-align: center;
+        width: 361px;
+        margin-left: 14px;
+        margin-bottom: 12px;
+    }
+    .author{
+        margin: auto;
+        font-size: 1.3rem;
+        margin-bottom: 9px;
+    }
+    .share{
+        word-spacing: 0px;
+    }
+    .vr{
+        height: 29px;
+        margin-left: -34px;
+    }
+    .status{
+        font-size: 1.3rem;
+        margin-left: -29px;
+    }
+    .small-menu{
+        right: 103px;
+        top: 308px;
+        height: fit-content;
+    }
+    .course-parent-flex{
+        margin: auto;
+        margin-top: 89px;
+    }
+    .course-child-parent{
+        flex-wrap: nowrap;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .course-child{
+        width: 100%;
+    }
+    .course-txt h3{
+        font-size: 1.15rem;
+    }
+    .share {
+        font-size: 1rem;
+    }
+    .status{
+        font-size: 1.1rem;
+    }
+    .author{
+        font-size: 1rem;
+    
+    }
 }
