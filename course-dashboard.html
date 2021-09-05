@@ -21,8 +21,8 @@
     </section>
     <section class="new-coures none">
         <div class="admin">
-            <h3>Admin Pannel Club Of Life</h3><div class="cross" onclick="rem()"><i class="fas fa-times"></i></div>
-            <a href="#">Logout</a>
+            <div class="cross" onclick="rem()"><i class="fas fa-times"></i></div>
+            
             <hr>
         </div>
         <div class="add-course">
@@ -35,7 +35,6 @@
                 Purchase Date<input type="datetime-local">
             </div>
             <div class="field-div">
-                <div class="title">Your Deatils</div>
                 <input type="text" name="firstName" id="" placeholder="First Name">
                 <input type="text" name="LastName" id="" placeholder="Last Name">
                 <input type="text" name="email" id="" placeholder="Email">
@@ -267,7 +266,9 @@
 
         //for search 
         const dash = document.querySelectorAll('.course-child-parent');
-        console.log(dash);
+
+        const ins = document.getElementsByClassName('author');
+
         const courseName = document.querySelectorAll('.course-txt h3');
         function hell(){
             const searchText = document.getElementById('searchjr').value.toUpperCase();
@@ -283,6 +284,7 @@
                     }
                 }
             }
+            
          }
 
 
