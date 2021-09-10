@@ -121,21 +121,28 @@ nav ul li a:hover{
         width: 82%;
     }
     .con-main h1 {
-        font-size: 2.9rem;
+        font-size:1.8rem;
         font-weight: 400;
-        margin-top: 4rem;
-        margin-bottom: 4rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
     }
     .signin {
         display: block;
-        margin-top: 54px;
+      
     }
     .signin input {
-        padding: 18px 120px;
-        background-color: #4A4A4A;
-        color: white;
-        border-radius: 16px;
-        font-size: 23px;
+    
+     
+    
+        border-radius: 10px;
+        font-size: 1rem;
+    }
+
+    #con-welcome{
+        width: 100%;
+    }
+    .input-parent input{
+        width: 80%;
     }
 }
 
