@@ -1,0 +1,85 @@
+body {
+  background: #eee;
+  font-family: 'Alegreya',serif;
+}
+
+
+.admin-header {
+  padding: 3rem 3rem 0 3rem;
+}
+
+.admin-header div h1 {
+  font-size: 30px;
+  /* font-weight: 600; */
+}
+
+.dashboard {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 3rem;
+
+}
+
+.dashboard-detail button {
+  padding: 13px;
+  text-align: center;
+  outline: none;
+  border: none;
+  background: #212529;
+  color: white;
+  font-family: inherit;
+  font-size: 18px;
+  width: 270px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 20px;
+
+}
+
+.detail {
+  padding: 41px 30px;
+  background: #3B76EF;
+  border-radius: 10px;
+  color: white;
+  width: 35%;
+  margin-bottom: 30px;
+
+}
+
+/* 
+.d-2 {
+  background-color: rgb(0, 230, 118);
+}
+
+.d-3 {
+  background-color: #A66DD4;
+  justify-self: flex-start;
+} */
+
+.card {
+  padding: 40px;
+  border-radius: 10px;
+  background-color: rgb(255,255,255);
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.65);
+  transition: all 500ms linear;
+}
+
+.card h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.card:nth-child(1) h1 {
+  color: rgb(63,110,184);
+}
+
+.card:nth-child(2) h1 {
+  color: rgb(172,57,255);
+}
+.card:nth-child(3) h1 {
+  color: #7FD461;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}

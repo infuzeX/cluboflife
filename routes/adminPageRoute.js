@@ -6,4 +6,8 @@ router.get('/login', (req, res) => {
   res.sendFile(file);
 });
 
+router.get('/dashboard', (req, res) => {
+  const file = path.resolve('public/dashboard.html');
+  res.sendFile(file);
+});
 module.exports = router;

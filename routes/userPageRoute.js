@@ -21,4 +21,9 @@ router.get('/profile', (req, res) => {
   res.sendFile(file);
 });
 
+router.get('/dashboard', (req, res) => {
+  const file = path.resolve('public/course-dashboard.html');
+  res.sendFile(file);
+});
+
 module.exports = router;
