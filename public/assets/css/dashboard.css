@@ -1,0 +1,56 @@
+body {
+  background: #eee;
+  font-family: 'Alegreya',serif;
+}
+
+
+.admin-header {
+  padding: 3rem 3rem 0 3rem;
+}
+
+.admin-header div h1 {
+  font-size: 30px;
+}
+
+.dashboard {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 3rem;
+
+}
+
+
+
+.card {
+  padding: 40px;
+  border-radius: 10px;
+  background-color: rgb(255,255,255);
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.65);
+  transition: all 500ms linear;
+}
+
+.card h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.card:nth-child(1) h1 {
+  color: rgb(63,110,184);
+}
+
+.card:nth-child(2) h1 {
+  color: rgb(172,57,255);
+}
+.card:nth-child(3) h1 {
+  color: #7FD461;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}
+
+
+.card a {
+  text-decoration: none;
+  color: inherit;
+}
