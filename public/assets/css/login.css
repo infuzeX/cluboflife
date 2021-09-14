@@ -73,6 +73,9 @@ nav ul li a:hover{
     border-radius: 10px;
 
 }
+.error {
+    color: red;
+}
 .no {
     font-family: auto;
 }

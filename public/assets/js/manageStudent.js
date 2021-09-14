@@ -21,3 +21,15 @@ closeButton[1].addEventListener('click', () => toggleModal(editStudentModal));
 editStudentButton.addEventListener('click', () =>
   toggleModal(editStudentModal)
 );
+
+const fetchUser = async () => {
+  try {
+    const res = await fetch('/api/v1/users/');
+    const users = await res.json();
+    console.log(users);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+fetchUser();

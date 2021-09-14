@@ -62,7 +62,7 @@
             >Add Student</a
           >
         </li>
-        <li><a href="/signup">Logout</a></li>
+        <li><a href="" class="logout">Logout</a></li>
       </ul>
     </nav>
     <div class="studentCount">
@@ -110,5 +110,17 @@
       </section>
     </main>
     <script src="/public/assets/js/manageStudent.js"></script>
+    <script>
+      document.querySelector('.logout').addEventListener('click', () => {
+        console.log('click');
+        fetch('/api/v1/auth/logout')
+          .then((res) => {
+            if (res.redirected) {
+              window.location = res.url;
+            }
+          })
+          .catch((e) => console.log(e));
+      });
+    </script>
   </body>
 </html>

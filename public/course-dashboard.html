@@ -36,18 +36,19 @@
         <form class="field-div">
           <div class="title">ADD Course</div>
           <p class='error'></p>
-          <input type="text" name="course" id="" placeholder="Course Name" class="course" />
-          <input type="text" name="subtitle" id="" placeholder="Subtitle" class="subtitle" />
-          Start Date<input type="date" name='createdAt' class="createdAt" />
+          <input type="text" name="course" id="" placeholder="Course Name" class="course" required />
+          <input type="text" name="subtitle" id="" placeholder="Subtitle" class="subtitle" required/>
+          Start Date<input type="date" name='createdAt' class="createdAt" required/>
           <input
             type="text"
             name="instructor"
             id=""
+            required
             class="instructor"
             placeholder="Instructor name"
           />
-          <input type="text" name="code" id="" placeholder="Course Code" class="code" />
-          <input type="text" name="link" id="" placeholder="Course Buy Link" class="link" />
+          <input type="text" name="code" id="" placeholder="Course Code" class="code" required/>
+          <input type="text" name="link" id="" placeholder="Course Buy Link" class="link" required/>
         </div>
         <div class="field-div">
           <button type="submit">Submit</button>

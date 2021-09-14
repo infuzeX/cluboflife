@@ -1,3 +1,5 @@
+// global store for courses,edit course
+
 const _GLOBAL_NAMESPACE = {
   courses: [],
   course: {},
@@ -14,6 +16,7 @@ const courseCode = document.querySelector('.code');
 const courseLink = document.querySelector('.link');
 const title = document.querySelector('.title');
 
+// Add/Edit course toggle
 function add() {
   addSection.classList.remove('none');
 }
@@ -23,6 +26,7 @@ function rem() {
   addSection.classList.add('none');
 }
 
+// append new div
 const createCourseNode = (course) => {
   const clone = template.content.cloneNode(true);
   const data = course.name + course._id;
@@ -48,6 +52,8 @@ const createCourseNode = (course) => {
   more.addEventListener('click', () => smallMenu.classList.toggle('none'));
   courseContainer.appendChild(clone);
 };
+
+// create node to array of course
 const showCourses = (courses) => {
   console.log(courses);
   if (!courses || !courses.length) return;
@@ -56,6 +62,7 @@ const showCourses = (courses) => {
   });
 };
 
+// update ui while deleting course
 const updateUI = () => {
   document.querySelector('.course-parent-flex').innerHTML = '';
   showCourses(_GLOBAL_NAMESPACE.courses);

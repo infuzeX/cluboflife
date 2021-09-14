@@ -1,17 +1,18 @@
 const router = require('express').Router();
 const path = require('path');
+const { protectLoginPage } = require('../controller/authController');
 
-router.get('/login', (req, res) => {
+router.get('/login', protectLoginPage, (req, res) => {
   const file = path.resolve('public/index.html');
   res.sendFile(file);
 });
 
-router.get('/signup', (req, res) => {
+router.get('/signup', protectLoginPage, (req, res) => {
   const file = path.resolve('public/createAccount.html');
   res.sendFile(file);
 });
 
-router.get('/forgotPassword', (req, res) => {
+router.get('/forgotPassword', protectLoginPage, (req, res) => {
   const file = path.resolve('public/forgotPassword.html');
   res.sendFile(file);
 });
