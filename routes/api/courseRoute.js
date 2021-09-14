@@ -10,15 +10,13 @@ router.route('/')
     .post(//authController.protect,
         //authController.restrictTo(['admin']),
         courseController.createCourse)
-/*
-router.route('/:userId')
-    .patch(authController.protect,
-        authController.restrictTo(['admin', 'student']),
-        authController.protectUserResource,
-        userController.updateUser)
-    .delete(authController.protect,
-        authController.restrictTo(['admin']),
-        authController.protectUserResource,
-        userController.deleteUser)
-*/
+
+router.route('/:courseId')
+    .patch(//authController.protect,
+        //authController.restrictTo(['admin', 'student']),
+        courseController.updateCourse)
+    .delete(//authController.protect,
+        //authController.restrictTo(['admin']),
+        courseController.deleteCourse)
+
 module.exports = router;

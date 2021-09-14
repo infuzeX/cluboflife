@@ -6,8 +6,12 @@ const courseSchema = new Schema({
         type: String,
         required: [true, "Please Provide Course Name"]
     },
-    //courses: { type: mongoose.Types.ObjectId, ref: 'course' },
     courseCode: {
+        type: String,
+        required: [true, "Please Provide Course Code"],
+        unique: true
+    },
+    instructor: {
         type: String,
         required: [true, "Please Provide Course Code"]
     },

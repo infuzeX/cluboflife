@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGOURI || 'mongodb://127.0.0.1:27017/cluboflife', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
 })
     .then(() => console.log("connected"))
     .catch(err => console.log(`Error: ${err.message}`))
