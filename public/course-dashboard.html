@@ -33,31 +33,26 @@
         <hr />
       </div>
       <div class="add-course">
-        <div class="field-div">
+        <form class="field-div">
           <div class="title">ADD Course</div>
-          <input type="text" name="course" id="" placeholder="Course Name" />
-          <input type="text" name="subtitle" id="" placeholder="Subtitle" />
+          <p class='error'></p>
+          <input type="text" name="course" id="" placeholder="Course Name" class="course" />
+          <input type="text" name="subtitle" id="" placeholder="Subtitle" class="subtitle" />
+          Start Date<input type="date" name='createdAt' class="createdAt" />
           <input
             type="text"
             name="instructor"
             id=""
+            class="instructor"
             placeholder="Instructor name"
           />
-          <input type="text" name="link" id="" placeholder="Course Link" />
-          Purchase Date<input type="datetime-local" />
+          <input type="text" name="code" id="" placeholder="Course Code" class="code" />
+          <input type="text" name="link" id="" placeholder="Course Buy Link" class="link" />
         </div>
         <div class="field-div">
-          <input type="text" name="firstName" id="" placeholder="First Name" />
-          <input type="text" name="LastName" id="" placeholder="Last Name" />
-          <input type="text" name="email" id="" placeholder="Email" />
-          <select>
-            <option>select one</option>
-            <option>Purchased</option>
-            <option>Not purchased</option>
-          </select>
           <button type="submit">Submit</button>
         </div>
-      </div>
+      </form>
     </section>
     <div class="sidenav">
       <div class="closebtn">
@@ -91,8 +86,14 @@
             </button>
           </form>
         </div>
+
         <div class="course-parent-flex">
-          <div class="course-child-parent">
+          
+         
+        </div>
+      </main>
+      <template>
+        <div class="course-child-parent">
             <div class="course-child">
               <img
                 width="100px"
@@ -116,160 +117,14 @@
             </div>
             <div class="none small-menu">
               <ul>
-                <li><a href="#">EDIT</a></li>
-                <li><a href="#">DELETE</a></li>
+                <li><a href="#" class="edit">EDIT</a></li>
+                <li><a href="#" class='delete'>DELETE</a></li>
               </ul>
             </div>
           </div>
-          <div class="course-child-parent">
-            <div class="course-child">
-              <img
-                width="100px"
-                height="100px"
-                src="/public/assets/images/blood.jpg"
-                alt="img"
-              />
-              <div class="course-txt">
-                <h3>Phylosphy course</h3>
-                <div class="author">Joseph Pepe Danza</div>
-              </div>
-              <div class="share">
-                <i class="fas fa-share-alt"></i>
-                SHARE
-              </div>
-              <div class="vr"></div>
-              <div class="status">Published</div>
-              <div class="moremenu">
-                <i class="fas fa-ellipsis-v"></i>
-              </div>
-            </div>
-            <div class="none small-menu">
-              <ul>
-                <li><a href="#">EDIT</a></li>
-                <li><a href="#">DELETE</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="course-child-parent">
-            <div class="course-child">
-              <img
-                width="100px"
-                height="100px"
-                src="/public/assets/images/blood.jpg"
-                alt="img"
-              />
-              <div class="course-txt">
-                <h3>Psychology course</h3>
-                <div class="author">Joseph Pepe Danza</div>
-              </div>
-              <div class="share">
-                <i class="fas fa-share-alt"></i>
-                SHARE
-              </div>
-              <div class="vr"></div>
-              <div class="status">Published</div>
-              <div class="moremenu">
-                <i class="fas fa-ellipsis-v"></i>
-              </div>
-            </div>
-            <div class="none small-menu">
-              <ul>
-                <li><a href="#">EDIT</a></li>
-                <li><a href="#">DELETE</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="course-child-parent">
-            <div class="course-child">
-              <img
-                width="100px"
-                height="100px"
-                src="/public/assets/images/blood.jpg"
-                alt="img"
-              />
-              <div class="course-txt">
-                <h3>Digital Marketing course</h3>
-                <div class="author">Joseph Pepe Danza</div>
-              </div>
-              <div class="share">
-                <i class="fas fa-share-alt"></i>
-                SHARE
-              </div>
-              <div class="vr"></div>
-              <div class="status">Published</div>
-              <div class="moremenu">
-                <i class="fas fa-ellipsis-v"></i>
-              </div>
-            </div>
-            <div class="none small-menu">
-              <ul>
-                <li><a href="#">EDIT</a></li>
-                <li><a href="#">DELETE</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="course-child-parent">
-            <div class="course-child">
-              <img
-                width="100px"
-                height="100px"
-                src="/public/assets/images/blood.jpg"
-                alt="img"
-              />
-              <div class="course-txt">
-                <h3>Social Media Marketing course</h3>
-                <div class="author">Joseph Pepe Danza</div>
-              </div>
-              <div class="share">
-                <i class="fas fa-share-alt"></i>
-                SHARE
-              </div>
-              <div class="vr"></div>
-              <div class="status">Published</div>
-              <div class="moremenu">
-                <i class="fas fa-ellipsis-v"></i>
-              </div>
-            </div>
-            <div class="none small-menu">
-              <ul>
-                <li><a href="#">EDIT</a></li>
-                <li><a href="#">DELETE</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="course-child-parent">
-            <div class="course-child">
-              <img
-                width="100px"
-                height="100px"
-                src="/public/assets/images/blood.jpg"
-                alt="img"
-              />
-              <div class="course-txt">
-                <h3>Advance web development course</h3>
-                <div class="author">Joseph Pepe Danza</div>
-              </div>
-              <div class="share">
-                <i class="fas fa-share-alt"></i>
-                SHARE
-              </div>
-              <div class="vr"></div>
-              <div class="status">Published</div>
-              <div class="moremenu">
-                <i class="fas fa-ellipsis-v"></i>
-              </div>
-            </div>
-            <div class="none small-menu">
-              <ul>
-                <li><a href="#">EDIT</a></li>
-                <li><a href="#">DELETE</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </main>
+      </template>
     </section>
-
+    <script src="/public/assets/js/manageCourse.js"></script>
     <script>
       let sideNav = document.getElementById('sideNav');
       let sidenav = document.querySelector('.sidenav');
@@ -282,29 +137,22 @@
         sidenav.classList.remove('vis');
       });
 
-      let more = document.querySelectorAll('.moremenu');
-      let smallMenu = document.querySelectorAll('.small-menu');
-      //console.log(more, smallMenu);
-
-      for (let i = 0; i < more.length; i++) {
-        more[i].addEventListener('click', function () {
-          smallMenu[i].classList.toggle('none');
-        });
-      }
+    
 
       //for search
-      const dash = document.querySelectorAll('.course-child-parent');
-
-      const ins = document.getElementsByClassName('author');
-
-      const courseName = document.querySelectorAll('.course-txt h3');
+      
+      
       function hell() {
+        const ins = document.getElementsByClassName('author');
+        const dash = document.querySelectorAll('.course-child-parent');
+        const courseName = document.querySelectorAll('.course-txt h3');
         const searchText = document
           .getElementById('searchjr')
           .value.toUpperCase();
-
+        console.log(searchText, courseName);
         for (let i = 0; i < courseName.length; i++) {
           const courseName = document.querySelectorAll('.course-txt h3')[i];
+          console.log(courseName);
           if (courseName) {
             let textValue = courseName.textContent || courseName.innerHTML;
             if (textValue.toUpperCase().indexOf(searchText) > -1) {
@@ -316,13 +164,9 @@
         }
       }
 
-      const addSection = document.querySelector('.new-coures');
-      function add() {
-        addSection.classList.remove('none');
-      }
-      function rem() {
-        addSection.classList.add('none');
-      }
+
+     
+      
     </script>
     <script></script>
   </body>

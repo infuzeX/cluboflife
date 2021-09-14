@@ -241,16 +241,20 @@ form{
     margin-bottom: 21px;
     font-size: 1.4rem;
 }
-.add-course input[type="datetime-local"]{
+.add-course input[type="date"]{
     display: block;
     margin: auto;
     width: 50%;
     margin-bottom: 40px;
     font-size: 1.1rem;
 }
+.error{
+    color: red;
+}
 
 .field-div{
     margin-bottom: 10px;
+    flex-direction: column;
 }
 .field-div select{
     width: 51%;
