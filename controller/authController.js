@@ -1,4 +1,3 @@
-const Admin = require('../model/admin');
 const User = require('../model/user');
 
 const jwt = require("jsonwebtoken");
@@ -29,7 +28,7 @@ exports.login = catchAsync(async (req, res, next) => {
     const dashboardRoute = user.role === "admin" ? "/admin/dashboard" : "/dashboard";
     return res.status(200)
         .cookie("token", token, { expiresIn, httpOnly: true, secure: true })
-        .redirect(dashboardRoute);
+    //.redirect(dashboardRoute);
 });
 
 //validate authentication for apis
@@ -72,6 +71,17 @@ exports.protectLoginPage = (req, res, next) => {
     const dashboardRoute = req.user.role === "admin" ? "/admin/dashboard" : "/dashboard";
     return res.redirect(dashboardRoute);
 }
+
+/*
+Middleware Flow for student page route
+-protectPageRoute
+
+Middleware Flow for admin page route
+-protectPageRoute, protectAdminPage
+
+Middleware Flow for admin and student login page 
+-protectLoginPage
+*/
 
 //prevent student access to another student data
 exports.protectUserResource = catchAsync(async (req, res, next) => {
