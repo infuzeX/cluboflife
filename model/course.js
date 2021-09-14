@@ -6,6 +6,14 @@ const courseSchema = new Schema({
         type: String,
         required: [true, "Please Provide Course Name"]
     },
+    description: {
+        type: String,
+        maxlength: [200, "Maximum Allowed Character is 200"]
+    },
+    courseLink: {
+        type: String,
+        required: [true, "Please Provide Course Link"]
+    },
     courseCode: {
         type: String,
         required: [true, "Please Provide Course Code"],
@@ -13,7 +21,7 @@ const courseSchema = new Schema({
     },
     instructor: {
         type: String,
-        required: [true, "Please Provide Course Code"]
+        required: [true, "Please Provide Instructor"]
     },
     publish: {
         type: Boolean,

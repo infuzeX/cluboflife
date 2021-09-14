@@ -6,17 +6,12 @@ const catchAsync = require("../utils/catchAsync");
 const exportSheet = require("../utils/export");
 
 exports.userSignup = catchAsync(async (req, res, next) => {
-    const joinedAt = Date.now();
-    if (req.body.expiresAt < joinedAt)
-        return next(new AppError("Subscription should be greater than current date", 400));
     const user = await User.create({
         name: req.body.name,
         email: req.body.email,
         role: 'student',
         password: req.body.password,
-        courses: req.body.courses,
-        expiresAt: req.body.expiresAt,
-        joinedAt
+        createdAt: req.body.createdAt
     });
     return res.status(200).json({ status: "success", data: { user } })
 })
@@ -44,13 +39,9 @@ exports.fetchUser = catchAsync(async (req, res, next) => {
 });
 
 exports.updateUser = catchAsync(async (req, res, next) => {
-    //restrict fields
-    if (req.user.role !== 'admin') {
-        ['password', 'expiresAt', 'courses'].forEach(field => {
-            if (req.body[field]) delete req.body[field];
-        })
-    }
     await User.updateOne({ _id: req.params.userId }, req.body);
+    if (!result.matchedCount) return next(new AppError('User not found!', 404));
+    if (!result.modifiedCount) return next(new AppError("Failed to update student!", 400))
     return res.status(200).json({
         status: "success",
         data: null
@@ -59,7 +50,7 @@ exports.updateUser = catchAsync(async (req, res, next) => {
 
 exports.deleteUser = catchAsync(async (req, res, next) => {
     const result = await User.deleteOne({ _id: req.params.userId });
-    if (!result.n) return next(new AppError('User not found!', 404));
+    if (!result.deletedCount) return next(new AppError('User not found!', 404));
     return res.status(200).json({ status: "success", data: null });
 });
 

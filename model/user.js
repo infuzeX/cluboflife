@@ -23,12 +23,7 @@ const userSchema = Schema({
         required: true,
         select: false
     },
-    //courses: { type: mongoose.Types.ObjectId, ref: 'course' },
     joinedAt: {
-        type: Date,
-        required: true
-    },
-    expiresAt: {
         type: Date,
         required: true
     }
@@ -40,7 +35,7 @@ userSchema.pre('save', async function (next) {
     next();
 })
 
-userSchema.methods.comparePassword = function(userPassword, hashedPassword) {
+userSchema.methods.comparePassword = function (userPassword, hashedPassword) {
     return brcrypt.compare(userPassword, hashedPassword);
 }
 

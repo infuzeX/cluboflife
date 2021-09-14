@@ -1,16 +1,18 @@
 const Course = require('../model/course');
+const Student = require('../model/user');
 
 const APIFeature = require('../utils/apifeatures');
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
-const exportSheet = require("../utils/export");
 
 exports.createCourse = catchAsync(async (req, res, next) => {
     const course = await Course.create({
         name: req.body.name,
         courseCode: req.body.courseCode,
+        description: req.body.description,
+        courseLink: req.body.courseLink,
         instructor: req.body.instructor,
-        createdAt: Date.now()
+        createdAt: req.body.createdAt
     });
     return res.status(200).json({ status: "success", data: { course } })
 })
