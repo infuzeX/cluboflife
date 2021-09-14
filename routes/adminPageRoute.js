@@ -15,4 +15,10 @@ router.get('/manage-student', (req, res) => {
   const file = path.resolve('public/manageStudent.html');
   res.sendFile(file);
 });
+
+router.get('/manage-course', (req, res) => {
+  const file = path.resolve('public/course-dashboard.html');
+  res.sendFile(file);
+});
+
 module.exports = router;

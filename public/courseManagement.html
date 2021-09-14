@@ -16,26 +16,20 @@
     />
     <link rel="stylesheet" href="/public/assets/css/login.css" />
     <link rel="stylesheet" href="/public/assets/css/manageStudent.css" />
-    <title>Manage Student</title>
+    <title>Manage Course</title>
   </head>
   <body>
     <div class="addModal">
       <div class="add_popup">
         <div class="close"><i class="fas fa-times delete"></i></div>
         <form class="form">
-          <input type="text" class="input" placeholder="Name" />
-          <input type="email" class="input" placeholder="Email" />
+          <input type="text" class="input" placeholder="Course Name" />
           <input
-            list="courses"
-            name="browser"
-            class="input"
-            placeholder="Courses-Purchased"
+            type="text"
+            onfocus="(this.type='date')"
+            class="input date"
+            placeholder="Subscription"
           />
-          <datalist id="courses">
-            <option value="Internet Explorer"></option>
-          </datalist>
-
-          <input type="date" class="input" placeholder="Subscription" />
           <button class="button">ADD</button>
         </form>
       </div>
@@ -44,9 +38,13 @@
       <div class="edit_popup">
         <div class="close"><i class="fas fa-times delete"></i></div>
         <form class="form">
-          <input type="text" class="input" placeholder="Name" />
-          <input type="email" class="input" placeholder="Email" />
-          <input type="date" class="input" placeholder="Subscription" />
+          <input type="text" class="input" placeholder="Course Name" />
+          <input
+            type="text"
+            onfocus="(this.type='date')"
+            class="input date"
+            placeholder="Subscription"
+          />
           <button class="button">EDIT</button>
         </form>
       </div>
@@ -59,33 +57,26 @@
 
         <li class="left">
           <a href="#" class="addModalButton" data-type="manageStudent"
-            >Add Student</a
+            >Add Course</a
           >
         </li>
         <li><a href="/signup">Logout</a></li>
       </ul>
     </nav>
     <div class="studentCount">
-      <h1>Total Students: <span class="no">2</span></h1>
+      <h1>Total Courses: <span class="no">2</span></h1>
     </div>
     <main class="studentContainer">
       <section class="studentHeader">
         <div>#</div>
-        <div>Name</div>
-        <div>Email</div>
-        <div>Course Purchased</div>
-        <div>Joined</div>
+        <div>Course Name</div>
         <div>Subscription</div>
         <div>Edit</div>
       </section>
       <section>
         <div class="detailHeader">
           <div>1.</div>
-          <div>Max</div>
-          <div>max@gmail.com</div>
-          <div>Course Purchased</div>
-
-          <div class="no">03-07-1990</div>
+          <div>GOlang</div>
           <div class="no">03-07-1990</div>
           <div>
             <i class="far fa-edit edit editModalButton"></i>
@@ -95,11 +86,7 @@
         </div>
         <div class="detailHeader">
           <div>1.</div>
-          <div>Max</div>
-          <div>max@gmail.com</div>
-          <div>Course Purchased</div>
-
-          <div class="no">03-07-1990</div>
+          <div>Django</div>
           <div class="no">03-07-1990</div>
           <div>
             <i class="far fa-edit edit"></i>

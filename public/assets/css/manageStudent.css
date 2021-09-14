@@ -66,7 +66,7 @@ body {
   color: #d9534f;
 }
 
-.addStudent,.editStudent {
+.addModal,.editModal {
   position: fixed;
   top: 0;
   left: 0;
@@ -82,7 +82,7 @@ body {
 
 }
 
-.addStudent_popup,.editStudent_popup {
+.add_popup,.edit_popup {
   min-width: 300px;
   min-height: 300px;
   background-color: rgba(255,255,255,0.92);
