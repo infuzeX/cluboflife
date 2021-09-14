@@ -10,4 +10,9 @@ router.get('/dashboard', (req, res) => {
   const file = path.resolve('public/dashboard.html');
   res.sendFile(file);
 });
+
+router.get('/manage-student', (req, res) => {
+  const file = path.resolve('public/manageStudent.html');
+  res.sendFile(file);
+});
 module.exports = router;
