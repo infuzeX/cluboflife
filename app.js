@@ -4,7 +4,8 @@ const app = express();
 const userRoutes = require('./routes/userPageRoute');
 const adminRoutes = require('./routes/adminPageRoute');
 
-const courseRoutes = require('./routes/api/courseRoute');
+const adminApiRoutes = require('./routes/api/adminRoute');
+const courseApiRoutes = require('./routes/api/courseRoute');
 
 app.use(express.json());
 app.use('/public', express.static('public'));
@@ -14,6 +15,7 @@ app.use('/', userRoutes);
 app.use('/admin', adminRoutes);
 
 //api routes
-app.use('/api/v1/courses', courseRoutes);
+app.use('/api/v1/admins', adminApiRoutes);
+app.use('/api/v1/courses', courseApiRoutes);
 
 module.exports = app;

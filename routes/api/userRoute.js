@@ -11,6 +11,8 @@ router.route('/')
         authController.restrictTo(['admin']),
         userController.fetchUsers)
 
+router.post('/login', authController.login)
+
 router.route('/:userId')
     .patch(authController.protect,
         authController.restrictTo(['admin', 'student']),

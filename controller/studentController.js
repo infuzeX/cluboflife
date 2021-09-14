@@ -14,6 +14,7 @@ exports.userSignup = catchAsync(async (req, res, next) => {
         email: req.body.email,
         role: 'student',
         password: req.body.password,
+        courses: req.body.courses,
         expiresAt: req.body.expiresAt,
         joinedAt
     });

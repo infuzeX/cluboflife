@@ -1,17 +1,15 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const brcrypt = require('bcryptjs');
 
-const userSchema = Schema({
+const adminSchema = Schema({
     name: {
         type: String,
         required: true
     },
     role: {
         type: String,
-        enum: {
-            values: ['student', 'admin'],
-            message: 'Invalid Role!'
-        }
+        default: 'admin'
     },
     email: {
         type: String,
@@ -22,26 +20,17 @@ const userSchema = Schema({
         type: String,
         required: true,
         select: false
-    },
-    //courses: { type: mongoose.Types.ObjectId, ref: 'course' },
-    joinedAt: {
-        type: Date,
-        required: true
-    },
-    expiresAt: {
-        type: Date,
-        required: true
     }
 });
 
-userSchema.pre('save', async function (next) {
+adminSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next()
     this.password = await brcrypt.hash(this.password, 2);
     next();
 })
 
-userSchema.methods.comparePassword = function(userPassword, hashedPassword) {
+adminSchema.methods.comparePassword = function(userPassword, hashedPassword) {
     return brcrypt.compare(userPassword, hashedPassword);
 }
 
-module.exports = mongoose.model('user', userSchema);
+module.exports = mongoose.model('admin', adminSchema);
