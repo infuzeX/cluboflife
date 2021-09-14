@@ -137,3 +137,22 @@ justify-content: center;
   font-size: inherit;
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  .studentContainer {
+    padding: 3px;
+  }
+  .studentHeader div,
+  .detailHeader div {
+    flex-wrap: wrap;
+    word-wrap:break-word;
+    word-break: break-all;
+  }
+  .studentHeader>div:nth-of-type(1),
+  .detailHeader>div:nth-of-type(1) {
+    width:fit-content;
+  }
+  .detailHeader i{
+    font-size: 18px;
+  }
+}
