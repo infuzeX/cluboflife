@@ -4,6 +4,7 @@ const {
   protectLoginPage,
   protect,
   protectPage,
+  protectForgotPage,
 } = require('../controller/authController');
 
 router.get('/login', protectLoginPage, (req, res) => {
@@ -28,6 +29,11 @@ router.get('/profile', (req, res) => {
 
 router.get('/dashboard', protectPage, (req, res) => {
   const file = path.resolve('public/yourProfile.html');
+  res.sendFile(file);
+});
+
+router.get('/reset-password/:token', (req, res) => {
+  const file = path.resolve('public/reset-password.html');
   res.sendFile(file);
 });
 

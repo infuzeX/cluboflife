@@ -9,5 +9,7 @@ router.patch(
   authController.changePassword
 );
 router.get('/logout', authController.logout);
+router.post('/forgotpassword', authController.forgotPassword);
+router.patch('/resetpassword', authController.resetPassword);
 
 module.exports = router;

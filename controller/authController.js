@@ -3,8 +3,10 @@ const User = require('../model/user');
 const jwt = require('jsonwebtoken');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const sendEmail = require('../utils/email');
 const { promisify } = require('util');
 const secret = process.env.TOKEN_SECRET;
+const emailSecret = process.env.EMAIL_SECRET;
 const expiresIn = eval(process.env.EXPIRES_IN);
 const expiresInMin = process.env.EXPIRES_IN_MIN;
 
@@ -43,6 +45,51 @@ exports.login = catchAsync(async (req, res, next) => {
   //   .json({ status: 'success', redirect: dashboardRoute })
 });
 
+exports.forgotPassword = catchAsync(async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) return next(new AppError('No user found', 404));
+  const token = await promisify(jwt.sign)(
+    { userId: user._id, email: user.email },
+    emailSecret,
+    {
+      expiresIn: 600000,
+    }
+  );
+  const resetURL = `${req.protocol}://${req.get(
+    'host'
+  )}/reset-password/${token}`;
+  const message = `Forgot your password? Reset using this link  ${resetURL}. `;
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: 'Password Reset Valid only for 30 min',
+      message,
+    });
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Token sent to email',
+    });
+  } catch (e) {
+    console.log(e);
+
+    return next(new AppError('Error sending email.Try again later', 500));
+  }
+});
+
+exports.resetPassword = catchAsync(async (req, res, next) => {
+  const { token, password } = req.body;
+  if (!token) return next(new AppError('Link expired', 401));
+
+  const decoded = jwt.verify(token, emailSecret);
+  if (!decoded) return next(new AppError('Link expired', 401));
+  const user = await User.findOne({ _id: decoded.userId }).select('password');
+  if (!user) return next(new AppError('Link expired', 401));
+  user.password = password;
+  await user.save();
+  return res.status(200).json({ status: 'success' });
+});
+
 //validate authentication for apis
 exports.protect = catchAsync(async (req, res, next) => {
   const token = req.cookies?.token;
@@ -50,6 +97,18 @@ exports.protect = catchAsync(async (req, res, next) => {
   req.user = jwt.verify(token, secret);
   next();
 });
+
+exports.protectForgotPage = async (req, res, next) => {
+  try {
+    const token = req.params.token;
+    if (!token) return res.send('Link Expired.Please Try again');
+    const user = jwt.verify(token, emailSecret);
+    if (!user) return res.send('Link Expired.Please Try again');
+    return next();
+  } catch (error) {
+    return res.send('Link Expired.Please Try again');
+  }
+};
 
 exports.restrictTo = (roles) => {
   return (req, res, next) => {
