@@ -53,7 +53,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
 exports.restrictTo = (roles) => {
   return (req, res, next) => {
-    if (!roles.includes(req.user.role))
+    if (!roles.includes(req.user?.role))
       return next(
         new AppError('You are not allowed to perform this action!', 401)
       );
@@ -105,15 +105,16 @@ Middleware Flow for admin and student login page
 
 //prevent student access to another student data
 exports.protectUserResource = catchAsync(async (req, res, next) => {
-  if (req.user.role === admin) return next();
+  if (req.user.role === 'admin') return next();
   if (req.user.userId === req.params.userId) return next();
 
   return next(new AppError('You are not allowed to perform this action!', 401));
 });
 
 exports.changePassword = catchAsync(async (req, res, next) => {
-  const user = await User.findOne({ _id: req.user.userId });
-  if (!user.comparePassword(req.body.password, user.password))
+  const user = await User.findOne({ _id: req.user.userId }).select('password');
+
+  if (!(await user.comparePassword(req.body.password, user.password)))
     return next(new AppError('Incorrect Password', 401));
 
   user.password = req.body.newPassword;

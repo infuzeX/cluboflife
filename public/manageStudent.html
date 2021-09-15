@@ -22,31 +22,49 @@
     <div class="addModal">
       <div class="add_popup">
         <div class="close"><i class="fas fa-times delete"></i></div>
-        <form class="form">
-          <input type="text" class="input" placeholder="Name" />
-          <input type="email" class="input" placeholder="Email" />
+        <div><p class="error"></p></div>
+        <form class="form addStudent">
+          <input type="text" name="name" class="input" placeholder="Name" />
+          <input type="email" name="email" class="input" placeholder="Email" />
           <input
-            list="courses"
-            name="browser"
+            type="password"
+            name="password"
             class="input"
-            placeholder="Courses-Purchased"
+            placeholder="Password"
           />
-          <datalist id="courses">
-            <option value="Internet Explorer"></option>
-          </datalist>
-
-          <input type="date" class="input" placeholder="Subscription" />
-          <button class="button">ADD</button>
+          <input
+            type="date"
+            class="input"
+            name="createdAt"
+            placeholder="Joined"
+          />
+          <button class="button" type="submit">ADD</button>
         </form>
       </div>
     </div>
     <div class="editModal">
       <div class="edit_popup">
         <div class="close"><i class="fas fa-times delete"></i></div>
-        <form class="form">
-          <input type="text" class="input" placeholder="Name" />
-          <input type="email" class="input" placeholder="Email" />
-          <input type="date" class="input" placeholder="Subscription" />
+        <div><p class="error"></p></div>
+        <form class="form editForm">
+          <input
+            type="text"
+            class="input name"
+            name="name"
+            placeholder="Name"
+          />
+          <input
+            type="email"
+            class="input email"
+            name="email"
+            placeholder="Email"
+          />
+          <input
+            type="date"
+            class="input createdAt"
+            name="createdAt"
+            placeholder="Joined At"
+          />
           <button class="button">EDIT</button>
         </form>
       </div>
@@ -65,50 +83,54 @@
         <li><a href="" class="logout">Logout</a></li>
       </ul>
     </nav>
-    <div class="studentCount">
-      <h1>Total Students: <span class="no">2</span></h1>
+
+    <header>
+      <div class="heading">Student Dashboard</div>
+      <div>
+        <a class="export"> <i class="fas fa-download download"></i>Export </a>
+      </div>
+    </header>
+
+    <div class="searchContainer">
+      <div class="search-input">
+        <input
+          type="search"
+          class="search"
+          placeholder="Search by name or email"
+        />
+      </div>
     </div>
+    <!-- <div class="studentCount">
+      <h1>Total Students: <span class="no">2</span></h1>
+    </div> -->
     <main class="studentContainer">
-      <section class="studentHeader">
-        <div>#</div>
-        <div>Name</div>
-        <div>Email</div>
-        <div>Course Purchased</div>
-        <div>Joined</div>
-        <div>Subscription</div>
-        <div>Edit</div>
-      </section>
-      <section>
-        <div class="detailHeader">
-          <div>1.</div>
-          <div>Max</div>
-          <div>max@gmail.com</div>
-          <div>Course Purchased</div>
-
-          <div class="no">03-07-1990</div>
-          <div class="no">03-07-1990</div>
-          <div>
-            <i class="far fa-edit edit editModalButton"></i>
-            <i class="fas fa-trash-alt delete"></i>
-            <i class="fas fa-copy"></i>
-          </div>
-        </div>
-        <div class="detailHeader">
-          <div>1.</div>
-          <div>Max</div>
-          <div>max@gmail.com</div>
-          <div>Course Purchased</div>
-
-          <div class="no">03-07-1990</div>
-          <div class="no">03-07-1990</div>
-          <div>
-            <i class="far fa-edit edit"></i>
-            <i class="fas fa-trash-alt delete"></i>
-            <i class="fas fa-copy"></i>
-          </div>
-        </div>
-      </section>
+      <div class="studentWrap">
+        <section class="studentHeader">
+          <div>#</div>
+          <div>Name</div>
+          <div>Email</div>
+          <!-- <div>Course Purchased</div> -->
+          <div>Joined</div>
+          <!-- <div>Subscription</div> -->
+          <div>Edit</div>
+        </section>
+        <section class="studentDetail"></section>
+      </div>
     </main>
+    <template>
+      <div class="detailHeader">
+        <div class="index no"></div>
+        <div class="name"></div>
+        <div class="email"></div>
+        <div class="joined no"></div>
+        <div>
+          <i class="far fa-edit edit editModalButton"></i>
+          <i class="fas fa-trash-alt delete"></i>
+          <i class="fas fa-copy copy"></i>
+        </div>
+      </div>
+    </template>
+    <script src="/public/assets/js/alert.js"></script>
     <script src="/public/assets/js/manageStudent.js"></script>
     <script>
       document.querySelector('.logout').addEventListener('click', () => {

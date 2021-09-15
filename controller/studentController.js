@@ -38,8 +38,16 @@ exports.fetchUser = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getMe = catchAsync(async (req, res, next) => {
+  const user = await User.findOne({ _id: req.user.userId }).lean();
+  return res.status(200).json({
+    status: 'success',
+    data: { user },
+  });
+});
+
 exports.updateUser = catchAsync(async (req, res, next) => {
-  await User.updateOne({ _id: req.params.userId }, req.body);
+  const result = await User.updateOne({ _id: req.params.userId }, req.body);
   if (!result.matchedCount) return next(new AppError('User not found!', 404));
   if (!result.modifiedCount)
     return next(new AppError('Failed to update student!', 400));

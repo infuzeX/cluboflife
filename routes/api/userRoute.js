@@ -12,9 +12,11 @@ router
   )
   .post(
     // authController.protect,
-    authController.restrictTo(['admin']),
+    // authController.restrictTo(['admin']),
     userController.userSignup
   );
+
+router.get('/me', authController.protect, userController.getMe);
 
 router
   .route('/:userId')
@@ -30,5 +32,12 @@ router
     authController.protectUserResource,
     userController.deleteUser
   );
+
+router.get(
+  '/export',
+  authController.protect,
+  authController.restrictTo(['admin']),
+  userController.exportUsers
+);
 
 module.exports = router;

@@ -20,6 +20,13 @@ body {
 
 .detailHeader {
   padding: 1rem 0;
+  border-bottom: 1px solid #ccc;
+  transition: all 500ms linear;
+  cursor: pointer;
+}
+
+.detailHeader:hover {
+  background: #eee;
 }
 
 .studentHeader::after{
@@ -88,6 +95,7 @@ body {
   background-color: rgba(255,255,255,0.92);
   border-radius: 8px;
   display: flex;
+  flex-direction: column;
   align-items: center;
 justify-content: center;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.65);
@@ -138,6 +146,80 @@ justify-content: center;
   cursor: pointer;
 }
 
+header {
+  display: flex;
+  padding: 5rem 5rem 2rem 5rem;
+  justify-content: space-between;
+}
+
+.heading {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.download {
+  margin-right: 7px;
+}
+.export {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border: none;
+  outline: none;
+  text-align: center;
+  min-width: 120px;
+  border-radius: 5px;
+  background: #0d6efd;
+  color: white;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: lighter;
+}
+
+.searchContainer {
+  padding: 0 5rem 5rem 5rem;
+  display: flex;
+  justify-content: center;
+}
+.search-input {
+  width: 250px;
+  position: relative;
+
+}
+.search {
+  padding: 15px;
+  border: 1px solid #999;
+  outline: none;
+  width: 100%;
+  background: #DCDCDC;
+  border-radius: 5px;
+}
+
+.studentWrap {
+  background-color: rgba(255,255,255,0.82);
+  padding: 2rem 6px;
+  border-radius:8px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.search:focus{
+  border: 1px solid #0275d8;
+}
+.search::placeholder{
+  font-size: 15px;
+}
+
+.icon {
+  position: absolute;
+  top: 0;
+  left:0;
+  padding: 15px 10px;
+  font-size: 17px;
+  color:#0d6efd;
+}
+
 @media (max-width: 768px) {
   .studentContainer {
     padding: 3px;
@@ -154,5 +236,15 @@ justify-content: center;
   }
   .detailHeader i{
     font-size: 18px;
+  }
+  header {
+    padding: 2rem;
+    flex-direction: column;
+  }
+
+  .export {
+    width: 120px;
+    align-self: flex-end;
+    margin-top: 14px;
   }
 }

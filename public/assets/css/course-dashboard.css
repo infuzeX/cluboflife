@@ -234,13 +234,17 @@ form{
     font-size: 3rem;
     margin-bottom: 19px;
 }
-.add-course input[type="text"]{
+.add-course input[type="text"],.checkbox{
     display: block;
     margin: auto;
     width: 50%;
     margin-bottom: 21px;
     font-size: 1.4rem;
 }
+.checkbox {
+    font-size: 20px;
+}
+
 .add-course input[type="date"]{
     display: block;
     margin: auto;

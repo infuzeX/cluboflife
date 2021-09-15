@@ -1,6 +1,10 @@
 const router = require('express').Router();
 const path = require('path');
-const { protectLoginPage } = require('../controller/authController');
+const {
+  protectLoginPage,
+  protect,
+  protectPage,
+} = require('../controller/authController');
 
 router.get('/login', protectLoginPage, (req, res) => {
   const file = path.resolve('public/index.html');
@@ -22,8 +26,8 @@ router.get('/profile', (req, res) => {
   res.sendFile(file);
 });
 
-router.get('/dashboard', (req, res) => {
-  const file = path.resolve('public/course-dashboard.html');
+router.get('/dashboard', protectPage, (req, res) => {
+  const file = path.resolve('public/yourProfile.html');
   res.sendFile(file);
 });
 

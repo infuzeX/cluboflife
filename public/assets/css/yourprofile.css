@@ -28,6 +28,15 @@ nav ul li a{
     margin-left: auto;
 }
 
+.flex{
+    display: flex !important;
+}
+.none {
+    display: none !important;
+}
+.changePassword {
+    display: none;
+}
 .dropdown ul{
     display: block;
     position: absolute;

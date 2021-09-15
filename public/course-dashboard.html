@@ -18,8 +18,8 @@
           <a id="sideNav" href="#"><i class="fas fa-bars"></i></a>
         </li>
         <li>COURSES</li>
-        <li class="left" onclick="add()">
-          <a href="#">
+        <li class="left">
+          <a href="#"  class="cour">
             <span><i class="fas fa-plus"></i></span>
             <span>NEW COURSE</span>
           </a>
@@ -28,7 +28,7 @@
     </section>
     <section class="new-coures none">
       <div class="admin">
-        <div class="cross" onclick="rem()"><i class="fas fa-times"></i></div>
+        <div class="cross"><i class="fas fa-times"></i></div>
 
         <hr />
       </div>
@@ -49,6 +49,9 @@
           />
           <input type="text" name="code" id="" placeholder="Course Code" class="code" required/>
           <input type="text" name="link" id="" placeholder="Course Buy Link" class="link" required/>
+          <div class='checkbox'>
+          <input type='checkbox' name='publish' id='publish' checked /> <label for="publish">Publish</label>
+        </div>
         </div>
         <div class="field-div">
           <button type="submit">Submit</button>
@@ -80,7 +83,7 @@
               id="searchjr"
               type="text"
               placeholder="Search.."
-              onkeyup="hell()"
+              class="searchCourse"
             />
             <button type="submit" onclick="hell()">
               <i class="fas fa-search"></i>
@@ -125,6 +128,7 @@
           </div>
       </template>
     </section>
+    <script src="/public/assets/js/alert.js"></script>
     <script src="/public/assets/js/manageCourse.js"></script>
     <script>
       let sideNav = document.getElementById('sideNav');
@@ -138,13 +142,10 @@
         sidenav.classList.remove('vis');
       });
 
-    
 
       //for search
-      
-      
-      function hell() {
-        const ins = document.getElementsByClassName('author');
+      document.querySelector(".searchCourse").addEventListener("keyup",()=> {
+         const ins = document.getElementsByClassName('author');
         const dash = document.querySelectorAll('.course-child-parent');
         const courseName = document.querySelectorAll('.course-txt h3');
         const searchText = document
@@ -163,7 +164,11 @@
             }
           }
         }
-      }
+      })
+      
+      // function hell() {
+       
+      // }
 
 
      
