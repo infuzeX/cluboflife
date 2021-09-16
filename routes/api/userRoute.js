@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const authController = require('../../controller/authController');
 const userController = require('../../controller/studentController');
+const subscriptionController = require('../../controller/subscriptionController');
 
 router
   .route('/')
@@ -18,6 +19,18 @@ router
 
 router.get('/me', authController.protect, userController.getMe);
 
+router.get(
+  '/export',
+  authController.protect,
+  authController.restrictTo(['admin']),
+  userController.exportUsers
+);
+
+router.get('/:userId/orders',
+  authController.protect,
+  authController.restrictTo(['admin', 'student']),
+  subscriptionController.fetchUserOrders)
+
 router
   .route('/:userId')
   .patch(
@@ -33,11 +46,5 @@ router
     userController.deleteUser
   );
 
-router.get(
-  '/export',
-  authController.protect,
-  authController.restrictTo(['admin']),
-  userController.exportUsers
-);
 
 module.exports = router;
