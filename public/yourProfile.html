@@ -11,16 +11,28 @@
     <link rel="stylesheet" href="/public/assets/css/table.css" />
     <link rel="stylesheet" href="/public/assets/css/yourprofile.css" />
     <title>Your Profile</title>
+    <!-- <style>
+      aside div {
+        border: none;
+        outline: none;
+        zoom: 90%;
+        transition: all 200ms linear;
+      }
+      aside div:focus{
+        zoom: 100%;
+      border-bottom: 4px solid dimgray;
+      }
+    </style> -->
   </head>
   <body>
     <section id="nav">
       <nav>
         <ul>
           <li><a href="#" style="font-size: 1.3rem">ooBlue</a></li>
-          <li class="left"><a href="#">ALL COURSES</a></li>
-          <li><a href="#">MY DASHBOARD</a></li>
-          <li><a href="#">VITORIO D</a></li>
-          <li id="font" onclick="show()">
+          <!-- <li class="left"><a href="#">ALL COURSES</a></li> -->
+          <!-- <li><a href="#">MY DASHBOARD</a></li> -->
+          <!-- <li><a href="#">VITORIO D</a></li> -->
+          <li class="left" id="font" onclick="show()">
             <a href="#" style="font-size: 2rem">
               <i class="far fa-user-circle"></i>
             </a>
@@ -30,8 +42,9 @@
           </li>
           <div class="dropdown none">
             <ul>
-              <li><a href="#">My Account</a></li>
-              <li><a href="#">Sign Out</a></li>
+              <li><a href="/dashboard">My Dashboard</a></li>
+              <!-- <li><a href="/account" class="username">Username</a></li> -->
+              <li><a href="#" class="logout">Sign Out</a></li>
             </ul>
           </div>
         </ul>
@@ -40,14 +53,15 @@
     <main>
       <aside>
         <div
-          class="asideSelected tabs"
+          class="tabs asideSelected"
           data-section="profile"
+          tabindex="-1"
         >
           Profile
         </div>
-        <div class="tabs" data-section="notification">Notification</div>
-        <div class="tabs" data-section="order">Order History</div>
-        <div class="tabs" data-section="password">
+        <div class="tabs" data-section="notification" tabindex="-1">Notification</div>
+        <div class="tabs" data-section="order" tabindex="-1">Order History</div>
+        <div class="tabs" data-section="password" tabindex="-1">
           Change Password
         </div>
       </aside>
@@ -86,6 +100,7 @@
                     class="text-input createdAt"
                     type="date"
                     name="createdAt"
+                    readonly
                     required
                   />
                 </div>
@@ -152,8 +167,15 @@
       </section>
     </main>
     <script src="/public/assets/js/alert.js"></script>
+    <script src="/public/assets/js/user.js"></script>
+    <script>
+      console.log(getMe);
+
+    </script>
     <script src="/public/assets/js/profile.js"></script>
     <script>
+      console.log(getMe);
+      // document.querySelector('.firstTab').focus()
       var liButton = document.querySelector('.dropdown');
       console.log(liButton);
       function show() {
@@ -162,9 +184,12 @@
     </script>
     <script>
       var asideBtn = document.querySelectorAll('aside div');
-      asideBtn.forEach((item) => {
+      asideBtn.forEach((item,idx) => {
         item.addEventListener('click', function () {
-          item.classList.toggle('asideSelected');
+          asideBtn.forEach((btn,i) => {
+            if (i===idx) btn.classList.add('asideSelected')
+            else btn.classList.remove('asideSelected')
+          })
         });
       });
     </script>

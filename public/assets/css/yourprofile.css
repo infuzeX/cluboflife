@@ -37,6 +37,9 @@ nav ul li a{
 .changePassword {
     display: none;
 }
+.dropdown{
+    z-index:1000;
+}
 .dropdown ul{
     display: block;
     position: absolute;
