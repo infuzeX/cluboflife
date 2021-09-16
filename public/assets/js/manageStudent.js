@@ -10,7 +10,7 @@
   const addStudentForm = document.querySelector('.addStudent');
   const addStudentModal = document.querySelector('.addModal');
   const editStudentModal = document.querySelector('.editModal');
-  const editStudentButton = document.querySelector('.editModalButton');
+  // const editStudentButton = document.querySelector('.editModalButton');
   const date = document.querySelectorAll('.date');
   const template = document.querySelector('template');
   const studentDetail = document.querySelector('.studentDetail');
@@ -20,6 +20,7 @@
   const createdAt = document.querySelector('.createdAt');
   const editForm = document.querySelector('.editForm');
   const exportCSV = document.querySelector('.export');
+  const downloadCSV = document.querySelector('.download');
 
   console.log(name, email, createdAt);
 
@@ -99,7 +100,7 @@
       );
       __GLOBAL_STUDENTS.students = [...students];
       updateUI();
-      exportUser();
+      // exportUser();
       tempAlert('Deleted Successfully', 3000);
     } catch (error) {
       console.log(error);
@@ -144,7 +145,7 @@
       ];
       updateUI();
       toggleModal(addStudentModal);
-      exportUser();
+      // exportUser();
       tempAlert('Added Successfully', 3000);
     } catch (err) {
       console.log(err);
@@ -194,46 +195,29 @@
 
       await fetchUser();
       toggleModal(editStudentModal);
-      exportUser();
+      // exportUser();
       tempAlert('Edited Successfully', 3000);
     } catch (err) {
       return (error[1].textContent = err.message);
     }
   });
 
-  // exportCSV.addEventListener('click', async () => {
-  //   fetch('/api/v1/users/export')
-  //     .then((res) => res)
-  //     .then(async (res) => {
-  //       res.blob().then((blob) => {
-  //         const downloadUrl = window.URL.createObjectURL(blob);
-  //         // exportCSV.href = downloadUrl;
-
-  //         // exportCSV.setAttribute('download', 'user.xlsx');
-  //         // exportCSV.click();
-  //         // exportCSV.remove();
-  //         console.log('hi');
-  //       });
-  //       console.log('b');
-  //     })
-  //     .catch((e) => console.log(e));
-  // });
+  exportCSV.addEventListener('click', () => exportUser());
   function exportUser() {
-    fetch('/api/v1/users/export')
+    fetch('/api/v1/users/export/?role=student')
       .then((res) => res)
       .then(async (res) => {
         res.blob().then((blob) => {
           const downloadUrl = window.URL.createObjectURL(blob);
-          exportCSV.href = downloadUrl;
-
-          exportCSV.setAttribute('download', 'user.xlsx');
-          exportCSV.style.display = 'flex';
+          downloadCSV.href = downloadUrl;
+          downloadCSV.setAttribute('download', 'user.xlsx');
+          downloadCSV.click();
         });
       })
       .catch((e) => console.log(e));
   }
 
-  exportUser();
+  // exportUser();
 
   document.querySelector('.search').addEventListener('keyup', () => {
     console.log('hi');

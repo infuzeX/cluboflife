@@ -52,7 +52,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     { userId: user._id, email: user.email },
     emailSecret,
     {
-      expiresIn: 600000,
+      expiresIn: '10m',
     }
   );
   const resetURL = `${req.protocol}://${req.get(

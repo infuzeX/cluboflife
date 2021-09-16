@@ -161,7 +161,7 @@ header {
   margin-right: 7px;
 }
 .export {
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   padding: 8px;
