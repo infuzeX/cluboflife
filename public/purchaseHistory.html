@@ -26,15 +26,14 @@
         <form class="form addStudent">
           <!-- <input type="email" name="email" class="input" placeholder="Email" /> -->
           <input
-            list="user"
+            list="userList"
             name="user"
-            class="user input"
+            class="userAdd input"
             placeholder="Select User"
+            autocomplete="off"
+            id="nameList"
           />
-          <datalist id="user">
-            <option value="me"></option>
-            <option value="some"></option>
-          </datalist>
+          <datalist id="userList" class="userDropdown"> </datalist>
           <!-- <input
             type="text"
             name="course"
@@ -44,23 +43,21 @@
           <input
             list="course"
             name="course"
-            class="course input"
+            class="courseAdd input"
             placeholder="Select Course"
+            autocomplete="off"
           />
-          <datalist id="course">
-            <option value="Go"></option>
-            <option value="Django"></option>
-          </datalist>
+          <datalist id="course" class="courseDropdown"> </datalist>
           <input
             type="date"
             name="boughtAt"
-            class="input boughtAt"
+            class="input boughtAtAdd"
             placeholder="Purchased At"
           />
           <input
             type="date"
             name="expireAt"
-            class="input expireAt"
+            class="input expireAtAdd"
             placeholder="Expire At"
           />
 
@@ -160,9 +157,10 @@
     <template>
       <div class="detailHeader">
         <div class="index no"></div>
-        <div class="name"></div>
         <div class="email"></div>
-        <div class="joined no"></div>
+        <div class="course"></div>
+        <div class="boughtAt no"></div>
+        <div class="expiresAt no"></div>
         <div>
           <i class="far fa-edit edit editModalButton"></i>
           <i class="fas fa-trash-alt delete"></i>

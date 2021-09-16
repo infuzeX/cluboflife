@@ -1,4 +1,3 @@
-console.log(document.querySelector('.add-course'));
 // global store for courses,edit course
 (() => {
   const _GLOBAL_NAMESPACE = {
