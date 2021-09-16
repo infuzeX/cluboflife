@@ -8,6 +8,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="/public/assets/css/table.css" />
     <link rel="stylesheet" href="/public/assets/css/yourprofile.css" />
     <title>Your Profile</title>
   </head>
@@ -38,19 +39,26 @@
     </section>
     <main>
       <aside>
-        <div class="asideSelected" onclick="toggleTab()">Profile</div>
-        <div>Notification</div>
-        <div>Order History</div>
-        <div onclick="toggleTab()">Change Password</div>
+        <div
+          class="asideSelected tabs"
+          data-section="profile"
+        >
+          Profile
+        </div>
+        <div class="tabs" data-section="notification">Notification</div>
+        <div class="tabs" data-section="order">Order History</div>
+        <div class="tabs" data-section="password">
+          Change Password
+        </div>
       </aside>
-      <section id="details">
-        <h1>Your Profile</h1>
-        <div class="details-flex-parent">
-          <div class="icon">
-            <i class="fas fa-user"></i>
-            <!-- <a href="#">Upload New Image</a> -->
-          </div>
-          <div class="form">
+      <div id="details">
+        <div class="profile menu">
+          <h1>Your Profile</h1>
+          <div class="details-flex-parent">
+            <div class="icon">
+              <i class="fas fa-user"></i>
+              <!-- <a href="#">Upload New Image</a> -->
+            </div>
             <form action="" class="editProfile">
               <p class="error"></p>
               <div class="input">
@@ -82,41 +90,64 @@
                   />
                 </div>
               </div>
-
-              <div class="input submit">
-                <input type="submit" value="Submit" />
-              </div>
-            </form>
-
-            <form action="" class="changePassword">
-              <p class="error"></p>
-
-              <div class="input2">
-                <div class="input">
-                  Old Password
-                  <input
-                    class="text-input name"
-                    type="password"
-                    name="password"
-                    required
-                  />
-                </div>
-                <div class="input">
-                  New Password
-                  <input
-                    class="text-input createdAt"
-                    type="password"
-                    name="newPassword"
-                    required
-                  />
-                </div>
-              </div>
-
               <div class="input submit">
                 <input type="submit" value="Submit" />
               </div>
             </form>
           </div>
+        </div>
+
+        <div class="order none menu mt">
+      <div class="studentWrap">
+        <section class="studentHeader">
+          <div>#</div>
+          <div>Email</div>
+          <div>Course</div>
+          <div>Purchased At</div>
+          <div>Expires At</div>
+        </section>
+        <section class="studentDetail">
+          <div class="detailHeader">
+            <div>1</div>
+            <div>2</div>
+            <div></div>
+            <div>4</div>
+            <div>5</div>
+          </div>
+        </section>
+      </div>
+        </div>
+        <div class="notification none menu">Notification</div>
+               
+        <div class="details-flex-parent mt">
+          <form action="" class="changePassword none password menu ">
+            <p class="error"></p>
+            <div class="input2">
+              <div class="input">
+              Old Password
+                <input
+                class="text-input name"
+                type="password"
+                name="password"
+                required
+                />
+             </div>
+            <div class="input">
+              New Password
+              <input
+                class="text-input createdAt"
+                type="password"
+                name="newPassword"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="input submit">
+            <input type="submit" value="Submit" />
+          </div>
+        </form>
+        </div>
         </div>
       </section>
     </main>

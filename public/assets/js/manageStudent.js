@@ -5,13 +5,13 @@
     filter: [],
   };
 
-  const manageStudentButton = document.querySelector('.addModalButton');
-  const closeButton = document.querySelectorAll('.close');
+  // const manageStudentButton = document.querySelector('.addModalButton');
+  // const closeButton = document.querySelectorAll('.close');
   const addStudentForm = document.querySelector('.addStudent');
   const addStudentModal = document.querySelector('.addModal');
   const editStudentModal = document.querySelector('.editModal');
   // const editStudentButton = document.querySelector('.editModalButton');
-  const date = document.querySelectorAll('.date');
+  // const date = document.querySelectorAll('.date');
   const template = document.querySelector('template');
   const studentDetail = document.querySelector('.studentDetail');
   const error = document.querySelectorAll('.error');
@@ -24,19 +24,19 @@
 
   console.log(name, email, createdAt);
 
-  function toggleModal(el) {
-    console.log(el);
-    error.forEach((err) => (err.textContent = ''));
-    el.classList.toggle('openModal');
-    date.forEach((input) => (input.type = 'text'));
-  }
+  // function toggleModal(el) {
+  //   console.log(el);
+  //   error.forEach((err) => (err.textContent = ''));
+  //   el.classList.toggle('openModal');
+  //   date.forEach((input) => (input.type = 'text'));
+  // }
 
-  manageStudentButton.addEventListener('click', () =>
-    toggleModal(addStudentModal)
-  );
+  // manageStudentButton.addEventListener('click', () =>
+  //   toggleModal(addStudentModal)
+  // );
 
-  closeButton[0].addEventListener('click', () => toggleModal(addStudentModal));
-  closeButton[1].addEventListener('click', () => toggleModal(editStudentModal));
+  // closeButton[0].addEventListener('click', () => toggleModal(addStudentModal));
+  // closeButton[1].addEventListener('click', () => toggleModal(editStudentModal));
 
   // editStudentButton.addEventListener('click', () =>
   //   toggleModal(editStudentModal)
@@ -104,6 +104,11 @@
       tempAlert('Deleted Successfully', 3000);
     } catch (error) {
       console.log(error);
+      tempAlert(
+        error?.message || 'Something went wrong.Please try again',
+        5000,
+        true
+      );
     }
   }
 
@@ -120,6 +125,11 @@
       showUsers(users.data.students);
     } catch (error) {
       console.log(error);
+      tempAlert(
+        error?.message || 'Something went wrong.Please try again',
+        5000,
+        true
+      );
     }
   };
   fetchUser();
@@ -214,7 +224,9 @@
           downloadCSV.click();
         });
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        tempAlert(e?.message || 'Something went wrong', 5000, true);
+      });
   }
 
   // exportUser();
@@ -236,6 +248,6 @@
 
   function copyToClipboard(data) {
     navigator.clipboard.writeText(data);
-    tempAlert('Copied to clipboard', 5000);
+    tempAlert('Copied to clipboard', 1000);
   }
 })();

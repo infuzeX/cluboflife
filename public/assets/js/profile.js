@@ -28,6 +28,7 @@
       __GLOBAL_PROFILE.user = user?.data?.user;
     } catch (error) {
       console.log(error);
+      tempAlert(error?.message || 'Something went wrong', 5000, true);
     }
   };
 
@@ -93,9 +94,26 @@
     }
   });
 })();
-const form = document.querySelector('.editProfile');
-const changePasswordForm = document.querySelector('.changePassword');
-function toggleTab() {
-  form.classList.toggle('none');
-  changePasswordForm.classList.toggle('flex');
-}
+// const form = document.querySelector('.editProfile');
+// const changePasswordForm = document.querySelector('.changePassword');
+// function toggleTab() {
+//   form.classList.toggle('none');
+//   changePasswordForm.classList.toggle('flex');
+// }
+
+const tabs = document.querySelectorAll('.tabs');
+const menus = document.querySelectorAll('.menu');
+
+tabs.forEach((tab) => {
+  tab.addEventListener('click', () => {
+    const data = tab?.dataset?.section;
+    menus.forEach((menu) => {
+      if (menu.classList.contains(data)) {
+        menu.classList.add('flex');
+        menu.classList.remove('none');
+      } else {
+        menu.classList.add('none');
+      }
+    });
+  });
+});

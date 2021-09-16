@@ -56,7 +56,7 @@ console.log(document.querySelector('.add-course'));
       editModal();
     });
     deleteButton.addEventListener('click', function () {
-      deleteCourse(deleteButton.dataset.id, data);
+      deleteCourse(course._id, data);
     });
     more.addEventListener('click', () => smallMenu.classList.toggle('none'));
     courseContainer.appendChild(clone);
@@ -93,6 +93,11 @@ console.log(document.querySelector('.add-course'));
       tempAlert('Deleted Successfully', 3000);
     } catch (error) {
       console.log(error);
+      tempAlert(
+        error?.message || 'Something went wrong.Please try again',
+        5000,
+        true
+      );
     }
   }
 
@@ -104,10 +109,15 @@ console.log(document.querySelector('.add-course'));
         throw new Error(newCourse.message);
       }
       console.log(courses);
-      _GLOBAL_NAMESPACE.courses = courses.data.courses;
+      _GLOBAL_NAMESPACE.courses = courses?.data?.courses;
       return showCourses(_GLOBAL_NAMESPACE.courses);
     } catch (error) {
       console.log(error);
+      tempAlert(
+        error?.message || 'Something went wrong.Please try again',
+        5000,
+        true
+      );
     }
   };
 
@@ -132,7 +142,11 @@ console.log(document.querySelector('.add-course'));
       if (newCourse.status === 'error' || newCourse.status === 'fail') {
         throw new Error(newCourse.message);
       }
-      createCourseNode(newCourse.data.course);
+      _GLOBAL_NAMESPACE.courses = [
+        ..._GLOBAL_NAMESPACE.courses,
+        newCourse?.data?.course,
+      ];
+      createCourseNode(newCourse?.data?.course);
       rem();
       tempAlert('Added Course', 3000);
     } catch (error) {

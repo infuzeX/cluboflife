@@ -29,7 +29,7 @@ nav ul li a{
 }
 
 .flex{
-    display: flex !important;
+    display: block !important;
 }
 .none {
     display: none !important;
@@ -46,6 +46,9 @@ nav ul li a{
 }
 .none{
     display: none;
+}
+.mt {
+    margin-top: 5%;
 }
 
 /* next section */
@@ -152,6 +155,20 @@ form .input{
 
 
 @media screen and (max-width: 768px) {
+    .input2 {
+        flex-direction: column;
+    }
+    form {
+        padding: 10px;
+    }
+
+    input {
+        border: 1px solid #212529;
+    }
+    .input2 .input {
+        width: 100%;
+
+    }
     nav ul li {
         padding: 6px;
         font-size: 0.5rem;

@@ -178,6 +178,22 @@ header {
   font-weight: lighter;
 }
 
+input[type="date"]::before {
+  content: attr(placeholder) !important;
+  color: #aaa;
+  margin-right: 0.5em;
+  font-family: 'Alegreya',serif;
+}
+
+input[type="date"]:focus::before,
+input[type="date"]:valid::before {
+  content: "";
+}
+
+label {
+  font-family: inherit;
+}
+
 .searchContainer {
   padding: 0 5rem 5rem 5rem;
   display: flex;

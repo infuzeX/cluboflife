@@ -16,6 +16,7 @@ body {
   display: flex;
   justify-content: space-evenly;
   padding: 3rem;
+  flex-wrap: wrap;
 
 }
 
@@ -53,4 +54,12 @@ body {
 .card a {
   text-decoration: none;
   color: inherit;
+}
+
+
+@media (max-width:768px) {
+  .card {
+    width: 90%;
+    margin-bottom: 1rem;
+  }
 }
