@@ -27,8 +27,13 @@ router.get('/profile', (req, res) => {
   res.sendFile(file);
 });
 
-router.get('/dashboard', protectPage, (req, res) => {
+router.get('/account', protectPage, (req, res) => {
   const file = path.resolve('public/yourProfile.html');
+  res.sendFile(file);
+});
+
+router.get('/dashboard', protectPage, (req, res) => {
+  const file = path.resolve('public/allCourses.html');
   res.sendFile(file);
 });
 

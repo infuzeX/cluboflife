@@ -9,30 +9,21 @@
   const error = document.querySelectorAll('.error');
   const form = document.querySelector('.editProfile');
   const changePasswordForm = document.querySelector('.changePassword');
+
   console.log(changePasswordForm);
   error.forEach((err) => (err.style.color = 'red'));
 
-  const getMe = async () => {
-    try {
-      const res = await fetch('/api/v1/users/me');
-      const user = await res.json();
-      if (user.status === 'fail' || user.status === 'error') {
-        throw new Error(user?.message);
-      }
-
-      name.value = user?.data?.user?.name;
-      email.value = user?.data?.user?.email;
-      createdAt.value = user?.data?.user?.createdAt
-        ? user?.data?.user?.createdAt?.split('T')[0]
-        : '';
-      __GLOBAL_PROFILE.user = user?.data?.user;
-    } catch (error) {
-      console.log(error);
-      tempAlert(error?.message || 'Something went wrong', 5000, true);
-    }
+  const getProfile = async () => {
+    const user = await getMe();
+    console.log(user);
+    if (!user) return;
+    name.value = user?.name;
+    email.value = user?.email;
+    createdAt.value = user?.createdAt ? user?.createdAt?.split('T')[0] : '';
+    __GLOBAL_PROFILE.user = user;
   };
 
-  getMe();
+  getProfile();
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -89,6 +80,8 @@
         throw new Error(user.message);
       }
       tempAlert('Password changed', 3000);
+      element['password'].value = '';
+      element['newPassword'].value = '';
     } catch (err) {
       error[1].textContent = err.message;
     }

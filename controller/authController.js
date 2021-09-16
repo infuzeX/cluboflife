@@ -8,7 +8,7 @@ const { promisify } = require('util');
 const secret = process.env.TOKEN_SECRET;
 const emailSecret = process.env.EMAIL_SECRET;
 const expiresIn = eval(process.env.EXPIRES_IN);
-const expiresInMin = process.env.EXPIRES_IN_MIN;
+const expiresInMin = parseInt(process.env.EXPIRES_IN_MIN);
 
 //user login
 exports.login = catchAsync(async (req, res, next) => {
@@ -27,7 +27,7 @@ exports.login = catchAsync(async (req, res, next) => {
     { userId: user._id, role: user.role },
     secret,
     {
-      expiresIn: '1d',
+      expiresIn: expiresInMin,
     }
   );
 
@@ -37,7 +37,7 @@ exports.login = catchAsync(async (req, res, next) => {
   return res
     .status(200)
     .cookie('token', token, {
-      expiresIn: 1 * 60 * 3600000,
+      expiresIn: expiresIn,
       httpOnly: true,
       secure: true,
     })
@@ -52,7 +52,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     { userId: user._id, email: user.email },
     emailSecret,
     {
-      expiresIn: '10m',
+      expiresIn: process.env.EMAIL_EXPIRE,
     }
   );
   const resetURL = `${req.protocol}://${req.get(
