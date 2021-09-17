@@ -7,6 +7,16 @@ const { subscriptionColumn } = require('../utils/column');
 const exportSheet = require('../utils/export');
 
 exports.createSubscription = catchAsync(async (req, res, next) => {
+  const hasSubscribed = await Subscription.findOne({
+    user: req.body.userId,
+    course: req.body.courseId,
+    active: true,
+  });
+  if (hasSubscribed)
+    return next(
+      new AppError('User has already subscribed to this course', 401)
+    );
+  console.log(hasSubscribed);
   const subscription = await Subscription.create({
     user: req.body.userId,
     course: req.body.courseId,
@@ -87,4 +97,16 @@ exports.exportCsv = catchAsync(async (req, res, next) => {
   res.setHeader('Content-Disposition', 'attachement; filename=Students');
   await workbookXLSX.write(res);
   res.end();
+});
+
+exports.hasUserSubscribed = catchAsync(async (req, res, next) => {
+  const courseId = req.query.courseId;
+  if (!courseId) return res.redirect('/dashboard');
+  const hasSubscribed = await Subscription.findOne({
+    user: req.user.userId,
+    course: courseId,
+    active: true,
+  });
+  if (!hasSubscribed) return res.redirect('/dashboard');
+  return next();
 });

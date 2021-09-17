@@ -5,6 +5,10 @@ const courseContainer = document.querySelector('.allCourses-flex-parent');
 
 const createProductNode = (product) => {
   const clone = template.content.cloneNode(true);
+  clone.querySelector('.course').addEventListener('click', () => {
+    console.log('hi');
+    window.location = `/courses/${product?.course?.courseCode}?courseId=${product?.course?._id}`;
+  });
   clone.querySelector(
     'h3'
   ).innerText = `${product?.course?.name} with ${product.course?.instructor}`;

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All courses</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/public/assets/css/allCourses.css" />
+  </head>
+
+  <body>
+    <section id="nav">
+      <nav>
+        <ul>
+          <li><a href="#" style="font-size: 1.3rem">ooBlue</a></li>
+          <!-- <li class="left"><a href="#">ALL COURSES</a></li>
+                <li><a href="#">MY DASHBOARD</a></li>
+                <li><a href="#">VITORIO D</a></li> -->
+          <li id="font" class="left" onclick="show()">
+            <a href="#" style="font-size: 2rem">
+              <i class="far fa-user-circle"></i>
+            </a>
+            <a class="font1" href="#">
+              <i class="fas fa-caret-down"></i>
+            </a>
+          </li>
+          <div class="dropdown none">
+            <ul>
+              <!-- <li><a href="#">My Dashboard</a></li> -->
+              <li><a href="/account" class="username"></a></li>
+              <li><a href="#" class="logout">Sign Out</a></li>
+            </ul>
+          </div>
+        </ul>
+        <h1>Course code</h1>
+        <!-- <h1>My Courses</h1>
+        <p>Joy And Magic Of Learning</p>
+      </nav>
+    </section>
+    <section id="second-section">
+      <h1>All Products</h1>
+      <!-- <h5>All Courses</h5> -->
+      <div class="allCourses-flex-parent"></div> 
+      
+    </section>
+    <script src="/public/assets/js/alert.js"></script>
+    <script src="/public/assets/js/user.js"></script>
+    <script>
+      getMe()
+      var liButton = document.querySelector('.dropdown');
+      console.log(liButton);
+      function show() {
+        liButton.classList.toggle('none');
+      }
+    </script>
+  </body>
+</html>
