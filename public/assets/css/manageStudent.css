@@ -5,6 +5,7 @@ body {
   margin: 0;
   box-sizing: border-box;
   position: relative;
+  min-height: 100vh;
 }
 
 .studentContainer {
@@ -236,6 +237,11 @@ label {
   color:#0d6efd;
 }
 
+option {
+  height:30px;
+  font-family: 'Alegreya';
+  color: black;
+}
 @media (max-width: 768px) {
   .studentContainer {
     padding: 3px;
@@ -253,6 +259,8 @@ label {
   .detailHeader i{
     font-size: 18px;
   }
+
+  
   header {
     padding: 2rem;
     flex-direction: column;

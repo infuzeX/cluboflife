@@ -9,6 +9,7 @@ const adminRoutes = require('./routes/adminPageRoute');
 const authApiRoutes = require('./routes/api/authRoute');
 const courseApiRoutes = require('./routes/api/courseRoute');
 const userApiRoutes = require('./routes/api/userRoute');
+const subscriptionApiRoute = require('./routes/api/subscriptionRoute');
 
 app.use(express.json());
 app.use(cookieParser());
@@ -22,6 +23,7 @@ app.use('/admin', adminRoutes);
 app.use('/api/v1/auth', authApiRoutes);
 app.use('/api/v1/courses', courseApiRoutes);
 app.use('/api/v1/users', userApiRoutes);
+app.use('/api/v1/subscription', subscriptionApiRoute);
 
 app.use(globalErrorController);
 

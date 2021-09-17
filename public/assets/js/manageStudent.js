@@ -217,6 +217,9 @@
     fetch('/api/v1/users/export/?role=student')
       .then((res) => res)
       .then(async (res) => {
+        if (res.status === 500 || res.status === 404) {
+          return tempAlert('No data found', 3000, true);
+        }
         res.blob().then((blob) => {
           const downloadUrl = window.URL.createObjectURL(blob);
           downloadCSV.href = downloadUrl;

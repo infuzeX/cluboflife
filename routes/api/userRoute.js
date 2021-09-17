@@ -26,10 +26,12 @@ router.get(
   userController.exportUsers
 );
 
-router.get('/:userId/orders',
+router.get(
+  '/orders',
   authController.protect,
   authController.restrictTo(['admin', 'student']),
-  subscriptionController.fetchUserOrders)
+  subscriptionController.fetchUserOrders
+);
 
 router
   .route('/:userId')
@@ -45,6 +47,5 @@ router
     authController.protectUserResource,
     userController.deleteUser
   );
-
 
 module.exports = router;

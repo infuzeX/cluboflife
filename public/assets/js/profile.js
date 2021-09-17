@@ -86,6 +86,45 @@
       error[1].textContent = err.message;
     }
   });
+
+  const template = document.querySelector('template');
+  const courseContainer = document.querySelector('.studentDetail');
+  const genDate = (date) => {
+    return date ? date?.split('T')[0] : '';
+  };
+  const createProductNode = (product, i) => {
+    const clone = template.content.cloneNode(true);
+    clone.querySelector('.index').textContent = i + 1;
+    clone.querySelector('.course').textContent = product?.course?.name;
+    clone.querySelector('.boughtAt').textContent = genDate(product?.boughtAt);
+    clone.querySelector('.expiresAt').textContent = genDate(product?.expiresAt);
+    clone.querySelector('.paid').textContent = product?.paid;
+    clone.querySelector('.active').textContent = product?.active;
+
+    courseContainer.append(clone);
+  };
+
+  const showProducts = (products) => {
+    if (!products || !products?.length) return;
+
+    products.map((product, i) => createProductNode(product, i));
+  };
+
+  const getOrder = async () => {
+    try {
+      const res = await fetch('/api/v1/users/orders');
+      const data = await res.json();
+      if (res.status === 'fail' || res.status === 'error') {
+        throw new Error(res?.message);
+      }
+      showProducts(data?.data?.subscriptions);
+    } catch (error) {
+      console.log(error);
+      tempAlert(error?.message, 3000, true);
+    }
+  };
+
+  getOrder();
 })();
 // const form = document.querySelector('.editProfile');
 // const changePasswordForm = document.querySelector('.changePassword');

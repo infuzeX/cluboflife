@@ -24,7 +24,6 @@
         <div class="close"><i class="fas fa-times delete"></i></div>
         <div><p class="error"></p></div>
         <form class="form addStudent">
-          <!-- <input type="email" name="email" class="input" placeholder="Email" /> -->
           <input
             list="userList"
             name="user"
@@ -32,20 +31,17 @@
             placeholder="Select User"
             autocomplete="off"
             id="nameList"
+            required
           />
           <datalist id="userList" class="userDropdown"> </datalist>
-          <!-- <input
-            type="text"
-            name="course"
-            class="input course"
-            placeholder="course"
-          /> -->
           <input
             list="course"
             name="course"
             class="courseAdd input"
             placeholder="Select Course"
             autocomplete="off"
+            id="courseList"
+            required
           />
           <datalist id="course" class="courseDropdown"> </datalist>
           <input
@@ -53,57 +49,34 @@
             name="boughtAt"
             class="input boughtAtAdd"
             placeholder="Purchased At"
+            required
           />
           <input
             type="date"
-            name="expireAt"
+            name="expiresAt"
             class="input expireAtAdd"
             placeholder="Expire At"
+            required
           />
 
+          <input
+            type="number"
+            name="paid"
+            class="input paid"
+            placeholder="Amount Paid"
+            required
+          />
+          <div class="input activeContainer" style="display: none">
+            <input type="checkbox" id="active" name="active" /><label
+              for="active"
+              >Active</label
+            >
+          </div>
           <button class="button" type="submit">ADD</button>
         </form>
       </div>
     </div>
-    <div class="editModal">
-      <div class="edit_popup">
-        <div class="close"><i class="fas fa-times delete"></i></div>
-        <div><p class="error"></p></div>
-        <form class="form editForm">
-          <!-- <input type="email" name="email" class="input" placeholder="Email" /> -->
-          <input
-            list="user"
-            name="user"
-            class="user"
-            placeholder="Select User"
-          />
-          <datalist id="user">
-            <option value="me"></option>
-            <option value="some"></option>
-          </datalist>
-          <input
-            type="text"
-            name="course"
-            class="input course"
-            placeholder="course"
-          />
-          <input
-            type="date"
-            name="boughtAt"
-            class="input boughtAt"
-            placeholder="Purchased At"
-          />
-          <input
-            type="date"
-            name="expireAt"
-            class="input expireAt"
-            placeholder="Expire At"
-          />
 
-          <button class="button">EDIT</button>
-        </form>
-      </div>
-    </div>
     <nav>
       <ul>
         <li>
@@ -129,11 +102,16 @@
 
     <div class="searchContainer">
       <div class="search-input">
-        <input
+        <!-- <input
           type="search"
           class="search"
           placeholder="Search by name or email"
-        />
+        /> -->
+        <select class="search" defaultValue="0">
+          <option value="0">All</option>
+          <option value="1">Active</option>
+          <option value="2">Inactive</option>
+        </select>
       </div>
     </div>
     <!-- <div class="studentCount">
@@ -148,6 +126,8 @@
           <div>Course</div>
           <div>Purchased At</div>
           <div>Expires At</div>
+          <div>Paid</div>
+          <div>Active</div>
           <!-- <div>Expired</div> -->
           <div>Edit</div>
         </section>
@@ -161,6 +141,8 @@
         <div class="course"></div>
         <div class="boughtAt no"></div>
         <div class="expiresAt no"></div>
+        <div class="paid no"></div>
+        <div class="active"></div>
         <div>
           <i class="far fa-edit edit editModalButton"></i>
           <i class="fas fa-trash-alt delete"></i>
@@ -183,5 +165,59 @@
           .catch((e) => console.log(e));
       });
     </script>
+    <script src="/public/assets/js/goBack.js"></script>
   </body>
 </html>
+
+<!-- 
+ <div class="editModal">
+      <div class="edit_popup">
+        <div class="close"><i class="fas fa-times delete"></i></div>
+        <div><p class="error"></p></div>
+        <form class="form editForm">
+          <!-- <input type="email" name="email" class="input" placeholder="Email" /> -->
+<!-- <input
+            list="user"
+            name="user"
+            class="user input"
+            placeholder="Select User"
+            autocomplete="off"
+          />
+          <datalist id="user" class="userDropdown"> </datalist>
+          <input
+            list="course"
+            name="course"
+            class="input course"
+            placeholder="course"
+            autocomplete="off"
+          />
+          <datalist id="course" class="courseDropdown"></datalist>
+
+          <input
+            type="date"
+            name="boughtAt"
+            class="input boughtAt"
+            placeholder="Purchased At"
+          />
+          <input
+            type="date"
+            name="expireAt"
+            class="input expireAt"
+            placeholder="Expire At"
+          />
+          <input
+            type="number"
+            name="paid"
+            class="paid"
+            placeholder="Amount Paid"
+            required
+          />
+          <div class="input">
+            <input type="checkbox" id="active" />
+            <label for="active">Active</label>
+          </div>
+          <button class="button">EDIT</button>
+        </form>
+      </div>
+    </div> -->
+-->

@@ -44,6 +44,11 @@ class APIFeatures {
     this.query = this.query.skip(skip).limit(limit);
     return this;
   }
+
+  lean() {
+    this.query = this.query.lean();
+    return this;
+  }
 }
 
 module.exports = APIFeatures;

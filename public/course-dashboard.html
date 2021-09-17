@@ -58,7 +58,7 @@
         </div>
       </form>
     </section>
-    <div class="sidenav">
+    <div class="sidenav" >
       <div class="closebtn">
         <i class="fas fa-times"></i>
       </div>
@@ -134,13 +134,15 @@
       let sideNav = document.getElementById('sideNav');
       let sidenav = document.querySelector('.sidenav');
       let closebtn = document.querySelector('.closebtn');
-      //console.log(closebtn);
+      console.log(closebtn);
       sideNav.addEventListener('click', function () {
         sidenav.classList.add('vis');
       });
       closebtn.addEventListener('click', function () {
         sidenav.classList.remove('vis');
       });
+
+      
 
 
       //for search
@@ -174,6 +176,6 @@
      
       
     </script>
-    <script></script>
+    <script src="/public/assets/js/goBack.js"></script>
   </body>
 </html>

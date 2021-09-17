@@ -3,6 +3,7 @@ const User = require('../model/user');
 const APIFeature = require('../utils/apifeatures');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
+const { userColumn } = require('../utils/column');
 const exportSheet = require('../utils/export');
 
 exports.userSignup = catchAsync(async (req, res, next) => {
@@ -70,11 +71,12 @@ exports.exportUsers = catchAsync(async (req, res, next) => {
     .filter()
     .limitFields()
     .sort()
-    .paginate();
+    .paginate()
+    .lean();
   const students = await feature.query;
   if (!students.length)
     return res.status(404).json({ status: 'fail', data: null });
-  const workbookXLSX = exportSheet(students);
+  const workbookXLSX = exportSheet(students, userColumn);
   res.setHeader(
     'Content-Type',
     'appication/vnd.openxmlformats-officedocument.spreadsheetml.sheet'

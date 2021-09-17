@@ -14,4 +14,4 @@ manageStudentButton.addEventListener('click', () =>
   toggleModal(addStudentModal)
 );
 closeButton[0].addEventListener('click', () => toggleModal(addStudentModal));
-closeButton[1].addEventListener('click', () => toggleModal(editStudentModal));
+closeButton[1]?.addEventListener('click', () => toggleModal(editStudentModal));
