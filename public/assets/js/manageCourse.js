@@ -140,9 +140,37 @@
   const error = document.querySelector('.error');
 
   const printErrorMessage = (e) => (error.textContent = e);
+  // const addCourse = async (data) => {
+  //   try {
+  //     const res = await fetch('/api/v1/courses', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         accept: 'application/json',
+  //       },
+  //       body: JSON.stringify(data),
+  //     });
+  //     const newCourse = await res.json();
+  //     printErrorMessage('');
+  //     if (newCourse.status === 'error' || newCourse.status === 'fail') {
+  //       throw new Error(newCourse.message);
+  //     }
+  //     _GLOBAL_NAMESPACE.courses = [
+  //       ..._GLOBAL_NAMESPACE.courses,
+  //       newCourse?.data?.course,
+  //     ];
+  //     createCourseNode(newCourse?.data?.course);
+  //     rem();
+  //     tempAlert('Added Course', 3000);
+  //   } catch (error) {
+  //     console.log(error.message);
+  //     printErrorMessage(error.message);
+  //   }
+  // };
+
   const addCourse = async (data) => {
     try {
-      const res = await fetch('/api/v1/courses', {
+      const res = await fetch('/api/v1/courses/test', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -207,7 +235,7 @@
     const courseCode = element['code'].value;
     const courseLink = element['link'].value;
     const publish = element['publish'].checked;
-    console.log(publish);
+    const image = element['image']?.files;
     const data = {
       name,
       description,
@@ -223,18 +251,28 @@
       !createdAt ||
       !instructor ||
       !courseCode ||
-      !courseLink
+      !courseLink ||
+      !image ||
+      !image?.length
     ) {
       error.textContent = 'Please fill all fields';
       return;
     }
+
+    const formData = new FormData();
+    console.log(image[0]);
+    formData.append('image', image[0], image[0]?.name);
+    Object.entries(data).forEach(([key, value]) => {
+      console.log(key, value);
+      formData.append(key, value);
+    });
 
     if (_GLOBAL_NAMESPACE.course?.name) {
       editCourse(data);
       return;
     }
 
-    addCourse(data);
+    addCourse(formData);
   });
 
   function clearInput() {

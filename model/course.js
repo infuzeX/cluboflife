@@ -28,6 +28,16 @@ const courseSchema = new Schema({
     default: true,
   },
   createdAt: Date,
+  image: {
+    Key: {
+      type: String,
+      required: true,
+    },
+    url: {
+      type: String,
+      required: true,
+    },
+  },
 });
 
 module.exports = mongoose.model('course', courseSchema);

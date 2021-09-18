@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const authController = require('../../controller/authController');
 const courseController = require('../../controller/courseController');
+const { imageUpload } = require('../../utils/multer');
 
 router
   .route('/')
@@ -31,5 +32,7 @@ router
     authController.restrictTo(['admin']),
     courseController.deleteCourse
   );
+
+router.post('/test', imageUpload, courseController.createTestCourse);
 
 module.exports = router;
