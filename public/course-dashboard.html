@@ -9,6 +9,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/public/assets/css/course-dashboard.css" />
+    <link rel="stylesheet" href="/public/assets/css/nav.css" />
+
     <title>Dashboard</title>
   </head>
   <body>
@@ -17,14 +19,23 @@
         <li>
           <a id="sideNav" href="#"><i class="fas fa-bars"></i></a>
         </li>
-        <li>COURSES</li>
+        <li style="font-size: 1.4rem;"><a href='/admin/dashboard' class='brand'>Club Of Life</a></li>
         <li class="left">
           <a href="#"  class="cour">
-            <span><i class="fas fa-plus"></i></span>
+            <span style="margin-right: 5px;"><i class="fas fa-plus"></i></span>
             <span>NEW COURSE</span>
           </a>
         </li>
       </ul>
+    </section>
+    <section class="delete-course none">
+      <div class="delete-course_popup">
+        <p>Are you sure that you want to delete <span></span>?</p>
+        <div class='buttons'>
+          <button class='popup-button cancel-del'>Cancel</button>
+          <button class='popup-button btn-red'>Delete</button>
+        </div>
+      </div>
     </section>
     <section class="new-coures none">
       <div class="admin">

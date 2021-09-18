@@ -94,6 +94,7 @@
   };
   const createProductNode = (product, i) => {
     const clone = template.content.cloneNode(true);
+    if (!product?.course) return;
     clone.querySelector('.index').textContent = i + 1;
     clone.querySelector('.course').textContent = product?.course?.name;
     clone.querySelector('.boughtAt').textContent = genDate(product?.boughtAt);

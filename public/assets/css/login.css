@@ -36,6 +36,16 @@ nav ul li a:hover{
     margin-left: auto;
 }
 
+.password-icon {
+    position: relative;
+}
+
+.pass-ic{
+    position: absolute;
+    right:2%;
+
+}
+
 /* next section */
 #con-welcome {
     display: flex;
@@ -47,8 +57,8 @@ nav ul li a:hover{
 }
 .con-main{
     text-align: center;
-    width: 48vw;
-    margin: 0 auto;
+    /* width: 48vw;
+    margin: 0 auto; */
 }
 .con-main h1{
     font-size: 3.2rem;
@@ -59,12 +69,13 @@ nav ul li a:hover{
     width: 100%;
     text-align: left;
     font-size: 1rem;
+    position: relative;
    
 }
 .input-parent input{
     display: block;
     margin: 0 auto;
-    width: 50%;
+    width: 100%;
     font-size: 1rem;
     padding: 10px;
     background-color: #e5e5e5;
@@ -72,6 +83,14 @@ nav ul li a:hover{
     margin-bottom: 16px;
     border-radius: 10px;
 
+
+}
+
+.password-icon {
+    position: absolute;
+    padding: 12px 0;
+    right:1%;
+    top: 0%;
 }
 .error {
     color: red;
@@ -123,7 +142,7 @@ nav ul li a:hover{
         font-size: 1.1rem !important;
     }
     .con-main{
-        width: 82%;
+        /* width: 82%; */
     }
     .con-main h1 {
         font-size:1.8rem;
@@ -147,7 +166,7 @@ nav ul li a:hover{
         width: 100%;
     }
     .input-parent input{
-        width: 80%;
+        width: 100%;
     }
 }
 

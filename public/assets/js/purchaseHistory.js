@@ -48,8 +48,10 @@
   const createSubscriptionNode = (subscription, i) => {
     const clone = template.content.cloneNode(true);
     clone.querySelector('.index').textContent = i + 1;
-    clone.querySelector('.email').textContent = subscription?.user?.email;
-    clone.querySelector('.course').textContent = subscription?.course?.name;
+    clone.querySelector('.email').textContent =
+      subscription?.user?.email || 'No user found';
+    clone.querySelector('.course').textContent =
+      subscription?.course?.name || 'No course found';
     clone.querySelector('.boughtAt').textContent =
       subscription?.boughtAt && genDate(subscription?.boughtAt);
     clone.querySelector('.expiresAt').textContent =
@@ -179,8 +181,8 @@
 
   function onEdit(sub) {
     __GLOBAL_PURCHASE.edit = sub._id;
-    userInput.value = sub.user.email;
-    courseInput.value = sub.course.name;
+    userInput.value = sub.user?.email || '';
+    courseInput.value = sub.course?.name || '';
     boughtInput.value = sub.boughtAt && genDate(sub.boughtAt);
     expiresInput.value = sub.expiresAt && genDate(sub.expiresAt);
     paidInput.value = sub.paid;

@@ -3,6 +3,7 @@
   const _GLOBAL_NAMESPACE = {
     courses: [],
     course: {},
+    deleteId: '',
   };
 
   const template = document.querySelector('template');
@@ -16,7 +17,11 @@
   const courseLink = document.querySelector('.link');
   const title = document.querySelector('.title');
   const publish = document.querySelector('#publish');
-  console.log(publish);
+  const deletePopup = document.querySelector('.delete-course');
+  const cancelDelete = document.querySelector('.cancel-del');
+  function toggleDelete() {
+    deletePopup.classList.toggle('none');
+  }
 
   // Add/Edit course toggle
   function add() {
@@ -55,7 +60,13 @@
       editModal();
     });
     deleteButton.addEventListener('click', function () {
-      deleteCourse(course._id, data);
+      // deleteCourse(course._id, data);
+      _GLOBAL_NAMESPACE.deleteId = course?._id;
+      document.querySelector('.delete-course span').textContent = `${
+        course?.name
+      } course ${course?.instructor ? `by ${course?.instructor}` : ''}`;
+      smallMenu.classList.toggle('none');
+      toggleDelete();
     });
     more.addEventListener('click', () => smallMenu.classList.toggle('none'));
     courseContainer.appendChild(clone);
@@ -90,6 +101,7 @@
       _GLOBAL_NAMESPACE.courses = [...courses];
       updateUI();
       tempAlert('Deleted Successfully', 3000);
+      toggleDelete();
     } catch (error) {
       console.log(error);
       tempAlert(
@@ -99,7 +111,9 @@
       );
     }
   }
-
+  document
+    .querySelector('.btn-red')
+    .addEventListener('click', () => deleteCourse(_GLOBAL_NAMESPACE.deleteId));
   const fetchCourse = async () => {
     try {
       const res = await fetch('/api/v1/courses', { method: 'GET' });
@@ -246,4 +260,6 @@
     publish.checked = course?.publish;
     add();
   }
+
+  cancelDelete.addEventListener('click', () => toggleDelete());
 })();

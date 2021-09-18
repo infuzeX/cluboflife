@@ -11,5 +11,11 @@ router.patch(
 router.get('/logout', authController.logout);
 router.post('/forgotpassword', authController.forgotPassword);
 router.patch('/resetpassword', authController.resetPassword);
+router.patch(
+  '/editpassword/:userId',
+  authController.protect,
+  authController.restrictTo(['admin']),
+  authController.editPassword
+);
 
 module.exports = router;

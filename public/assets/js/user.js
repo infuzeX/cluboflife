@@ -24,6 +24,7 @@ document.querySelector('.logout')?.addEventListener('click', () => {
       if (res.redirected) {
         window.location = res.url;
       }
+      console.log(res);
     })
     .catch((e) => console.log(e));
 });

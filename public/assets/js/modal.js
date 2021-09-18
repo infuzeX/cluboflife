@@ -13,5 +13,11 @@ const toggleModal = (el, cb) => {
 manageStudentButton.addEventListener('click', () =>
   toggleModal(addStudentModal)
 );
-closeButton[0].addEventListener('click', () => toggleModal(addStudentModal));
-closeButton[1]?.addEventListener('click', () => toggleModal(editStudentModal));
+// closeButton[0].addEventListener('click', () => toggleModal(addStudentModal));
+// closeButton[1]?.addEventListener('click', () => toggleModal(editStudentModal));
+
+closeButton.forEach((btn) => {
+  btn.addEventListener('click', () =>
+    toggleModal(btn.parentElement.parentElement)
+  );
+});

@@ -90,6 +90,20 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   return res.status(200).json({ status: 'success' });
 });
 
+exports.editPassword = catchAsync(async (req, res, next) => {
+  const userId = req.params?.userId;
+  console.log(userId, req.body);
+  if (!userId || !req.body?.password)
+    return next(new AppError('User not found', 404));
+
+  const user = await User.findById(userId);
+  console.log(user, 22);
+  if (!user) return next(new AppError('User not found', 404));
+  user.password = req.body?.password;
+  await user.save();
+  return res.status(201).json({ status: 'success', user });
+});
+
 //validate authentication for apis
 exports.protect = catchAsync(async (req, res, next) => {
   const token = req.cookies?.token;

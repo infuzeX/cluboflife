@@ -19,6 +19,11 @@ body {
   position: relative;
 }
 
+.detailHeader div {
+  word-break: break-all;
+  margin-right: 5px;
+}
+
 .detailHeader {
   padding: 1rem 0;
   border-bottom: 1px solid #ccc;
@@ -74,7 +79,7 @@ body {
   color: #d9534f;
 }
 
-.addModal,.editModal {
+.addModal,.editModal,.copyModal,.editPasswordModal {
   position: fixed;
   top: 0;
   left: 0;
@@ -90,7 +95,8 @@ body {
 
 }
 
-.add_popup,.edit_popup {
+
+.add_popup,.edit_popup,.copy_popup,.editPassword_popup {
   min-width: 300px;
   min-height: 300px;
   background-color: rgba(255,255,255,0.92);
@@ -101,6 +107,54 @@ body {
 justify-content: center;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.65);
   position: relative;
+
+}
+.buttons {
+  margin-top: 8px;
+  display: flex;
+}
+
+.popup-button {
+  margin-right: 10px;
+  padding: 8px;
+  background-color: #ccc;
+  font-size: inherit;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-red {
+  background-color: #d9534f;
+  color: white;
+}
+
+.copy_popup ul {
+  padding: 0;
+  margin: 0;
+}
+
+.password-container {
+  position: relative;
+}
+
+.password-icon {
+  position: absolute;
+  right:2%;
+  padding:8px;
+  cursor: pointer;
+}
+
+.copy_popup ul li {
+  list-style: none;
+  margin-bottom: 9px;
+  font-size: 17px;
+}
+
+.copy_popup ul li span {
+  text-transform: capitalize;
+  font-weight: 500;
 
 }
 .openModal {

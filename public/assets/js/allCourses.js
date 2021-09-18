@@ -2,9 +2,11 @@ getMe();
 
 const template = document.querySelector('template');
 const courseContainer = document.querySelector('.allCourses-flex-parent');
+const noCourse = document.querySelector('.noCourse');
 
 const createProductNode = (product) => {
   const clone = template.content.cloneNode(true);
+  if (!product?.course) return;
   clone.querySelector('.course').addEventListener('click', () => {
     console.log('hi');
     window.location = `/courses/${product?.course?.courseCode}?courseId=${product?.course?._id}`;
@@ -12,13 +14,22 @@ const createProductNode = (product) => {
   clone.querySelector(
     'h3'
   ).innerText = `${product?.course?.name} with ${product.course?.instructor}`;
+
   courseContainer.append(clone);
 };
 
 const showProducts = (products) => {
-  if (!products || !products?.length) return;
+  if (!products || !products?.length) {
+    noCourse.setAttribute('style', 'display: flex;justify-content:center;');
+    noCourse.textContent = 'No courses available';
+    return;
+  }
 
   products.map((product) => createProductNode(product));
+  if (!courseContainer.innerHTML) {
+    noCourse.setAttribute('style', 'display: flex;justify-content:center;');
+    noCourse.textContent = 'No courses available';
+  }
 };
 
 const getOrder = async () => {

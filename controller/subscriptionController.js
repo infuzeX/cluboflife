@@ -52,6 +52,7 @@ exports.fetchUserOrders = catchAsync(async (req, res, next) => {
     .limitFields()
     .sort()
     .paginate();
+  console.log(feature);
   const subscriptions = await feature.query;
   return res.status(200).json({
     status: 'success',
@@ -100,7 +101,7 @@ exports.exportCsv = catchAsync(async (req, res, next) => {
 });
 
 exports.hasUserSubscribed = catchAsync(async (req, res, next) => {
-  const courseId = req.query.courseId;
+  const courseId = req.query?.courseId;
   if (!courseId) return res.redirect('/dashboard');
   const hasSubscribed = await Subscription.findOne({
     user: req.user.userId,

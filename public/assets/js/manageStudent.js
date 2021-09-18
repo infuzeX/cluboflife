@@ -3,15 +3,11 @@
     students: [],
     student: {},
     filter: [],
+    changePasswordId: '',
   };
-
-  // const manageStudentButton = document.querySelector('.addModalButton');
-  // const closeButton = document.querySelectorAll('.close');
   const addStudentForm = document.querySelector('.addStudent');
   const addStudentModal = document.querySelector('.addModal');
   const editStudentModal = document.querySelector('.editModal');
-  // const editStudentButton = document.querySelector('.editModalButton');
-  // const date = document.querySelectorAll('.date');
   const template = document.querySelector('template');
   const studentDetail = document.querySelector('.studentDetail');
   const error = document.querySelectorAll('.error');
@@ -21,26 +17,12 @@
   const editForm = document.querySelector('.editForm');
   const exportCSV = document.querySelector('.export');
   const downloadCSV = document.querySelector('.download');
+  const copyModal = document.querySelector('.copyModal');
+  const copyData = document.querySelector('.copy-data');
+  const editPasswordModal = document.querySelector('.editPasswordModal');
+  const editPasswordForm = document.querySelector('.editPasswordForm');
 
   console.log(name, email, createdAt);
-
-  // function toggleModal(el) {
-  //   console.log(el);
-  //   error.forEach((err) => (err.textContent = ''));
-  //   el.classList.toggle('openModal');
-  //   date.forEach((input) => (input.type = 'text'));
-  // }
-
-  // manageStudentButton.addEventListener('click', () =>
-  //   toggleModal(addStudentModal)
-  // );
-
-  // closeButton[0].addEventListener('click', () => toggleModal(addStudentModal));
-  // closeButton[1].addEventListener('click', () => toggleModal(editStudentModal));
-
-  // editStudentButton.addEventListener('click', () =>
-  //   toggleModal(editStudentModal)
-  // );
 
   const createUserNode = (user, index) => {
     const clone = template.content.cloneNode(true);
@@ -63,6 +45,12 @@
     clone
       .querySelector('.copy')
       .addEventListener('click', () => copyToClipboard(user?.email));
+
+    clone.querySelector('.editPassword').addEventListener('click', () => {
+      document.querySelector('.editPasswordEmail').value = user?.email;
+      __GLOBAL_STUDENTS.changePasswordId = user?._id;
+      toggleModal(editPasswordModal);
+    });
     studentDetail.append(clone);
   };
 
@@ -176,6 +164,7 @@
     }
 
     await signup({ name, email, password, createdAt });
+    toggleCopy({ name, email, password, joined: createdAt });
   });
 
   editForm.addEventListener('submit', async (e) => {
@@ -205,7 +194,6 @@
 
       await fetchUser();
       toggleModal(editStudentModal);
-      // exportUser();
       tempAlert('Edited Successfully', 3000);
     } catch (err) {
       return (error[1].textContent = err.message);
@@ -253,4 +241,62 @@
     navigator.clipboard.writeText(data);
     tempAlert('Copied to clipboard', 1000);
   }
+
+  function toggleCopy(data) {
+    if (!data || !data?.email) return;
+    Object.entries(data).map(([key, value]) => {
+      const li = document.createElement('li');
+      li.innerHTML = `<span>${key}</span>-${value}`;
+      copyData.append(li);
+    });
+    toggleModal(copyModal);
+  }
+
+  document.querySelector('.btn-copy')?.addEventListener('click', () => {
+    const li = copyData.querySelectorAll('li');
+    console.log(li, li?.length);
+    if (!li || !li?.length) {
+      return tempAlert('No data to copy', 2000, true);
+    }
+    let data = '';
+    li.forEach((item) => (data += `${item.textContent},${' '}`));
+    window.navigator.clipboard.writeText(data);
+    tempAlert('Copied', 2000);
+  });
+
+  document
+    .querySelector('.btn-close')
+    .addEventListener('click', () => toggleModal(copyModal));
+
+  editPasswordForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const password = editPasswordForm.elements['password'].value;
+    if (!password) return tempAlert('Password is required', 4000, true);
+    try {
+      const res = await fetch(
+        `/api/v1/auth/editPassword/${__GLOBAL_STUDENTS.changePasswordId}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ password }),
+        }
+      );
+      const data = await res.json();
+      if (data.status === 'fail' || data.status === 'error') {
+        throw new Error(data?.message);
+      }
+      tempAlert('Password Edited', 3000);
+      toggleModal(editPasswordModal);
+      toggleCopy({
+        email: data?.user?.email,
+        name: data?.user?.name,
+        joined: data?.user?.createdAt && data?.user?.createdAt?.split('T')[0],
+        password,
+      });
+    } catch (error) {
+      return tempAlert(error?.message, 3000, true);
+    }
+  });
 })();
