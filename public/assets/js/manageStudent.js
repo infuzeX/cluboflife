@@ -21,6 +21,8 @@
   const copyData = document.querySelector('.copy-data');
   const editPasswordModal = document.querySelector('.editPasswordModal');
   const editPasswordForm = document.querySelector('.editPasswordForm');
+  const autoGen = document.querySelector('.autoGen');
+  const populatePassword = document.querySelector('.inputLabel');
 
   console.log(name, email, createdAt);
 
@@ -76,6 +78,16 @@
     toggleModal(editStudentModal);
   }
 
+  function generatePassword() {
+    let length = 8,
+      charset =
+        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+      retVal = '';
+    for (let i = 0, n = charset.length; i < length; ++i) {
+      retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+    return retVal;
+  }
   async function deleteStudent(id) {
     try {
       const res = await fetch(`/api/v1/users/${id}`, { method: 'DELETE' });
@@ -298,5 +310,9 @@
     } catch (error) {
       return tempAlert(error?.message, 3000, true);
     }
+  });
+
+  autoGen.addEventListener('click', () => {
+    populatePassword.value = generatePassword();
   });
 })();

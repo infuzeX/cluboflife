@@ -296,6 +296,16 @@ option {
   font-family: 'Alegreya';
   color: black;
 }
+
+.inputLabel {
+  margin-bottom: 0px;
+}
+.password-container p {
+  color:#0275d8;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .studentContainer {
     padding: 3px;
