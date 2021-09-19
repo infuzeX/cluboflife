@@ -47,7 +47,7 @@ router.get(
   protectPage,
   hasUserSubscribed,
   (req, res) => {
-    const file = path.resolve('public/courseCode.html');
+    const file = path.resolve(`public/courses/${req.params.courseCode}`);
     res.sendFile(file);
   }
 );
