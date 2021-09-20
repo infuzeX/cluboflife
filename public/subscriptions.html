@@ -1,163 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/public/assets/css/login.css" />
-    <link rel="stylesheet" href="/public/assets/css/manageStudent.css" />
-    <link rel="stylesheet" href="/public/assets/css/nav.css" />
 
-    <title>Assign Courses and Payments</title>
-  </head>
-  <body>
-    <div class="addModal">
-      <div class="add_popup">
-        <div class="close"><i class="fas fa-times delete"></i></div>
-        <div><p class="error"></p></div>
-        <form class="form addStudent">
-          <input
-            list="userList"
-            name="user"
-            class="userAdd input"
-            placeholder="Select User"
-            autocomplete="off"
-            id="nameList"
-            required
-          />
-          <datalist id="userList" class="userDropdown"> </datalist>
-          <input
-            list="course"
-            name="course"
-            class="courseAdd input"
-            placeholder="Select Course"
-            autocomplete="off"
-            id="courseList"
-            required
-          />
-          <datalist id="course" class="courseDropdown"> </datalist>
-          <input
-            type="date"
-            name="boughtAt"
-            class="input boughtAtAdd"
-            placeholder="Purchased At"
-            required
-          />
-          <input
-            type="date"
-            name="expiresAt"
-            class="input expireAtAdd"
-            placeholder="Expire At"
-            required
-          />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/public/assets/css/font.css">
+  <link rel="stylesheet" href="/public/assets/css/login.css" />
+  <link rel="stylesheet" href="/public/assets/css/manageStudent.css" />
+  <link rel="stylesheet" href="/public/assets/css/nav.css" />
 
-          <input
-            type="number"
-            name="paid"
-            class="input paid"
-            placeholder="Amount Paid"
-            required
-          />
-          <div class="input activeContainer" style="display: none">
-            <input type="checkbox" id="active" name="active" /><label
-              for="active"
-              >Active</label
-            >
-          </div>
-          <button class="button" type="submit">ADD</button>
-        </form>
-      </div>
-    </div>
+  <title>Assign Courses and Payments</title>
+</head>
 
-    <nav>
-      <ul>
-        <li>
-          <a href="/admin/dashboard" class="brand">Club Of Life</a>
-        </li>
-
-        <li class="left">
-          <a href="#" class="addModalButton" data-type="manageStudent"
-            >Add Subscription</a
-          >
-        </li>
-        <li><a href="" class="logout">Logout</a></li>
-      </ul>
-    </nav>
-
-    <header>
-      <div class="heading">Assign Courses and Payments</div>
+<body>
+  <div class="addModal">
+    <div class="add_popup">
+      <div class="close"><i class="fas fa-times delete"></i></div>
       <div>
-        <a class="download" style="display: none"></a>
-        <a class="export"> <i class="fas fa-download download"></i>Export </a>
+        <p class="error"></p>
       </div>
-    </header>
+      <form class="form addStudent">
+        <input list="userList" name="user" class="userAdd input" placeholder="Select User" autocomplete="off"
+          id="nameList" required />
+        <datalist id="userList" class="userDropdown"> </datalist>
+        <input list="course" name="course" class="courseAdd input" placeholder="Select Course" autocomplete="off"
+          id="courseList" required />
+        <datalist id="course" class="courseDropdown"> </datalist>
+        <input type="date" name="boughtAt" class="input boughtAtAdd" placeholder="Purchased At" required />
+        <input type="date" name="expiresAt" class="input expireAtAdd" placeholder="Expire At" required />
 
-    <div class="searchContainer">
-      <div class="search-input">
-        <select class="search" defaultValue="0">
-          <option value="0">All</option>
-          <option value="1">Active</option>
-          <option value="2">Inactive</option>
-        </select>
+        <input type="number" name="paid" class="input paid" placeholder="Amount Paid" required />
+        <div class="input activeContainer" style="display: none">
+          <input type="checkbox" id="active" name="active" /><label for="active">Active</label>
+        </div>
+        <button class="button" type="submit">ADD</button>
+      </form>
+    </div>
+  </div>
+
+  <nav>
+    <ul>
+      <li>
+        <a href="/admin/dashboard" class="brand">Club Of Life</a>
+      </li>
+
+      <li class="left">
+        <a href="#" class="addModalButton" data-type="manageStudent">Add Subscription</a>
+      </li>
+      <li><a href="" class="logout">Logout</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <div class="heading">Assign Courses and Payments</div>
+    <div>
+      <a class="download" style="display: none"></a>
+      <a class="export"> <i class="fas fa-download download"></i>Export </a>
+    </div>
+  </header>
+
+  <div class="searchContainer">
+    <div class="search-input">
+      <select class="search" defaultValue="0">
+        <option value="0">All</option>
+        <option value="1">Active</option>
+        <option value="2">Inactive</option>
+      </select>
+    </div>
+  </div>
+
+  <main class="studentContainer">
+    <div class="studentWrap">
+      <section class="studentHeader">
+        <div>#</div>
+        <div>Email</div>
+        <div>Course</div>
+        <div>Purchased At</div>
+        <div>Expires At</div>
+        <div>Paid</div>
+        <div>Active</div>
+        <div>Edit</div>
+      </section>
+      <section class="studentDetail"></section>
+    </div>
+  </main>
+  <template>
+    <div class="detailHeader">
+      <div class="index no"></div>
+      <div class="email"></div>
+      <div class="course"></div>
+      <div class="boughtAt no"></div>
+      <div class="expiresAt no"></div>
+      <div class="paid no"></div>
+      <div class="active"></div>
+      <div>
+        <i class="far fa-edit edit editModalButton"></i>
+        <!--<i class="fas fa-trash-alt delete"></i>-->
+        <i class="fas fa-copy copy"></i>
       </div>
     </div>
+  </template>
+  <script src="/public/assets/js/modal.js"></script>
+  <script src="/public/assets/js/alert.js"></script>
+  <script src="/public/assets/js/subscriptions.js"></script>
+  <script>
+    document.querySelector('.logout').addEventListener('click', () => {
+      console.log('click');
+      fetch('/api/v1/auth/logout')
+        .then((res) => {
+          if (res.redirected) {
+            window.location = res.url;
+          }
+        })
+        .catch((e) => console.log(e));
+    });
+  </script>
+  <script src="/public/assets/js/goBack.js"></script>
+</body>
 
-    <main class="studentContainer">
-      <div class="studentWrap">
-        <section class="studentHeader">
-          <div>#</div>
-          <div>Email</div>
-          <div>Course</div>
-          <div>Purchased At</div>
-          <div>Expires At</div>
-          <div>Paid</div>
-          <div>Active</div>
-          <div>Edit</div>
-        </section>
-        <section class="studentDetail"></section>
-      </div>
-    </main>
-    <template>
-      <div class="detailHeader">
-        <div class="index no"></div>
-        <div class="email"></div>
-        <div class="course"></div>
-        <div class="boughtAt no"></div>
-        <div class="expiresAt no"></div>
-        <div class="paid no"></div>
-        <div class="active"></div>
-        <div>
-          <i class="far fa-edit edit editModalButton"></i>
-          <i class="fas fa-trash-alt delete"></i>
-          <i class="fas fa-copy copy"></i>
-        </div>
-      </div>
-    </template>
-    <script src="/public/assets/js/modal.js"></script>
-    <script src="/public/assets/js/alert.js"></script>
-    <script src="/public/assets/js/purchaseHistory.js"></script>
-    <script>
-      document.querySelector('.logout').addEventListener('click', () => {
-        console.log('click');
-        fetch('/api/v1/auth/logout')
-          .then((res) => {
-            if (res.redirected) {
-              window.location = res.url;
-            }
-          })
-          .catch((e) => console.log(e));
-      });
-    </script>
-    <script src="/public/assets/js/goBack.js"></script>
-  </body>
 </html>

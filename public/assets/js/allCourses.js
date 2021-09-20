@@ -8,7 +8,6 @@ const createProductNode = (product) => {
   const clone = template.content.cloneNode(true);
   if (!product?.course) return;
   clone.querySelector('.course').addEventListener('click', () => {
-    console.log('hi');
     window.location = `/courses/${product?.course?.courseCode}?courseId=${product?.course?._id}`;
   });
   clone.querySelector(
@@ -24,7 +23,7 @@ const showProducts = (products) => {
     noCourse.textContent = 'No courses available';
     return;
   }
-
+  console.log(products)
   products.map((product) => createProductNode(product));
   if (!courseContainer.innerHTML) {
     noCourse.setAttribute('style', 'display: flex;justify-content:center;');

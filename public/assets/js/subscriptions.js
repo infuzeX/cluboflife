@@ -45,13 +45,28 @@
     return date ? date?.split('T')[0] : '';
   };
 
+  const copySubscription = (data) => {
+    return `
+Name:${data.user.name},
+Email:${data.user.email},
+Course:${data.cousrse?.name || 'Not Available'},
+Course Code: ${data.cousrse?.courseCode || 'Not Available'},
+Subscription:${data.expiresAt}
+      `
+  }
+
   const createSubscriptionNode = (subscription, i) => {
+    console.log(subscription)
     const clone = template.content.cloneNode(true);
     clone.querySelector('.index').textContent = i + 1;
     clone.querySelector('.email').textContent =
       subscription?.user?.email || 'No user found';
+    //modifiy course column based on value [start]
     clone.querySelector('.course').textContent =
       subscription?.course?.name || 'No course found';
+    clone.querySelector('.course').style.color =
+      subscription?.course ? 'black' : 'grey';
+    //modifiy course column based on value [end]
     clone.querySelector('.boughtAt').textContent =
       subscription?.boughtAt && genDate(subscription?.boughtAt);
     clone.querySelector('.expiresAt').textContent =
@@ -60,19 +75,20 @@
     clone.querySelector('.active').textContent = subscription?.active;
 
     clone.querySelector('.copy').addEventListener('click', () => {
-      window.navigator.clipboard.writeText(subscription?.user?.email);
-      tempAlert('Copied email', 2000);
+      window.navigator.clipboard.writeText(copySubscription(subscription));
+      tempAlert('Copied', 2000);
     });
 
     clone
       .querySelector('.edit')
       .addEventListener('click', () => onEdit(subscription));
-    clone
+    //DELETE EVENT LISTENER
+      /*clone
       .querySelector('.delete')
       .addEventListener(
         'click',
         async () => await deleteSubscription(subscription._id)
-      );
+      );*/
 
     studentDetail.append(clone);
   };
@@ -133,6 +149,7 @@
   getUsers();
   getCourses();
 
+  
   async function deleteSubscription(id) {
     search.value = 0;
     try {
@@ -303,7 +320,6 @@
     emptyUpNode();
     showSubscription();
   });
-  console.log(exportCSV);
   exportCSV.addEventListener('click', () => exportUser());
   function exportUser() {
     console.log('hi');

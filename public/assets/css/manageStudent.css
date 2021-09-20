@@ -203,7 +203,7 @@ justify-content: center;
 
 header {
   display: flex;
-  padding: 5rem 5rem 2rem 5rem;
+  padding: 2rem 5rem 2rem 5rem;
   justify-content: space-between;
 }
 
@@ -250,7 +250,7 @@ label {
 }
 
 .searchContainer {
-  padding: 0 5rem 5rem 5rem;
+  padding: 0 5rem 2rem 5rem;
   display: flex;
   justify-content: center;
 }

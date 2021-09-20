@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/public/assets/css/table.css" />
-    <link rel="stylesheet" href="/public/assets/css/yourprofile.css" />
-    <title>Your Profile</title>
-    <!-- <style>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/public/assets/css/font.css">
+  <link rel="stylesheet" href="/public/assets/css/table.css" />
+  <link rel="stylesheet" href="/public/assets/css/yourprofile.css" />
+  <title>Your Profile</title>
+  <!-- <style>
       aside div {
         border: none;
         outline: none;
@@ -23,143 +22,114 @@
       border-bottom: 4px solid dimgray;
       }
     </style> -->
-  </head>
-  <body>
-    <section id="nav">
-      <nav>
-        <ul>
-          <li><a href="/dashboard" style="font-size: 1.3rem">Club Of Life</a></li>
-          <!-- <li class="left"><a href="#">ALL COURSES</a></li> -->
-          <!-- <li><a href="#">MY DASHBOARD</a></li> -->
-          <!-- <li><a href="#">VITORIO D</a></li> -->
-          <li class="left" id="font" onclick="show()">
-            <a href="#" style="font-size: 2rem">
-              <i class="far fa-user-circle"></i>
-            </a>
-            <a class="font1" href="#">
-              <i class="fas fa-caret-down"></i>
-            </a>
-          </li>
-          <div class="dropdown none">
-            <ul>
-              <li><a href="/dashboard">My Dashboard</a></li>
-              <!-- <li><a href="/account" class="username">Username</a></li> -->
-              <li><a href="#" class="logout">Sign Out</a></li>
-            </ul>
-          </div>
-        </ul>
-      </nav>
-    </section>
-    <main>
-      <aside>
-        <div
-          class="tabs asideSelected"
-          data-section="profile"
-          tabindex="-1"
-        >
-          Profile
-        </div>
-        <div class="tabs" data-section="notification" tabindex="-1">Notification</div>
-        <div class="tabs" data-section="order" tabindex="-1">Order History</div>
-        <div class="tabs" data-section="password" tabindex="-1">
-          Change Password
-        </div>
-      </aside>
-      <div id="details">
-        <div class="profile menu">
-          <h1>Your Profile</h1>
-          <div class="details-flex-parent">
-            <div class="icon">
-              <i class="fas fa-user"></i>
-              <!-- <a href="#">Upload New Image</a> -->
-            </div>
-            <form action="" class="editProfile">
-              <p class="error"></p>
-              <div class="input">
-                Email
-                <input
-                  class="text-input email"
-                  type="email"
-                  name="email"
-                  required
-                />
-              </div>
-              <div class="input2">
-                <div class="input">
-                  Name
-                  <input
-                    class="text-input name"
-                    type="text"
-                    name="name"
-                    required
-                  />
-                </div>
-                <div class="input">
-                  Joined At
-                  <input
-                    class="text-input createdAt"
-                    type="date"
-                    name="createdAt"
-                    readonly
-                    required
-                  />
-                </div>
-              </div>
-              <div class="input submit">
-                <input type="submit" value="Submit" />
-              </div>
-            </form>
-          </div>
-        </div>
+</head>
 
-        <div class="order none menu mt">
-      <div class="studentWrap">
-        <section class="studentHeader">
-          <div>#</div>
-          <div>Course</div>
-          <div>Purchased At</div>
-          <div>Expires At</div>
-          <div>Paid</div>
-          <div>Active</div>
-        </section>
-        <section class="studentDetail">
-          
-        </section>
-        <template>
-          <div class="detailHeader">
-            <div class="index no"></div>
-            <div class='course'></div>
-            <div class='boughtAt'></div>
-            <div class='expiresAt'></div>
-            <div class='paid'></div>
-            <div class='active'></div>
-          </div>
-        </template>
-      </div>
+<body>
+  <section id="nav">
+    <nav>
+      <ul>
+        <li><a href="/dashboard" style="font-size: 1.3rem">Club Of Life</a></li>
+        <!-- <li class="left"><a href="#">ALL COURSES</a></li> -->
+        <!-- <li><a href="#">MY DASHBOARD</a></li> -->
+        <!-- <li><a href="#">VITORIO D</a></li> -->
+        <li class="left" id="font" onclick="show()">
+          <a href="#" style="font-size: 2rem">
+            <i class="far fa-user-circle"></i>
+          </a>
+          <a class="font1" href="#">
+            <i class="fas fa-caret-down"></i>
+          </a>
+        </li>
+        <div class="dropdown none">
+          <ul>
+            <li><a href="/dashboard">My Dashboard</a></li>
+            <!-- <li><a href="/account" class="username">Username</a></li> -->
+            <li><a href="#" class="logout">Sign Out</a></li>
+          </ul>
         </div>
-        <div class="notification none menu">Notification</div>
-               
-        <div class="details-flex-parent mt">
-          <form action="" class="changePassword none password menu ">
+      </ul>
+    </nav>
+  </section>
+  <main>
+    <aside>
+      <div class="tabs asideSelected" data-section="profile" tabindex="-1">
+        Profile
+      </div>
+      <div class="tabs" data-section="notification" tabindex="-1">Notification</div>
+      <div class="tabs" data-section="order" tabindex="-1">Order History</div>
+      <div class="tabs" data-section="password" tabindex="-1">
+        Change Password
+      </div>
+    </aside>
+    <div id="details">
+      <div class="profile menu">
+        <h1>Your Profile</h1>
+        <div class="details-flex-parent">
+          <div class="icon">
+            <i class="fas fa-user"></i>
+            <!-- <a href="#">Upload New Image</a> -->
+          </div>
+          <form action="" class="editProfile">
             <p class="error"></p>
+            <div class="input">
+              Email
+              <input class="text-input email" type="email" name="email" required />
+            </div>
             <div class="input2">
               <div class="input">
+                Name
+                <input class="text-input name" type="text" name="name" required />
+              </div>
+              <div class="input">
+                Joined At
+                <input class="text-input createdAt" type="date" name="createdAt" readonly required />
+              </div>
+            </div>
+            <div class="input submit">
+              <input type="submit" value="Submit" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="order none menu mt">
+        <div class="studentWrap">
+          <section class="studentHeader">
+            <div>#</div>
+            <div>Course</div>
+            <div>Purchased At</div>
+            <div>Expires At</div>
+            <div>Paid</div>
+            <div>Active</div>
+          </section>
+          <section class="studentDetail">
+
+          </section>
+          <template>
+            <div class="detailHeader">
+              <div class="index no"></div>
+              <div class='course'></div>
+              <div class='boughtAt'></div>
+              <div class='expiresAt'></div>
+              <div class='paid'></div>
+              <div class='active'></div>
+            </div>
+          </template>
+        </div>
+      </div>
+      <div class="notification none menu">Notification</div>
+
+      <div class="details-flex-parent mt">
+        <form action="" class="changePassword none password menu ">
+          <p class="error"></p>
+          <div class="input2">
+            <div class="input">
               Old Password
-                <input
-                class="text-input name"
-                type="password"
-                name="password"
-                required
-                />
-             </div>
+              <input class="text-input name" type="password" name="password" required />
+            </div>
             <div class="input">
               New Password
-              <input
-                class="text-input createdAt"
-                type="password"
-                name="newPassword"
-                required
-              />
+              <input class="text-input createdAt" type="password" name="newPassword" required />
             </div>
           </div>
 
@@ -167,38 +137,39 @@
             <input type="submit" value="Submit" />
           </div>
         </form>
-        </div>
-        </div>
-      </section>
-    </main>
-    <script src="/public/assets/js/alert.js"></script>
-    <script src="/public/assets/js/user.js"></script>
-    <script>
-      console.log(getMe);
+      </div>
+    </div>
+    </section>
+  </main>
+  <script src="/public/assets/js/alert.js"></script>
+  <script src="/public/assets/js/user.js"></script>
+  <script>
+    console.log(getMe);
 
-    </script>
-    <script src="/public/assets/js/profile.js"></script>
-    <script>
-      console.log(getMe);
-      // document.querySelector('.firstTab').focus()
-      var liButton = document.querySelector('.dropdown');
-      console.log(liButton);
-      function show() {
-        liButton.classList.toggle('none');
-      }
-    </script>
-    <script>
-      var asideBtn = document.querySelectorAll('aside div');
-      asideBtn.forEach((item,idx) => {
-        item.addEventListener('click', function () {
-          asideBtn.forEach((btn,i) => {
-            if (i===idx) btn.classList.add('asideSelected')
-            else btn.classList.remove('asideSelected')
-          })
-        });
+  </script>
+  <script src="/public/assets/js/profile.js"></script>
+  <script>
+    console.log(getMe);
+    // document.querySelector('.firstTab').focus()
+    var liButton = document.querySelector('.dropdown');
+    console.log(liButton);
+    function show() {
+      liButton.classList.toggle('none');
+    }
+  </script>
+  <script>
+    var asideBtn = document.querySelectorAll('aside div');
+    asideBtn.forEach((item, idx) => {
+      item.addEventListener('click', function () {
+        asideBtn.forEach((btn, i) => {
+          if (i === idx) btn.classList.add('asideSelected')
+          else btn.classList.remove('asideSelected')
+        })
       });
-    </script>
-  </body>
+    });
+  </script>
+</body>
+
 </html>
 
 <!-- <div class="input">

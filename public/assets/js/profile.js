@@ -10,7 +10,6 @@
   const form = document.querySelector('.editProfile');
   const changePasswordForm = document.querySelector('.changePassword');
 
-  console.log(changePasswordForm);
   error.forEach((err) => (err.style.color = 'red'));
 
   const getProfile = async () => {
@@ -94,9 +93,13 @@
   };
   const createProductNode = (product, i) => {
     const clone = template.content.cloneNode(true);
-    if (!product?.course) return;
+    if (!product?.course) {
+      clone.querySelector('.detailHeader').style.backgroundColor = "#eee";
+      clone.querySelector('.detailHeader').style.opacity = 0.5;
+    }
     clone.querySelector('.index').textContent = i + 1;
-    clone.querySelector('.course').textContent = product?.course?.name;
+    clone.querySelector('.course').textContent = product?.course?.name || "Not Available";
+    clone.querySelector('.course').style.color = product?.course ? "black" : "grey";
     clone.querySelector('.boughtAt').textContent = genDate(product?.boughtAt);
     clone.querySelector('.expiresAt').textContent = genDate(product?.expiresAt);
     clone.querySelector('.paid').textContent = product?.paid;
