@@ -135,48 +135,51 @@
   fetchUser();
 
   const signup = async (data) => {
-    try {
-      const res = await fetch('/api/v1/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      console.log(res);
-      const user = await res.json();
-      console.log(user);
-      if (user.status === 'error' || user.status === 'fail') {
-        throw new Error(user.message);
-      }
-      __GLOBAL_STUDENTS.students = [
-        user.data.user,
-        ...__GLOBAL_STUDENTS.students,
-      ];
-      updateUI();
-      toggleModal(addStudentModal);
-      // exportUser();
-      tempAlert('Added Successfully', 3000);
-    } catch (err) {
+    const res = await fetch('/api/v1/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    console.log(res);
+    const user = await res.json();
+    console.log(user.status);
+    if (["error", "fail"].includes(user.status)) {
+      throw new Error(user.message);
+    }
+    __GLOBAL_STUDENTS.students = [
+      user.data.user,
+      ...__GLOBAL_STUDENTS.students,
+    ];
+    updateUI();
+    toggleModal(addStudentModal);
+    // exportUser();
+    tempAlert('Added Successfully', 3000);
+    /*} catch (err) {
       console.log(err);
       error[0].textContent = err.message;
-    }
+    }*/
   };
 
   addStudentForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const element = addStudentForm.elements;
-    const name = element['name'].value;
-    const email = element['email'].value;
-    const password = element['password'].value;
-    const createdAt = element['createdAt'].value;
+    try {
+      e.preventDefault();
+      const element = addStudentForm.elements;
+      const name = element['name'].value;
+      const email = element['email'].value;
+      const password = element['password'].value;
+      const createdAt = element['createdAt'].value;
 
-    if (!name || !email || !password || !createdAt) {
-      return (error[0].textContent = 'Please Fill all fields');
+      if (!name || !email || !password || !createdAt) {
+        return (error[0].textContent = 'Please Fill all fields');
+      }
+
+      await signup({ name, email, password, createdAt });
+      toggleCopy({ name, email, password, joined: createdAt });
+    } catch (err) {
+      tempAlert(err?.message || "Something went wrong!", 3000, true);
     }
-
-    await signup({ name, email, password, createdAt });
-    toggleCopy({ name, email, password, joined: createdAt });
   });
 
   editForm.addEventListener('submit', async (e) => {

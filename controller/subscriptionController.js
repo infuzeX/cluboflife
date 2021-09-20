@@ -16,6 +16,7 @@ exports.createSubscription = catchAsync(async (req, res, next) => {
     return next(
       new AppError('User has already subscribed to this course', 401)
     );
+
   const subscription = await Subscription.create({
     user: req.body.userId,
     course: req.body.courseId,

@@ -47,6 +47,7 @@
     clone.querySelector('.status').textContent = course?.publish
       ? 'Published'
       : 'Not Published';
+    clone.querySelector('.share').href = course?.courseLink;
     const more = clone.querySelector('.moremenu');
     const smallMenu = clone.querySelector('.small-menu');
     const deleteButton = clone.querySelector('.delete');
@@ -111,6 +112,7 @@
       );
     }
   }
+
   document
     .querySelector('.btn-red')
     .addEventListener('click', () => deleteCourse(_GLOBAL_NAMESPACE.deleteId));
