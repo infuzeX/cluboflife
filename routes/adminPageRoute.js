@@ -26,8 +26,8 @@ router.get('/manage-course', protectPage, protectAdminPage, (req, res) => {
   res.sendFile(file);
 });
 
-router.get('/purchase-history', protectPage, protectAdminPage, (req, res) => {
-  const file = path.resolve('public/purchaseHistory.html');
+router.get('/subscriptions', protectPage, protectAdminPage, (req, res) => {
+  const file = path.resolve('public/subscriptions.html');
   res.sendFile(file);
 });
 

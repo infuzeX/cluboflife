@@ -19,7 +19,6 @@ exports.createCourse = catchAsync(async (req, res, next) => {
 });
 
 exports.createTestCourse = catchAsync(async (req, res, next) => {
-  console.log(req.body, req.files, req.file);
   if (!req.files) return next(new AppError('Course Image is required', 401));
   const course = await Course.create({
     name: req.body.name,

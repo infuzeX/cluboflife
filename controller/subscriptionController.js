@@ -16,7 +16,6 @@ exports.createSubscription = catchAsync(async (req, res, next) => {
     return next(
       new AppError('User has already subscribed to this course', 401)
     );
-  console.log(hasSubscribed);
   const subscription = await Subscription.create({
     user: req.body.userId,
     course: req.body.courseId,
@@ -52,7 +51,6 @@ exports.fetchUserOrders = catchAsync(async (req, res, next) => {
     .limitFields()
     .sort()
     .paginate();
-  console.log(feature);
   const subscriptions = await feature.query;
   return res.status(200).json({
     status: 'success',
@@ -76,7 +74,6 @@ exports.updateSubscription = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteSubscription = catchAsync(async (req, res, next) => {
-  console.log(req.params);
   const result = await Subscription.deleteOne({
     _id: req.params.subscriptionId,
   });
@@ -109,5 +106,7 @@ exports.hasUserSubscribed = catchAsync(async (req, res, next) => {
     active: true,
   });
   if (!hasSubscribed) return res.redirect('/dashboard');
+  if (new Date(hasSubscribed.expiresAt).getTime() <= Date.now()) res.redirect('/dashboard');
+
   return next();
 });

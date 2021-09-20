@@ -7,8 +7,8 @@ const {
 } = require('../controller/authController');
 const { hasUserSubscribed } = require('../controller/subscriptionController');
 
-router.get('/login', protectLoginPage, (req, res) => {
-  const file = path.resolve('public/index.html');
+router.get('/', protectLoginPage, (req, res) => {
+  const file = path.resolve('public/login.html');
   res.sendFile(file);
 });
 

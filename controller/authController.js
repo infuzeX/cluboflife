@@ -92,7 +92,6 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
 exports.editPassword = catchAsync(async (req, res, next) => {
   const userId = req.params?.userId;
-  console.log(userId, req.body);
   if (!userId || !req.body?.password)
     return next(new AppError('User not found', 404));
 
@@ -138,14 +137,13 @@ exports.restrictTo = (roles) => {
 exports.protectPage = (req, res, next) => {
   try {
     const token = req.cookies?.token;
-    console.log(token);
     if (!token) throw { message: 'You are not logged In' };
     req.user = jwt.verify(token, secret);
     return next();
   } catch (err) {
     const dashboardRoute = req.originalUrl.startsWith('/admin')
       ? '/admin/login'
-      : '/login';
+      : '/';
     return res
       .cookie('token', '', { maxAge: 0, expiresIn: 0 })
       .redirect(dashboardRoute);
@@ -165,16 +163,6 @@ exports.protectLoginPage = (req, res, next) => {
   return res.redirect(dashboardRoute);
 };
 
-/*
-Middleware Flow for student page route
--protectPageRoute
-
-Middleware Flow for admin page route
--protectPageRoute, protectAdminPage
-
-Middleware Flow for admin and student login page 
--protectLoginPage
-*/
 
 //prevent student access to another student data
 exports.protectUserResource = catchAsync(async (req, res, next) => {
@@ -202,7 +190,7 @@ exports.logout = (req, res) => {
   const token = req.cookies?.token;
   if (!token) res.redirect('/login');
   const user = jwt.decode(token, secret);
-  const loginRoute = user.role === 'admin' ? '/admin/login' : '/login';
+  const loginRoute = user.role === 'admin' ? '/admin/login' : '/';
   return res
     .cookie('token', '', { expiresIn: 0, maxAge: 0 })
     .redirect(loginRoute);
