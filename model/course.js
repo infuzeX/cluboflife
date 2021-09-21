@@ -11,8 +11,7 @@ const courseSchema = new Schema({
     maxlength: [200, 'Maximum Allowed Character is 200'],
   },
   courseLink: {
-    type: String,
-    required: [true, 'Please Provide Course Link'],
+    type: String
   },
   courseCode: {
     type: String,
@@ -28,16 +27,7 @@ const courseSchema = new Schema({
     default: true,
   },
   createdAt: Date,
-  image: {
-    Key: {
-      type: String,
-      required: true,
-    },
-    url: {
-      type: String,
-      required: true,
-    },
-  },
+  image: String
 });
 
 module.exports = mongoose.model('course', courseSchema);

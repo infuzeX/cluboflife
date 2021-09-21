@@ -12,26 +12,9 @@ exports.createCourse = catchAsync(async (req, res, next) => {
     description: req.body.description,
     courseLink: req.body.courseLink,
     instructor: req.body.instructor,
+    image: req.body.image,
     createdAt: req.body.createdAt,
     publish: req.body.publish,
-  });
-  return res.status(200).json({ status: 'success', data: { course } });
-});
-
-exports.createTestCourse = catchAsync(async (req, res, next) => {
-  if (!req.files) return next(new AppError('Course Image is required', 401));
-  const course = await Course.create({
-    name: req.body.name,
-    courseCode: req.body.courseCode,
-    description: req.body.description,
-    courseLink: req.body.courseLink,
-    instructor: req.body.instructor,
-    createdAt: req.body.createdAt,
-    publish: req.body.publish,
-    image: {
-      Key: req.files.key,
-      url: req.files.location,
-    },
   });
   return res.status(200).json({ status: 'success', data: { course } });
 });

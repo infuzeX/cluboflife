@@ -15,6 +15,7 @@
   const instructor = document.querySelector('.instructor');
   const courseCode = document.querySelector('.code');
   const courseLink = document.querySelector('.link');
+  const imagePath = document.querySelector('.image');
   const title = document.querySelector('.title');
   const publish = document.querySelector('#publish');
   const deletePopup = document.querySelector('.delete-course');
@@ -42,7 +43,9 @@
     const clone = template.content.cloneNode(true);
     const data = course.name + course._id;
     clone.querySelector('.course-child-parent').setAttribute('id', data);
+    clone.querySelector('img').src = course?.image;
     clone.querySelector('h3').textContent = course?.name;
+    clone.querySelector('.subtitle').textContent = course?.description;
     clone.querySelector('.author').textContent = course?.instructor;
     clone.querySelector('.status').textContent = course?.publish
       ? 'Published'
@@ -60,12 +63,12 @@
       _GLOBAL_NAMESPACE.course = { ...course };
       editModal();
     });
+
     deleteButton.addEventListener('click', function () {
       // deleteCourse(course._id, data);
       _GLOBAL_NAMESPACE.deleteId = course?._id;
-      document.querySelector('.delete-course span').textContent = `${
-        course?.name
-      } course ${course?.instructor ? `by ${course?.instructor}` : ''}`;
+      document.querySelector('.delete-course span').textContent = `${course?.name
+        } course ${course?.instructor ? `by ${course?.instructor}` : ''}`;
       smallMenu.classList.toggle('none');
       toggleDelete();
     });
@@ -75,7 +78,6 @@
 
   // create node to array of course
   const showCourses = (courses) => {
-    console.log(courses);
     if (!courses || !courses.length) return;
     courses.forEach((course) => {
       createCourseNode(course);
@@ -123,7 +125,6 @@
       if (courses.status === 'error' || courses.status === 'fail') {
         throw new Error(newCourse.message);
       }
-      console.log(courses);
       _GLOBAL_NAMESPACE.courses = courses?.data?.courses;
       return showCourses(_GLOBAL_NAMESPACE.courses);
     } catch (error) {
@@ -142,37 +143,10 @@
   const error = document.querySelector('.error');
 
   const printErrorMessage = (e) => (error.textContent = e);
-  // const addCourse = async (data) => {
-  //   try {
-  //     const res = await fetch('/api/v1/courses', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         accept: 'application/json',
-  //       },
-  //       body: JSON.stringify(data),
-  //     });
-  //     const newCourse = await res.json();
-  //     printErrorMessage('');
-  //     if (newCourse.status === 'error' || newCourse.status === 'fail') {
-  //       throw new Error(newCourse.message);
-  //     }
-  //     _GLOBAL_NAMESPACE.courses = [
-  //       ..._GLOBAL_NAMESPACE.courses,
-  //       newCourse?.data?.course,
-  //     ];
-  //     createCourseNode(newCourse?.data?.course);
-  //     rem();
-  //     tempAlert('Added Course', 3000);
-  //   } catch (error) {
-  //     console.log(error.message);
-  //     printErrorMessage(error.message);
-  //   }
-  // };
 
   const addCourse = async (data) => {
     try {
-      const res = await fetch('/api/v1/courses/test', {
+      const res = await fetch('/api/v1/courses', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -212,7 +186,6 @@
         }
       );
       const newCourse = await res.json();
-      console.log(newCourse);
       printErrorMessage('');
       if (newCourse.status === 'error' || newCourse.status === 'fail') {
         throw new Error(newCourse.message);
@@ -237,7 +210,7 @@
     const courseCode = element['code'].value;
     const courseLink = element['link'].value;
     const publish = element['publish'].checked;
-    const image = element['image']?.files;
+    const image = element['image'].value;
     const data = {
       name,
       description,
@@ -245,36 +218,25 @@
       instructor,
       courseCode,
       courseLink,
-      publish,
+      image,
+      publish
     };
     if (
       !name ||
-      !description ||
       !createdAt ||
       !instructor ||
-      !courseCode ||
-      !courseLink ||
-      !image ||
-      !image?.length
+      !courseCode
     ) {
-      error.textContent = 'Please fill all fields';
+      error.textContent = 'Please fill all Required fields';
       return;
     }
-
-    const formData = new FormData();
-    console.log(image[0]);
-    formData.append('image', image[0], image[0]?.name);
-    Object.entries(data).forEach(([key, value]) => {
-      console.log(key, value);
-      formData.append(key, value);
-    });
 
     if (_GLOBAL_NAMESPACE.course?.name) {
       editCourse(data);
       return;
     }
 
-    addCourse(formData);
+    addCourse(data);
   });
 
   function clearInput() {
@@ -296,6 +258,7 @@
     instructor.value = course?.instructor;
     courseCode.value = course?.courseCode;
     courseLink.value = course?.courseLink;
+    imagePath.value = course?.image;
     title.innerHTML = 'Edit Course';
     publish.checked = course?.publish;
     add();

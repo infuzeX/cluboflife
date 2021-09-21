@@ -63,7 +63,8 @@ exports.fetchUserOrders = catchAsync(async (req, res, next) => {
 exports.updateSubscription = catchAsync(async (req, res, next) => {
   const result = await Subscription.updateOne(
     { _id: req.params.subscriptionId },
-    req.body
+    req.body,
+    {runValidators:true}
   );
   if (!result.matchedCount) return next(new AppError('Course not found!', 404));
   if (!result.modifiedCount)
@@ -110,7 +111,7 @@ exports.hasUserSubscribed = catchAsync(async (req, res, next) => {
   if (!hasSubscribed) return res.redirect('/dashboard');
   if (new Date(hasSubscribed.expiresAt).getTime() <= Date.now()) {
     hasSubscribed.active = false;
-    await hasSubscribed.save();
+    await hasSubscribed.save({validateBeforeSave:false});
     return res.redirect('/dashboard');
   }
   return next();

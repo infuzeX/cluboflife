@@ -1,196 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/public/assets/css/font.css">
-    <link rel="stylesheet" href="/public/assets/css/course-dashboard.css" />
-    <link rel="stylesheet" href="/public/assets/css/nav.css" />
 
-    <title>Dashboard</title>
-  </head>
-  <body>
-    <section class="nav">
-      <ul>
-        <li>
-          <a id="sideNav" href="#"><i class="fas fa-bars"></i></a>
-        </li>
-        <li style="font-size: 1.4rem;"><a href='/admin/dashboard' class='brand'>Club Of Life</a></li>
-        <li class="left">
-          <a href="#"  class="cour">
-            <span style="margin-right: 5px;"><i class="fas fa-plus"></i></span>
-            <span>NEW COURSE</span>
-          </a>
-        </li>
-      </ul>
-    </section>
-    <section class="delete-course none">
-      <div class="delete-course_popup">
-        <p>Are you sure that you want to delete <span></span>?</p>
-        <div class='buttons'>
-          <button class='popup-button cancel-del'>Cancel</button>
-          <button class='popup-button btn-red'>Delete</button>
-        </div>
-      </div>
-    </section>
-    <section class="new-coures none">
-      <div class="admin">
-        <div class="cross"><i class="fas fa-times"></i></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/public/assets/css/font.css">
+  <link rel="stylesheet" href="/public/assets/css/course-dashboard.css" />
+  <link rel="stylesheet" href="/public/assets/css/nav.css" />
 
-        <hr />
-      </div>
-      <div class="add-course">
-        <form class="field-div">
-          <div class="title">ADD Course</div>
-          <p class='error'></p>
-          <input type="text" name="course" id="" placeholder="Course Name" class="course" required />
-          <input type="text" name="subtitle" id="" placeholder="Subtitle" class="subtitle" required/>
-          Start Date<input type="date" name='createdAt' class="createdAt" required/>
-          <input
-            type="text"
-            name="instructor"
-            id=""
-            required
-            class="instructor"
-            placeholder="Instructor name"
-          />
-          <input type="text" name="code" id="" placeholder="Course Code" class="code" required/>
-          <input type="text" name="link" id="" placeholder="Course Buy Link" class="link" required/>
-          <input type=file accept="image/*" name='image' required />
-           <div class='checkbox'>
-          <input type='checkbox' name='publish' id='publish' checked /> <label for="publish">Publish</label>
-        </div>
-        </div>
-        <div class="field-div">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-    </section>
-    <div class="sidenav" >
-      <div class="closebtn">
-        <i class="fas fa-times"></i>
-      </div>
-      <div class="side-list">
-        <a href="#"><div>option1</div></a>
-        <a href="#"><div>option2</div></a>
-        <a href="#"><div>option3</div></a>
-        <a href="#"><div>option4</div></a>
-        <a href="#"><div>option5</div></a>
-        <a href="#"><div>option6</div></a>
-        <a href="#"><div>option7</div></a>
+  <title>Dashboard</title>
+</head>
+
+<body>
+  <section class="nav">
+    <ul>
+      <li>
+        <a id="sideNav" href="#"><i class="fas fa-bars"></i></a>
+      </li>
+      <li style="font-size: 1.4rem;"><a href='/admin/dashboard' class='brand'>Club Of Life</a></li>
+      <li class="left">
+        <a href="#" class="cour">
+          <span style="margin-right: 5px;"><i class="fas fa-plus"></i></span>
+          <span>NEW COURSE</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+  <section class="delete-course none">
+    <div class="delete-course_popup">
+      <p>Are you sure that you want to delete <span></span>?</p>
+      <div class='buttons'>
+        <button class='popup-button cancel-del'>Cancel</button>
+        <button class='popup-button btn-red'>Delete</button>
       </div>
     </div>
-    <section id="main">
-      <div class="heading">
-        <h3>Courses</h3>
-      </div>
-      <main>
-        <div class="search">
-          <form>
-            <input
-              id="searchjr"
-              type="text"
-              placeholder="Search.."
-              class="searchCourse"
-            />
-            <!--
-            <button type="submit" onclick="hell()">
-              <i class="fas fa-search"></i>
-            </button>
-            -->
-          </form>
-        </div>
+  </section>
+  <section class="new-coures none">
+    <div class="admin">
+      <div class="cross"><i class="fas fa-times"></i></div>
 
-        <div class="course-parent-flex">
-          
-         
+      <hr />
+    </div>
+    <div class="add-course">
+      <form class="field-div">
+        <div class="title">ADD Course</div>
+        <p class='error'></p>
+        <input type="text" name="course" id="" placeholder="Course Name" class="course" required />
+        <input type="text" name="subtitle" id="" placeholder="Subtitle" class="subtitle" />
+        Start Date<input type="date" name='createdAt' class="createdAt" required />
+        <input type="text" name="instructor" id="" required class="instructor" placeholder="Instructor name" />
+        <input type="text" name="code" id="" placeholder="Course Code" class="code" required />
+        <input type="text" name="link" id="" placeholder="Course Buy Link" class="link" />
+        <input type="text" name='image' placeholder="Image Path" class="image" />
+        <div class='checkbox'>
+          <input type='checkbox' name='publish' id='publish' checked /> <label for="publish">Publish</label>
         </div>
-      </main>
-      <template>
+    </div>
+    <div class="field-div">
+      <button type="submit">Submit</button>
+    </div>
+    </form>
+  </section>
+  <div class="sidenav">
+    <div class="closebtn">
+      <i class="fas fa-times"></i>
+    </div>
+    <div class="side-list">
+      <a href="#">
+        <div>option1</div>
+      </a>
+      <a href="#">
+        <div>option2</div>
+      </a>
+      <a href="#">
+        <div>option3</div>
+      </a>
+      <a href="#">
+        <div>option4</div>
+      </a>
+      <a href="#">
+        <div>option5</div>
+      </a>
+      <a href="#">
+        <div>option6</div>
+      </a>
+      <a href="#">
+        <div>option7</div>
+      </a>
+    </div>
+  </div>
+  <section id="main">
+
+    <div class="heading">
+      <h3>Courses</h3>
+      <form>
+        <input id="searchjr" type="text" placeholder="Search.." class="searchCourse" />
+        <!--
+          <button type="submit" onclick="hell()">
+            <i class="fas fa-search"></i>
+          </button>
+          -->
+      </form>
+    </div>
+
+    <main>
+      <!--Courses List-->
+      <div class="course-parent-flex">
         <div class="course-child-parent">
-            <div class="course-child">
-              <img
-                width="100px"
-                height="100px"
-                src="/public/assets/images/blood.jpg"
-                alt="img"
-              />
-              <div class="course-txt">
-                <h3>Sacred Sexuality with pepe danza</h3>
-                <div class="author">Joseph Pepe Danza</div>
-              </div>
-              <a style="text-decoration: none;" class="share">
-                <i class="fas fa-share-alt"></i>
-                SHARE
-              </a>
-              <div class="vr"></div>
-              <div class="status">Published</div>
-              <div class="moremenu">
-                <i class="fas fa-ellipsis-v"></i>
-              </div>
+
+          <div class="course-child">
+
+            <img src="/public/assets/images/blood.jpg" alt="img" />
+
+            <div class="course-txt">
+              <h3>Sacred with pepe danza</h3>
+              <h4>Abdullah</h4>
+              <p class="subtitle">Joseph Pepe Danza Joseph Pepe Danza v Joseph Pepe Danza Joseph Pepe DanzaJoseph Pepe
+                Danza</p>
             </div>
-            <div class="none small-menu">
-              <ul>
-                <li><a href="#" class="edit">EDIT</a></li>
-                <li><a href="#" class='delete'>DELETE</a></li>
-              </ul>
+
+            <!--
+            <a style="text-decoration: none;" class="share">
+              <i class="fas fa-share-alt"></i>
+              SHARE
+            </a>
+-->
+            <div class="status">Published</div>
+
+            <div class="moremenu">
+              <i class="fas fa-ellipsis-v"></i>
             </div>
+
           </div>
-      </template>
-    </section>
-    <script src="/public/assets/js/alert.js"></script>
-    <script src="/public/assets/js/manageCourse.js"></script>
-    <script>
-      let sideNav = document.getElementById('sideNav');
-      let sidenav = document.querySelector('.sidenav');
-      let closebtn = document.querySelector('.closebtn');
-      console.log(closebtn);
-      sideNav.addEventListener('click', function () {
-        sidenav.classList.add('vis');
-      });
-      closebtn.addEventListener('click', function () {
-        sidenav.classList.remove('vis');
-      });
 
-      
+          <div class="none small-menu">
+            <ul>
+              <li><a href="#" class="edit">EDIT</a></li>
+              <li><a href="#" class='delete'>DELETE</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+      <!--Courses List-->
+    </main>
+    <!--Course Template-->
+    <template>
+      <div class="course-child-parent">
+
+        <div class="course-child">
+          <img src="/public/assets/images/blood.jpg" alt="img" />
+          <div class="course-txt">
+            <h3></h3>
+            <h4 class="author"></h4>
+            <p class="subtitle"></p>
+          </div>
+
+          <div class="status">Published</div>
+          <div class="moremenu">
+            <i class="fas fa-ellipsis-v"></i>
+          </div>
+        </div>
+
+        <div class="none small-menu">
+          <ul>
+            <li>
+              <a class="edit">
+                <i class="fas fa-pen"></i>&nbsp;
+                <span>EDIT</span>
+              </a>
+            </li>
+            <li>
+              <a class='delete'>
+                <i class="fas fa-trash"></i>&nbsp;
+                <span>DELETE</span>
+              </a>
+            </li>
+            <li>
+              <a class="share">
+                <i class="fas fa-share-alt"></i>&nbsp;
+                <span>SHARE</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </template>
+    <!--Course Template-->
+  </section>
+  <script src="/public/assets/js/alert.js"></script>
+  <script src="/public/assets/js/manageCourse.js"></script>
+  <script>
+    let sideNav = document.getElementById('sideNav');
+    let sidenav = document.querySelector('.sidenav');
+    let closebtn = document.querySelector('.closebtn');
+    console.log(closebtn);
+    sideNav.addEventListener('click', function () {
+      sidenav.classList.add('vis');
+    });
+    closebtn.addEventListener('click', function () {
+      sidenav.classList.remove('vis');
+    });
 
 
-      //for search
-      document.querySelector(".searchCourse").addEventListener("keyup",()=> {
-         const ins = document.getElementsByClassName('author');
-        const dash = document.querySelectorAll('.course-child-parent');
-        const courseName = document.querySelectorAll('.course-txt h3');
-        const searchText = document
-          .getElementById('searchjr')
-          .value.toUpperCase();
-        console.log(searchText, courseName);
-        for (let i = 0; i < courseName.length; i++) {
-          const courseName = document.querySelectorAll('.course-txt h3')[i];
-          console.log(courseName);
-          if (courseName) {
-            let textValue = courseName.textContent || courseName.innerHTML;
-            if (textValue.toUpperCase().indexOf(searchText) > -1) {
-              dash[i].style.display = '';
-            } else {
-              dash[i].style.display = 'none';
-            }
+
+
+    //for search
+    document.querySelector(".searchCourse").addEventListener("keyup", () => {
+      const ins = document.getElementsByClassName('author');
+      const dash = document.querySelectorAll('.course-child-parent');
+      const courseName = document.querySelectorAll('.course-txt h3');
+      const searchText = document
+        .getElementById('searchjr')
+        .value.toUpperCase();
+      console.log(searchText, courseName);
+      for (let i = 0; i < courseName.length; i++) {
+        const courseName = document.querySelectorAll('.course-txt h3')[i];
+        console.log(courseName);
+        if (courseName) {
+          let textValue = courseName.textContent || courseName.innerHTML;
+          if (textValue.toUpperCase().indexOf(searchText) > -1) {
+            dash[i].style.display = '';
+          } else {
+            dash[i].style.display = 'none';
           }
         }
-      })
-      
+      }
+    })
+
       // function hell() {
-       
+
       // }
 
 
-     
-      
-    </script>
-    <script src="/public/assets/js/goBack.js"></script>
-  </body>
+
+
+  </script>
+  <script src="/public/assets/js/goBack.js"></script>
+</body>
+
 </html>

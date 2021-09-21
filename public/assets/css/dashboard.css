@@ -9,42 +9,44 @@ body {
 }
 
 .admin-header div h1 {
+  text-align: center;
   font-size: 30px;
+  color:  rgb(16,12,89);;
 }
 
 .dashboard {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: left
   padding: 3rem;
   flex-wrap: wrap;
 
 }
 
-
-
 .card {
   padding: 40px;
   border-radius: 10px;
+  margin:20px auto;
   background-color: rgb(255,255,255);
-  box-shadow: 0 3px 10px rgb(0 0 0 / 0.65);
+  box-shadow: 0 3px 10px rgb(0, 0, 0, 0.05);
   transition: all 500ms linear;
 }
 
 .card h1 {
   font-size: 20px;
   font-weight: bold;
+  color:  rgb(16,12,89);;
 }
 
+/*
 .card:nth-child(1) h1 {
   color: rgb(63,110,184);
 }
-
 .card:nth-child(2) h1 {
   color: rgb(172,57,255);
 }
 .card:nth-child(3) h1 {
   color: #7FD461;
-}
+}*/
 
 .card:hover {
   transform: scale(1.1);
