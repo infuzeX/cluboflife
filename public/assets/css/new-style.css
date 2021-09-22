@@ -1,0 +1,24 @@
+#view:hover{
+    color: #9fd5f3;
+  
+}
+#view{
+    background-color: #313132;
+    padding: 3px 10px;
+    border-radius: 20px;
+    color:#FBFBFD;
+}
+#nav{
+    background-image: url(img1.jpg);
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#logo{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+#logo img{
+    width: 25%;
+}
