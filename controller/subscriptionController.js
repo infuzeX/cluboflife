@@ -34,7 +34,7 @@ exports.fetchSubscriptions = catchAsync(async (req, res, next) => {
     .filter()
     .limitFields()
     .sort()
-    //.paginate();
+  //.paginate();
   const subscriptions = await feature.query;
   return res.status(200).json({
     status: 'success',
@@ -45,13 +45,16 @@ exports.fetchSubscriptions = catchAsync(async (req, res, next) => {
 
 exports.fetchUserOrders = catchAsync(async (req, res, next) => {
   const feature = new APIFeature(
-    Subscription.find({ user: req.user.userId }),
+    Subscription.find({ user: req.user.userId }).populate({
+      path: 'course',
+      select: 'name instructor courseCode'
+    }),
     req.query
   )
     .filter()
     .limitFields()
     .sort()
-    .paginate();
+    .paginate()
   const subscriptions = await feature.query;
   return res.status(200).json({
     status: 'success',

@@ -39,7 +39,7 @@ const subscriptionSchema = Schema({
 subscriptionSchema.pre(/find/, function (next) {
   this.find().populate([
     { path: 'user', select: 'name email' },
-    { path: 'course', select: 'name instructor courseCode' },
+    { path: 'course', select: 'name instructor courseCode description' },
   ]);
   next();
 });

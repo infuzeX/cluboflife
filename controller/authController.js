@@ -96,7 +96,6 @@ exports.editPassword = catchAsync(async (req, res, next) => {
     return next(new AppError('User not found', 404));
 
   const user = await User.findById(userId);
-  console.log(user, 22);
   if (!user) return next(new AppError('User not found', 404));
   user.password = req.body?.password;
   await user.save();
