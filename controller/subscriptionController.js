@@ -34,7 +34,7 @@ exports.fetchSubscriptions = catchAsync(async (req, res, next) => {
     .filter()
     .limitFields()
     .sort()
-    .paginate();
+    //.paginate();
   const subscriptions = await feature.query;
   return res.status(200).json({
     status: 'success',
@@ -63,8 +63,7 @@ exports.fetchUserOrders = catchAsync(async (req, res, next) => {
 exports.updateSubscription = catchAsync(async (req, res, next) => {
   const result = await Subscription.updateOne(
     { _id: req.params.subscriptionId },
-    req.body,
-    {runValidators:true}
+    req.body
   );
   if (!result.matchedCount) return next(new AppError('Course not found!', 404));
   if (!result.modifiedCount)
@@ -111,7 +110,7 @@ exports.hasUserSubscribed = catchAsync(async (req, res, next) => {
   if (!hasSubscribed) return res.redirect('/dashboard');
   if (new Date(hasSubscribed.expiresAt).getTime() <= Date.now()) {
     hasSubscribed.active = false;
-    await hasSubscribed.save({validateBeforeSave:false});
+    await hasSubscribed.save({ validateBeforeSave: false });
     return res.redirect('/dashboard');
   }
   return next();

@@ -1,42 +1,42 @@
-html,
-body{
+html, body {
     margin: 0px;
     padding: 0px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-   
-background-color: #F5F5F7;
+    background-color: #F5F5F7;
 }
-nav{
+
+nav {
     background: url('./assets/images/beach.jpg');
-    background: linear-gradient(
-0deg
-, rgba(22, 21, 22, 0.39), rgba(34, 33, 33, 0.794)), url('./assets/images/beach.jpg');
+    background: linear-gradient( 0deg, rgba(22, 21, 22, 0.39), rgba(34, 33, 33, 0.794)), url('./assets/images/beach.jpg');
     height: 40vh;
     /* filter: grayscale(0.5) blur(10px); */
     background-repeat: round;
 }
+
 nav ul {
     display: flex;
     align-items: center;
     list-style: none;
     margin: 0px;
     padding: 8px;
- 
 }
+
 nav ul li {
     padding: 13px;
     font-size: 0.8rem;
     cursor: pointer;
 }
-nav ul li a{
+
+nav ul li a {
     text-decoration: none;
     color: white;
 }
-.left{
+
+.left {
     margin-left: auto;
 }
 
-nav h1{
+nav h1 {
     color: white;
     font-size: 4rem;
     font-weight: 100;
@@ -44,7 +44,8 @@ nav h1{
     padding: 0px;
     letter-spacing: 2px;
 }
-nav p{
+
+nav p {
     color: white;
     margin-left: 30px;
     font-size: 1.2rem;
@@ -52,7 +53,7 @@ nav p{
     letter-spacing: 1px;
 }
 
-.dropdown ul{
+.dropdown ul {
     display: block;
     position: absolute;
     right: 15px;
@@ -60,62 +61,46 @@ nav p{
     background: rgba(0, 0, 0, 0.63);
     border-radius: 10px;
 }
-.none{
+
+.none {
     display: none;
 }
-.dropdown a:hover{
+
+.dropdown a:hover {
     color: #9fd5f3;
 }
+
 /* second-section */
-
-
-
-#second-section h1{
-    text-align: center;
-    font-size: 2.7rem;
-    font-weight: 100;
-}
-#second-section h5{
-    text-align: center;
-    background: #e5e5e5;
-    font-size: 2rem;
-    font-weight: 400;
-    width: 89%;
-    margin: auto;
-    margin-bottom: -43px;
-    padding: 20px;
-}
-
-.allCourses-flex-parent{
+.allCourses-flex-parent {
     display: flex;
     flex-direction: row;
-    /* background-color: #e5e5e5; */
+    /* background-color: #e5e5e5;*/
     width: 100%;
-    justify-content: space-evenly;
+    justify-content:center;
     margin-top: 73px;
     margin-bottom: 73px;
     flex-wrap: wrap;
 }
-/* .allCourses-flex-parent div{
-    width: 100%;
-    margin-bottom: 100px;
-} */
-.allCourses-flex-parent h5{
+
+.allCourses-flex-parent h5 {
     text-align: center;
     width: 100%;
     font-weight: 100;
 }
-.course-child{
+
+.course-child {
     width: 100%;
 }
-.course h3{
+
+.course h3 {
     text-align: center;
     font-size: 1.2rem;
     font-weight: 600;
     margin: 23px 0px;
     padding: 10px;
 }
-.course{
+
+.course {
     width: 22%;
     background-color: #FBFBFD;
     /* background: linear-gradient(
@@ -126,36 +111,45 @@ nav p{
     box-shadow: 0px 12px 40px 0px rgb(0 0 0 / 6%);
 }
 
+.course>p {
+    color: #333;
+    font-size: 1rem;
+    margin: 10px;
+}
 
-.perc{
+.perc {
     display: flex;
     flex-direction: column-reverse;
     align-items: end;
     margin-left: 12%;
     margin-bottom: 30px;
 }
-.cmplt{
+
+.cmplt {
     color: rgb(134, 203, 230);
     font-weight: bold;
 }
-.outer-div{
+
+.outer-div {
     width: 87%;
     height: 2px;
     background-color: white;
     flex-basis: 60%;
     margin-bottom: 0px;
 }
-.inner-div{
+
+.inner-div {
     background-color: skyblue;
     width: 30%;
     height: 2px;
 }
 
-.overview-flex-parent{
+.overview-flex-parent {
     display: flex;
     justify-content: space-around;
 }
-.overview-flex-parent a{
+
+.overview-flex-parent a {
     text-decoration: none;
     color: black;
     text-transform: capitalize;
@@ -165,16 +159,15 @@ nav p{
     width: 100%;
     margin-top: 29px;
     height: fit-content;
-  
 }
 
-.course-img img{
+.course-img img {
     width: 100%;
     border-radius: 0px 0px 20px 20px;
-   
 }
+
 @media screen and (max-width: 768px) {
-    nav{
+    nav {
         height: 46vh;
     }
     nav ul li {
@@ -182,17 +175,17 @@ nav p{
         font-size: 0.5rem;
         cursor: pointer;
     }
-    #font a{
+    #font a {
         font-size: 1.5rem !important;
     }
-    #font a.font1{
+    #font a.font1 {
         font-size: 1rem !important;
     }
-    nav h1{
+    nav h1 {
         font-size: 3rem;
         margin: 114px 34px 14px 11px;
     }
-    nav p{
+    nav p {
         margin-left: 19px;
         font-size: 1.2rem;
         margin-top: -13px;
@@ -204,12 +197,12 @@ nav p{
         margin: auto;
     }
     /* second section */
-    .course{
+    .course {
         display: block;
         width: 90%;
         margin-bottom: 17px;
     }
-    #second-section h5{
+    #second-section h5 {
         padding: 12px;
         margin-bottom: -61px;
         width: 82%;

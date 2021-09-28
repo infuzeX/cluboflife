@@ -56,51 +56,45 @@
     </nav>
   </section>
 
-
-
-
-
-
-
   <section id="second-section">
 
-    <h1 class="noCourse" style="display: none"></h1>
+    <div class="allCourses-flex-parent">
+      <div class="course">
+        <div class="course-content">
+          <h3>Life Of Pie</h3>
+          <p id="subtitle">Subtitile</p>
+          <div class="overview-flex-parent">
+            <a class="courseRoute" href="#">
+              <div class="overview-child" id="view">View Course</div>
+            </a>
+          </div>
+        </div>
+        <div class="course-img">
+          <img src="/public/assets/images/blood.jpg" alt="" />
+        </div>
+      </div>
+    </div>
 
-    <div class="allCourses-flex-parent"></div>
-  
     <template>
       <div class="course">
         <h3></h3>
-       <center><h4 id="subtitle">Subtitile</h4><center> 
-
-       
+        <p id="subtitle">Subtitile</p>
         <div class="overview-flex-parent">
           <a class="courseRoute" href="#">
             <div class="overview-child" id="view">View Course</div>
           </a>
         </div>
-
         <div class="course-img">
           <img src="/public/assets/images/blood.jpg" alt="" />
         </div>
-
       </div>
     </template>
 
   </section>
 
-
-
-
-
-
-
-
-
-
-
   <script src="/public/assets/js/alert.js"></script>
   <script src="/public/assets/js/user.js"></script>
+  <script src="/public/assets/js/logout.js"></script>
   <script src="/public/assets/js/allCourses.js"></script>
   <script>
     var liButton = document.querySelector('.dropdown');

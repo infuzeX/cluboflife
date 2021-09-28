@@ -176,6 +176,12 @@
       }
 
       await signup({ name, email, password, createdAt });
+        /*clear value*/
+        element['name'].value = "";
+        element['email'].value = "";
+        element['password'].value = "";
+        element['createdAt'].value = "";
+        /*clear value*/
       toggleCopy({ name, email, password, joined: createdAt });
     } catch (err) {
       tempAlert(err?.message || "Something went wrong!", 3000, true);
@@ -258,6 +264,7 @@
   }
 
   function toggleCopy(data) {
+    copyData.innerHTML = ""
     if (!data || !data?.email) return;
     Object.entries(data).map(([key, value]) => {
       const li = document.createElement('li');

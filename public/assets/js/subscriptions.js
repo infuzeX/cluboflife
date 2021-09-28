@@ -243,8 +243,8 @@ Subscription:${data.expiresAt}
       return editPurchase({
         userId,
         courseId,
-        boughtAt,
-        expiresAt,
+        boughtAt:new Date(boughtAt).getTime(),
+        expiresAt:new Date(expiresAt).getTime(),
         paid: parseInt(paid),
         active,
       });
