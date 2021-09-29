@@ -14,7 +14,7 @@ const createProductNode = (product) => {
   clone.querySelector('h3').textContent = scaleText(product?.course?.name, 50);
   clone.querySelector('#subtitle').textContent = scaleText(product?.course?.description, 100);
   clone.querySelector('.foot-cont').children[0].innerHTML = `<i class="fas fa-user"></i>&nbsp;${product.course.instructor}`;
-  clone.querySelector('.foot-cont').children[1].innerHTML = `<i class="fas fa-clock"></i>&nbsp;Expires In ${numberOfDays(product.expiresAt).remDays} Days`;;
+  clone.querySelector('.foot-cont').children[1].innerHTML = `<i class="fas fa-clock"></i>&nbsp;${numberOfDays(product.expiresAt)}`;;
   clone.querySelector('#courseRoute').setAttribute('href', courseRoute);
   courseContainer.append(clone);
 };
@@ -53,11 +53,12 @@ const numberOfDays = (time) => {
   const remSec = (timestamp - currentData) / 1000;
   const remMin = remSec / 60;
   const remDays = Math.round(remMin / (24 * 60))
-  return {
+  const data = {
     remSec,
     remMin,
     remDays
   }
+  return data.remDay < 0 ? "Expired" : `Expires In ${data.remDays} Days`
 }
 
 const scaleText = (text, maxLength) => {

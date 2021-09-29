@@ -1,57 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Dashboard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/public/assets/css/font.css">
-    <link rel="stylesheet" href="/public/assets/css/login.css" />
-    <link rel="stylesheet" href="/public/assets/css/dashboard.css" />
-    <link rel="stylesheet" href="/public/assets/css/nav.css" />
-  </head>
-  <body>
-    <nav>
-      <ul>
-        <li style="text-transform: none; font-size: 1.4rem">
-          <!-- style="text-transform: none; font-size: 2rem" -->
-          <a href="/admin/dashboard" class="brand">Club Of Life</a>
-        </li>
-        <li class="left"><a href="#" class="logout">Logout</a></li>
-        <!-- <li><a href="/signup">sign up</a></li> -->
-      </ul>
-    </nav>
-    <section class="admin-header">
-      <div class="header">
-        <h1>Admin Panel-Club of life</h1>
-      </div>
-    </section>
 
-    <section class="dashboard">
-      <div class="card">
-        <a href="/admin/manage-student">
-          <h1>Manage Student</h1>
-        </a>
-      </div>
-      <div class="card">
-        <a href="/admin/manage-course">
-          <h1>Course Management</h1>
-        </a>
-      </div>
-      <div class="card">
-        <a href="/admin/subscriptions">
-          <h1>Subscriptions</h1>
-        </a>
-      </div>
-    </section>
-  </body>
-  <script src="/public/assets/js/user.js"></script>
-  <script src="/public/assets/js/goBack.js"></script>
-  <script src="/public/assets/js/logout.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/public/assets/css/font.css">
+  <link rel="stylesheet" href="/public/assets/css/login.css" />
+  <link rel="stylesheet" href="/public/assets/css/dashboard.css" />
+  <link rel="stylesheet" href="/public/assets/css/nav.css" />
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li style="text-transform: none; font-size: 1.4rem">
+        <!-- style="text-transform: none; font-size: 2rem" -->
+        <a href="/admin/dashboard" class="brand">Club Of Life</a>
+      </li>
+      <li class="left"><a href="#" class="logout">Logout</a></li>
+      <!-- <li><a href="/signup">sign up</a></li> -->
+    </ul>
+  </nav>
+  <section class="admin-header">
+    <div class="header">
+      <h1>Admin Panel-Club of life</h1>
+    </div>
+  </section>
+
+  <section class="dashboard">
+    <div class="card">
+      <a href="/admin/manage-student">
+        <h1>Manage Student</h1>
+      </a>
+    </div>
+    <div class="card">
+      <a href="/admin/manage-course">
+        <h1>Course Management</h1>
+      </a>
+    </div>
+    <div class="card">
+      <a href="/admin/subscriptions">
+        <h1>Subscriptions</h1>
+      </a>
+    </div>
+    <div class="card">
+      <a href="/admin/notifications">
+        <h1>Notifications</h1>
+      </a>
+    </div>
+  </section>
+  
+</body>
+<script src="/public/assets/js/user.js"></script>
+<script src="/public/assets/js/goBack.js"></script>
+<script src="/public/assets/js/logout.js"></script>
+
 </html>

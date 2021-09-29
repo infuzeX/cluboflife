@@ -31,4 +31,9 @@ router.get('/subscriptions', protectPage, protectAdminPage, (req, res) => {
   res.sendFile(file);
 });
 
+router.get('/notifications', protectPage, protectAdminPage, (req, res) => {
+  const file = path.resolve('public/notifications.html');
+  res.sendFile(file);
+});
+
 module.exports = router;
