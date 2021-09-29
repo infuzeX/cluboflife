@@ -5,16 +5,13 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="/public/assets/css/font.css">
   <link rel="stylesheet" href="/public/assets/css/login.css" />
   <link rel="stylesheet" href="/public/assets/css/manageStudent.css" />
-  <link rel="stylesheet" href="/public/assets/css/nav.css" />
+  <link rel="stylesheet" href="/public/assets/css/adminHeader.css">
 
-  <title>Manage Student</title>
+  <title>Students</title>
 </head>
 
 <body>
@@ -80,12 +77,13 @@
     <ul>
       <li>
         <a href="/admin/dashboard" class="brand">Club Of Life</a>
+        <img src="/public/assets/css/col-logo.png">
       </li>
-
       <li class="left">
-        <a href="#" class="addModalButton" data-type="manageStudent">Add Student</a>
-      </li>
-      <li><a class="logout">Logout</a></li>
+        <a href="#" class="addModalButton" data-type="manageStudent">
+          <i class="fas fa-user"></i>&nbsp;Add Student</a>
+      </li>&nbsp;&nbsp;&nbsp;&nbsp;
+      <li><a class="logout"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a></li>
     </ul>
   </nav>
 

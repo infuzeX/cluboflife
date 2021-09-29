@@ -8,18 +8,18 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="/public/assets/css/font.css">
   <link rel="stylesheet" href="/public/assets/css/course-dashboard.css" />
-  <link rel="stylesheet" href="/public/assets/css/nav.css" />
+  <link rel="stylesheet" href="/public/assets/css/adminHeader.css">
 
-  <title>Dashboard</title>
+  <title>Course</title>
 </head>
 
 <body>
-  <section class="nav">
+  <nav>
     <ul>
-      <li>
-        <a id="sideNav" href="#"><i class="fas fa-bars"></i></a>
+      <li style="font-size: 1.4rem;">
+        <a href='/admin/dashboard' class='brand'>Club Of Life</a>
+        <img src="/public/assets/css/col-logo.png">
       </li>
-      <li style="font-size: 1.4rem;"><a href='/admin/dashboard' class='brand'>Club Of Life</a></li>
       <li class="left">
         <a href="#" class="cour">
           <span style="margin-right: 5px;"><i class="fas fa-plus"></i></span>
@@ -27,7 +27,8 @@
         </a>
       </li>
     </ul>
-  </section>
+  </nav>
+  
   <section class="delete-course none">
     <div class="delete-course_popup">
       <p>Are you sure that you want to delete <span></span>?</p>
@@ -108,7 +109,7 @@
     <main>
       <!--Courses List-->
       <div class="course-parent-flex">
-<!--
+        <!--
         <div class="course-child-parent">
 
           <div class="course-child">

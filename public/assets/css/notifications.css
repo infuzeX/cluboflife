@@ -9,43 +9,12 @@ body {
     background-color: #eee !important;
 }
 
-/* Nav section */
-
-nav {
-    background-color: black;
-    color: #fff;
-}
-
-nav ul {
-    display: flex;
-    list-style: none;
-    margin: 0px;
-    align-items: center;
-}
-
-nav ul li {
-    padding: 9px 0;
-    cursor: pointer;
-}
-
-nav ul li a {
-    display: block;
-    text-decoration: none;
-    text-align: center;
-    color: #fff;
-    font-size: 1.1rem;
-    font-weight: 100;
-}
-
-nav ul li a:hover {
-    color: #9fd5f3;
-}
-
 .notify-main {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     width: 100%;
+    flex: 1;
 }
 
 .notify-main>.notify-form {
@@ -65,6 +34,10 @@ nav ul li a:hover {
     font-weight: bold;
     font-size: 1rem;
     height: 200px;
+}
+.notify-main>.notify-form>form>textarea::placeholder{
+    color: grey;
+    font-weight:400
 }
 
 .notify-main>.notify-form>form>button {
@@ -97,16 +70,18 @@ nav ul li a:hover {
 }
 
 .notifications>.notification>.content {
-    width: 80%;
+    width: 95%;
 }
-.notifications > .notification >.content .detail {
+
+.notifications>.notification>.content .detail {
     width: fit-content;
     color: grey;
-    margin:0 0 0 auto;
+    margin: 0 0 0 auto;
 }
+
 .notifications>.notification>.content>p {
     margin-top: 0;
-    font-size:1rem;
+    font-size: 1rem;
 }
 
 .notifications>.notification>.content>.time {
@@ -124,16 +99,13 @@ nav ul li a:hover {
         display: flex;
         flex-direction: column;
     }
-    .notify-main {
-        height: 86%
-    }
     .notify-main>.notify-form {
         width: 30%;
+        height:85%;
     }
     .notify-main>.notify-content {
         width: 60%;
         padding: 2.5%;
-        height: 100%;
-        overflow-y: scroll;
+        height: 85%;
     }
 }
