@@ -24,7 +24,7 @@ exports.login = catchAsync(async (req, res, next) => {
   if (!(await user.comparePassword(req.body.password, user.password)))
     return next(new AppError('Incorrect Password', 401));
   const token = await promisify(jwt.sign)(
-    { userId: user._id, role: user.role },
+    { userId: user._id, role: user.role, name: user.name },
     secret,
     {
       expiresIn: expiresInMin,
