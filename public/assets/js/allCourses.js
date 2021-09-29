@@ -11,11 +11,11 @@ const createProductNode = (product) => {
   clone.querySelector('.course').addEventListener('click', () => {
     window.location = courseRoute;
   });
-  clone.querySelector('h3').textContent = product?.course?.name;
-  clone.querySelector('#subtitle').textContent = product?.course?.description;
-  clone.querySelector('#inst-content').children[1].textContent = product?.course?.instructor;
+  clone.querySelector('h3').textContent = scaleText(product?.course?.name, 50);
+  clone.querySelector('#subtitle').textContent = scaleText(product?.course?.description, 100);
+  clone.querySelector('.foot-cont').children[0].innerHTML = `<i class="fas fa-user"></i>&nbsp;${product.course.instructor}`;
+  clone.querySelector('.foot-cont').children[1].innerHTML = `<i class="fas fa-clock"></i>&nbsp;Expires In ${numberOfDays(product.expiresAt).remDays} Days`;;
   clone.querySelector('#courseRoute').setAttribute('href', courseRoute);
-
   courseContainer.append(clone);
 };
 
@@ -47,5 +47,21 @@ const getOrder = async () => {
   }
 };
 
+const numberOfDays = (time) => {
+  const timestamp = new Date(time).getTime();
+  const currentData = Date.now();
+  const remSec = (timestamp - currentData) / 1000;
+  const remMin = remSec / 60;
+  const remDays = Math.round(remMin / (24 * 60))
+  return {
+    remSec,
+    remMin,
+    remDays
+  }
+}
 
+const scaleText = (text, maxLength) => {
+  if (text.length <= maxLength) return text;
+  return text.slice(0, maxLength) + '...'
+}
 getOrder();
