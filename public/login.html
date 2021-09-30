@@ -9,14 +9,18 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/public/assets/css/font.css">
     <link rel="stylesheet" href="/public/assets/css/login.css">
+    <link rel="stylesheet" href="/public/assets/css/adminHeader.css">
 </head>
 
 <body>
+
     <nav>
         <ul>
-            <li><a href="#" style="text-transform: none; font-size: 1.4rem">Club Of Life</a></li>
-            <li class="left"><a href="#">All Courses</a></li>
-            <li><a href="/signup">sign up</a></li>
+            <li>
+                <a href="/admin/dashboard" class="brand">Club Of Life</a>
+                <img src="/public/assets/css/col-logo.png">
+            </li>
+            <li><a href="signup" class="left"><i class="fas fa-user"></i>&nbsp;Sign Up</a></li>
         </ul>
     </nav>
 
@@ -25,7 +29,7 @@
             <h1>Welcome back!</h1>
             <p class="error"></p>
             <div class="input-parent">
-                
+
                 <input type="email" id="email" name="email" placeholder="Email" required>
             </div>
             <div class="input-parent">

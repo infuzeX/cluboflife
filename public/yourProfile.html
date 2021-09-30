@@ -10,28 +10,18 @@
   <link rel="stylesheet" href="/public/assets/css/table.css" />
   <link rel="stylesheet" href="/public/assets/css/yourprofile.css" />
   <title>Your Profile</title>
-  <!-- <style>
-      aside div {
-        border: none;
-        outline: none;
-        zoom: 90%;
-        transition: all 200ms linear;
-      }
-      aside div:focus{
-        zoom: 100%;
-      border-bottom: 4px solid dimgray;
-      }
-    </style> -->
+
 </head>
 
 <body>
   <section id="nav">
     <nav>
       <ul>
-        <li><a href="/dashboard" style="font-size: 1.3rem">Club Of Life</a></li>
-        <!-- <li class="left"><a href="#">ALL COURSES</a></li> -->
-        <!-- <li><a href="#">MY DASHBOARD</a></li> -->
-        <!-- <li><a href="#">VITORIO D</a></li> -->
+        <li>
+          <a href="/dashboard" style="font-size: 1.3rem">Club Of Life</a>
+          <img src="/public/assets/css/col-logo.png">
+        </li>
+
         <li class="left" id="font" onclick="show()">
           <a href="#" style="font-size: 2rem">
             <i class="far fa-user-circle"></i>
@@ -55,12 +45,14 @@
       <div class="tabs asideSelected" data-section="profile" tabindex="-1">
         Profile
       </div>
-      <div class="tabs" data-section="notification" tabindex="-1">Notification</div>
+      <div class="tabs" data-section="notification-section" tabindex="-1">Notification</div>
       <div class="tabs" data-section="order" tabindex="-1">Order History</div>
       <div class="tabs" data-section="password" tabindex="-1">
         Change Password
       </div>
     </aside>
+
+    <!--profile section-->
     <div id="details">
       <div class="profile menu">
         <h1>Your Profile</h1>
@@ -91,7 +83,7 @@
           </form>
         </div>
       </div>
-
+      <!--order section section-->
       <div class="order none menu mt">
         <div class="studentWrap">
           <section class="studentHeader">
@@ -117,8 +109,29 @@
           </template>
         </div>
       </div>
-      <div class="notification none menu">Notification</div>
 
+      <!--notification section-->
+      <div class="notification-section none menu">
+
+        <div class="notifications">
+          <!--notification-->
+          <div id="n_${data._id}" class="notification">
+            <div class="content">
+              <p>${data.message}</p>
+              <div class="detail">
+                <span class="user"><i class="fas fa-user"></i>&nbsp;Abdullah</span>
+                &nbsp;&nbsp;
+                <span class="time"><i class="fas fa-clock"></i>&nbsp;12:09 PM</span>
+              </div>
+            </div>
+          </div>
+          <!--notification-->
+        </div>
+
+      </div>
+
+
+      <!--change password section-->
       <div class="details-flex-parent mt">
         <form action="" class="changePassword none password menu ">
           <p class="error"></p>
@@ -148,6 +161,7 @@
 
   </script>
   <script src="/public/assets/js/profile.js"></script>
+  <script src="/public/assets/js/logout.js"></script>
   <script>
     console.log(getMe);
     // document.querySelector('.firstTab').focus()
@@ -171,22 +185,3 @@
 </body>
 
 </html>
-
-<!-- <div class="input">
-                Company
-                <input class="text-input" type="text" name="company" required />
-              </div> -->
-<!-- <div class="input">
-                Professional Title
-                <input class="text-input" type="text" name="title" required />
-              </div> -->
-<!-- <div class="input">
-                Timezone
-                <select class="text-input" name="" id="" required>
-                  <option value="op0">Your time zone</option>
-                  <option value="op1">option 1</option>
-                  <option value="op2">option 2</option>
-                  <option value="op3">Option 3</option>
-                  <option value="op4">Option 4</option>
-                </select>
-              </div> -->

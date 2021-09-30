@@ -86,6 +86,7 @@
     }
   });
 
+  //Order History
   const template = document.querySelector('template');
   const courseContainer = document.querySelector('.studentDetail');
   const genDate = (date) => {
@@ -129,13 +130,41 @@
   };
 
   getOrder();
+
+  //Notifications
+  const notificationsEl = document.querySelector('.notifications');
+  const showNotifications = (notifications) => {
+    let lists = "";
+    notifications.forEach(data => {
+      lists += `<div id="n_${data._id}" class="notification">
+       <div class="content">
+         <p>${data.message}</p>
+         <div class="detail">
+           <span class="user"><i class="fas fa-user"></i>&nbsp;${data.sender}</span>
+           &nbsp;&nbsp;
+           <span class="time"><i class="fas fa-clock"></i>&nbsp;${new Date(data.createdAt).toLocaleTimeString()}</span>
+         </div>
+       </div>
+     </div>`
+    })
+    notificationsEl.innerHTML = lists;
+  }
+  const getNotifications = async () => {
+    try {
+      const res = await fetch('/api/v1/notifications?sort=-createdAt');
+      const data = await res.json();
+      if (res.status === 'fail' || res.status === 'error') {
+        throw new Error(res?.message);
+      }
+      showNotifications(data?.data?.notifications);
+    } catch (error) {
+      console.log(error);
+      tempAlert(error?.message, 3000, true);
+    }
+  };
+
+  getNotifications()
 })();
-// const form = document.querySelector('.editProfile');
-// const changePasswordForm = document.querySelector('.changePassword');
-// function toggleTab() {
-//   form.classList.toggle('none');
-//   changePasswordForm.classList.toggle('flex');
-// }
 
 const tabs = document.querySelectorAll('.tabs');
 const menus = document.querySelectorAll('.menu');

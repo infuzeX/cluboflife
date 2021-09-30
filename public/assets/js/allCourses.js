@@ -58,7 +58,7 @@ const numberOfDays = (time) => {
     remMin,
     remDays
   }
-  return data.remDay < 0 ? "Expired" : `Expires In ${data.remDays} Days`
+  return data.remDays < 0 ? "Expired" : `Expires In ${data.remDays} Days`
 }
 
 const scaleText = (text, maxLength) => {

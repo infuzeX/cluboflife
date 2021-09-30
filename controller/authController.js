@@ -150,7 +150,7 @@ exports.protectPage = (req, res, next) => {
 };
 
 exports.protectAdminPage = (req, res, next) => {
-  if (req.user.role !== 'admin') return res.redirect('/dashbaord');
+  if (req.user.role !== 'admin') return res.redirect('/dashboard');
   return next();
 };
 

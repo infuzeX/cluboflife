@@ -26,7 +26,13 @@ nav ul li {
     font-size: 0.8rem;
     cursor: pointer;
 }
-
+nav ul li:nth-child(2) {
+    display: flex;
+}
+nav ul li:nth-child(2) > a {
+    font-size:1rem;
+    margin: auto 5px;
+}
 nav ul li a {
     text-decoration: none;
     color: white;
@@ -59,9 +65,11 @@ nav p {
     right: 15px;
     top: 65px;
     background: rgba(0, 0, 0, 0.63);
-    border-radius: 10px;
 }
-
+.dropdown ul li a {
+    font-size: 1rem;
+    margin:0 !important;
+}
 .none {
     display: none;
 }
@@ -82,7 +90,7 @@ nav p {
     flex-wrap: wrap;
 }
 
-noCourse {
+.noCourse {
     color: grey;
 }
 
@@ -215,7 +223,6 @@ noCourse {
     }
     nav ul li {
         padding: 6px;
-        font-size: 0.5rem;
         cursor: pointer;
     }
     #font a {
