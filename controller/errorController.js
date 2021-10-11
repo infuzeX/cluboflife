@@ -54,7 +54,6 @@ module.exports = (err, req, res, next) => {
     err.status = err.status || "error";
 
     //send error in production mode
-    console.log(process.env.NODE_ENV);
     if (process.env.NODE_ENV === "production") {
         let error = err;
         if (err.name === "CastError") error = handleCastErrorDB(error);

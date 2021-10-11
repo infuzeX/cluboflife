@@ -24,7 +24,7 @@ app.use('/admin', adminRoutes);
 app.use('/api/v1/auth', authApiRoutes);
 app.use('/api/v1/courses', courseApiRoutes);
 app.use('/api/v1/users', userApiRoutes);
-app.use('/api/v1/subscription', subscriptionApiRoutes);
+app.use('/api/v1/subscriptions', subscriptionApiRoutes);
 app.use('/api/v1/notifications', notificationApiRoutes);
 
 app.use(globalErrorController);

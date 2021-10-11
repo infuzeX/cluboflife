@@ -50,7 +50,8 @@
         <img src="/public/assets/css/col-logo.png">
       </li>
       <li class="left">
-        <a href="#" class="addModalButton" data-type="manageStudent"><i class="fas fa-pen"></i>&nbsp;New Subscription</a>
+        <a href="#" class="addModalButton" data-type="manageStudent"><i class="fas fa-pen"></i>&nbsp;New
+          Subscription</a>
       </li>&nbsp;&nbsp;&nbsp;&nbsp;
       <li><a class="logout"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a></li>
     </ul>
@@ -65,6 +66,17 @@
   </header>
 
   <div class="searchContainer">
+    <!--filter-->
+    <div class="filter">
+      
+    </div>
+    <!--paginate-->
+    <div class="paginate">
+      <span onclick="moveToNextPage(-1)"><i class="fas fa-arrow-left"></i></span>
+      <span id="pagecount">1</span>
+      <span onclick="moveToNextPage(1)"><i class="fas fa-arrow-right"></i></span>
+    </div>
+
     <div class="search-input">
       <select class="search" defaultValue="0">
         <option value="0">All</option>
@@ -100,7 +112,7 @@
       <div class="active"></div>
       <div>
         <i class="far fa-edit edit editModalButton"></i>
-        <!--<i class="fas fa-trash-alt delete"></i>-->
+        <i class="fas fa-trash-alt delete"></i>
         <i class="fas fa-copy copy"></i>
       </div>
     </div>

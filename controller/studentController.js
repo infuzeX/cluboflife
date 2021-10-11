@@ -12,7 +12,7 @@ exports.userSignup = catchAsync(async (req, res, next) => {
     email: req.body.email,
     role: 'student',
     password: req.body.password,
-    createdAt: req.body.createdAt || Date.now(),
+    createdAt: Date.now(),
   });
   return res.status(200).json({ status: 'success', data: { user } });
 });

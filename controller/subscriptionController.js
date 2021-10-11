@@ -102,7 +102,6 @@ exports.exportCsv = catchAsync(async (req, res, next) => {
 });
 
 exports.hasUserSubscribed = catchAsync(async (req, res, next) => {
-  console.log(req.params)
   const courseId = req.query?.courseId;
   if (!courseId) return res.redirect('/dashboard');
   const hasSubscribed = await Subscription.findOne({

@@ -46,7 +46,11 @@
 
     clone
       .querySelector('.copy')
-      .addEventListener('click', () => copyToClipboard(user?.email));
+      .addEventListener('click', () => copyToClipboard(`
+         Name: ${user.name}
+         Email: ${user.email}
+         Joined: ${new Date(user.createdAt).toLocaleDateString()}
+      `));
 
     clone.querySelector('.editPassword').addEventListener('click', () => {
       document.querySelector('.editPasswordEmail').value = user?.email;
@@ -72,9 +76,6 @@
     if (!student || !Object.entries(student).length) return;
     name.value = student?.name;
     email.value = student?.email;
-    createdAt.value = student?.createdAt
-      ? student.createdAt?.split('T')[0]
-      : '';
     toggleModal(editStudentModal);
   }
 
@@ -142,9 +143,7 @@
       },
       body: JSON.stringify(data),
     });
-    console.log(res);
     const user = await res.json();
-    console.log(user.status);
     if (["error", "fail"].includes(user.status)) {
       throw new Error(user.message);
     }
@@ -153,13 +152,9 @@
       ...__GLOBAL_STUDENTS.students,
     ];
     updateUI();
-    toggleModal(addStudentModal);
-    // exportUser();
+    toggleModal(addStudentModal)
     tempAlert('Added Successfully', 3000);
-    /*} catch (err) {
-      console.log(err);
-      error[0].textContent = err.message;
-    }*/
+    return user.data.user;
   };
 
   addStudentForm.addEventListener('submit', async (e) => {
@@ -169,20 +164,18 @@
       const name = element['name'].value;
       const email = element['email'].value;
       const password = element['password'].value;
-      const createdAt = element['createdAt'].value;
 
       if (!name || !email || !password || !createdAt) {
         return (error[0].textContent = 'Please Fill all fields');
       }
 
-      await signup({ name, email, password, createdAt });
-        /*clear value*/
-        element['name'].value = "";
-        element['email'].value = "";
-        element['password'].value = "";
-        element['createdAt'].value = "";
-        /*clear value*/
-      toggleCopy({ name, email, password, joined: createdAt });
+      const user = await signup({ name, email, password });
+      /*clear value*/
+      element['name'].value = "";
+      element['email'].value = "";
+      element['password'].value = "";
+      /*clear value*/
+      toggleCopy({ name: user.name, email: user.email, password, joined: new Date(user.createdAt).toLocaleDateString() });
     } catch (err) {
       tempAlert(err?.message || "Something went wrong!", 3000, true);
     }
@@ -194,7 +187,6 @@
     const element = editForm.elements;
     const name = element['name'].value;
     const email = element['email'].value;
-    const createdAt = element['createdAt'].value;
     if (!name || !email || !createdAt) {
       console.log(name, email, createdAt);
       return (error[1].textContent = 'Please Fill all fields');
@@ -241,8 +233,7 @@
       });
   }
 
-  // exportUser();
-
+  // exportUser()
   document.querySelector('.search').addEventListener('keyup', () => {
     console.log('hi');
     const searchText = document.querySelector('.search').value.toUpperCase();
@@ -254,7 +245,6 @@
         student.email.toUpperCase().indexOf(searchText) > -1
     );
     studentDetail.innerHTML = '';
-    console.log(filteredStudent, searchText);
     showUsers(filteredStudent);
   });
 

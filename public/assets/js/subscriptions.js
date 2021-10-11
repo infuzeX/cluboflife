@@ -1,9 +1,12 @@
 (() => {
   const __GLOBAL_PURCHASE = {
-    courses: [],
-    users: [],
-    purchases: [],
+    courses: [], //list of courses
+    users: [], //list of users
+    purchases: [], //list of all subscriptionss
     edit: '',
+    invalidSubscriptions: [], //list of deleteed user or course subscription
+    subscriptions: [], //list of subscriptions
+    query: {}
   };
 
   const addSubscriptionForm = document.querySelector('.addStudent');
@@ -21,7 +24,7 @@
   const template = document.querySelector('template');
   const studentDetail = document.querySelector('.studentDetail');
   const addSubscriptionModal = document.querySelector('.addModal');
-  const search = document.querySelector('.search');
+  const search = document.querySelector('.search'); //handle filter;
   const exportCSV = document.querySelector('.export');
   const downloadCSV = document.querySelector('.download');
 
@@ -56,14 +59,17 @@ Subscription:${data.expiresAt}
   }
 
   const createSubscriptionNode = (subscription, i) => {
-    console.log(subscription)
+    if (!subscription?.user?.email || !subscription?.course) {
+      __GLOBAL_PURCHASE.invalidSubscriptions.push(subscription);
+      return i;
+    }
     const clone = template.content.cloneNode(true);
     clone.querySelector('.index').textContent = i + 1;
     clone.querySelector('.email').textContent =
       subscription?.user?.email || 'No user found';
     //modifiy course column based on value [start]
     clone.querySelector('.course').textContent =
-      subscription?.course?.name || 'No course found';
+      subscription?.course?.name || '-';
     clone.querySelector('.course').style.color =
       subscription?.course ? 'black' : 'grey';
     //modifiy course column based on value [end]
@@ -82,25 +88,31 @@ Subscription:${data.expiresAt}
     clone
       .querySelector('.edit')
       .addEventListener('click', () => onEdit(subscription));
-    //DELETE EVENT LISTENER
-      /*clone
+    clone
       .querySelector('.delete')
       .addEventListener(
         'click',
         async () => await deleteSubscription(subscription._id)
-      );*/
+      );
 
+    __GLOBAL_PURCHASE.subscriptions.push(subscription);
     studentDetail.append(clone);
+    return i + 1;
   };
 
   const showSubscription = (subbscription = __GLOBAL_PURCHASE.purchases) => {
     if (!subbscription || !subbscription?.length) return;
-    subbscription.forEach((sub, i) => createSubscriptionNode(sub, i));
+    let i = 0;
+    subbscription.forEach((sub) => {
+      i = createSubscriptionNode(sub, i)
+    });
   };
 
-  const fetchSubscription = async () => {
+  const fetchSubscriptions = async () => {
     try {
-      const res = await fetch('/api/v1/subscription');
+      const queryString = new URLSearchParams(__GLOBAL_PURCHASE.query).toString();
+      //queryString =  queryString ? `?${queryString}` : "";
+      const res = await fetch(`/api/v1/subscriptions?${queryString}`);
       const subs = await res.json();
       if (subs.status === 'error' || subs.status === 'fail') {
         throw new Error(subs.message);
@@ -114,7 +126,8 @@ Subscription:${data.expiresAt}
     }
   };
 
-  fetchSubscription();
+  fetchSubscriptions();
+
   const getUsers = async () => {
     try {
       const res = await fetch('/api/v1/users/?role=student');
@@ -149,11 +162,12 @@ Subscription:${data.expiresAt}
   getUsers();
   getCourses();
 
-  
-  async function deleteSubscription(id) {
+  const deleteSubscription = async (id) => {
+    const okDelete = confirm("Are you sure you want to delete this subscription!");
+    if (!okDelete) return;
     search.value = 0;
     try {
-      const res = await fetch(`/api/v1/subscription/${id}`, {
+      const res = await fetch(`/api/v1/subscriptions/${id}`, {
         method: 'DELETE',
       });
       const subs = await res.json();
@@ -176,7 +190,7 @@ Subscription:${data.expiresAt}
     const id = __GLOBAL_PURCHASE.edit;
     if (!id) return;
     try {
-      const res = await fetch(`/api/v1/subscription/${id}`, {
+      const res = await fetch(`/api/v1/subscriptions/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -243,14 +257,14 @@ Subscription:${data.expiresAt}
       return editPurchase({
         userId,
         courseId,
-        boughtAt:new Date(boughtAt).getTime(),
-        expiresAt:new Date(expiresAt).getTime(),
+        boughtAt: new Date(boughtAt).getTime(),
+        expiresAt: new Date(expiresAt).getTime(),
         paid: parseInt(paid),
         active,
       });
 
     try {
-      const res = await fetch('/api/v1/subscription', {
+      const res = await fetch('/api/v1/subscriptions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -296,34 +310,29 @@ Subscription:${data.expiresAt}
     }
   });
 
-  const fetchUserByActive = async (active) => {
-    console.log(active);
-    try {
-      const res = await fetch(`/api/v1/subscription/?active=${active}`);
-      const subs = await res.json();
-      if (subs.status === 'error' || subs.status === 'fail') {
-        throw new Error(subs.message);
-      }
-      const data = subs?.data?.subscriptions;
-      emptyUpNode();
-      showSubscription(data);
-    } catch (error) {
-      tempAlert(error?.message, 3000, true);
-    }
-  };
-
+  /**
+   * @description handle filter
+   */
   search.addEventListener('change', (e) => {
-    const val = e.target.value;
-    console.log(val);
-    if (val == 1) return fetchUserByActive(true);
-    if (val == 2) return fetchUserByActive(false);
+    const val = Number.parseInt(e.target.value);
+    if (!val) {
+      delete __GLOBAL_PURCHASE.query['active'];
+    } else {
+      __GLOBAL_PURCHASE.query["active"] = { 0: null, 1: true, 2: false }[val];
+    }
     emptyUpNode();
-    showSubscription();
+    fetchSubscriptions();
+    //showSubscription();
   });
+
+
+  /**
+   * @description export subscriptions data
+   */
   exportCSV.addEventListener('click', () => exportUser());
   function exportUser() {
     console.log('hi');
-    fetch('/api/v1/subscription/export/')
+    fetch('/api/v1/subscriptions/export/')
       .then((res) => res)
       .then(async (res) => {
         if (res.status === 500 || res.status === 404) {
