@@ -1,0 +1,48 @@
+.settingContainer {
+    display: flex;
+    width:fit-content;
+    margin:auto 0 auto auto;
+}
+.settingContainer > .setting {
+    margin-right: 20px;
+}
+.settingContainer > .searchForm {
+    position: relative;
+    width: fit-content;
+}
+.settingContainer > .searchForm > input {
+    padding:2.5%;
+    border-radius:5px;
+    font-size:1rem;
+    border:1px solid grey;
+}
+.settingContainer> .searchForm > .datalist {
+    width:100%;
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+    box-shadow:2px 2px 6px 2px solid rgba(0, 0, 0, 0.080);
+    padding:0;
+    list-style: none;
+    max-height: 225px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.settingContainer> .searchForm > .datalist > li {
+    width:90%;
+    padding:5% 10px;
+    word-wrap: break-word;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+.settingContainer> .searchForm > .datalist > li:hover {
+    background-color: #eee;
+}
+
+.settingContainer> .searchForm > .datalist::-webkit-scrollbar{
+    width:5px;
+}
+.settingContainer> .searchForm > .datalist::-webkit-scrollbar-thumb{
+    background: grey;
+}

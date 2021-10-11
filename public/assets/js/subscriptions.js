@@ -6,7 +6,8 @@
     edit: '',
     invalidSubscriptions: [], //list of deleteed user or course subscription
     subscriptions: [], //list of subscriptions
-    query: {}
+    query: {sort:'-boughtAt'},
+    table: 'subscriptions'
   };
 
   const addSubscriptionForm = document.querySelector('.addStudent');
@@ -24,9 +25,82 @@
   const template = document.querySelector('template');
   const studentDetail = document.querySelector('.studentDetail');
   const addSubscriptionModal = document.querySelector('.addModal');
-  const search = document.querySelector('.search'); //handle filter;
+  //const search = document.querySelector('.search'); //handle filter;
   const exportCSV = document.querySelector('.export');
   const downloadCSV = document.querySelector('.download');
+  //SETTINGS
+  const settings = [...document.querySelectorAll('.setting')];
+
+  //Search Event Handler
+  async function searchData(e) {
+    try {
+      const parent = e.path[1];
+      const searchValue = e.target.value;
+      //clear previous data list
+      parent.children[1].innerHTML = '';
+      if (searchValue === "") {
+        delete __GLOBAL_PURCHASE.query["user"];
+        delete __GLOBAL_PURCHASE.query["course"];
+        emptyUpNode();
+        fetchSubscriptions()
+        return;
+      }
+      //fetch data
+      const queryString = e.target.id === 'users' ? `email[regex]=^${searchValue}` : `name[regex]=${searchValue}`;
+      const response = await fetch(`/api/v1/${e.target.id}?${queryString}&fields=name`);
+      const res = await response.json();
+      if (['error', 'fail'].includes(res.status)) {
+        throw new Error(subs.message);
+      }
+      const data = res?.data[e.target.id] || res?.data['students'];
+      parent.children[1].innerHTML = ""
+      //display data
+      data.forEach(data => {
+        const list = document.createElement('li');
+        list.textContent = data.name;
+        list.id = `${e.target.id.slice(0, e.target.id.length - 1)}_${data._id}`;
+        list.onclick = findByData;
+        parent.children[1].appendChild(list);
+      })
+
+    } catch (error) {
+      tempAlert(error?.message, 5000, true);
+    }
+  }
+
+  //ATTACH EVENTS TO SEARCH FORM
+  settings[0].children[0].addEventListener('input', searchData);
+  settings[1].children[0].addEventListener('input', searchData);
+
+  //FIND SUBSCRIPTION BY SELECTING DATA
+  async function findByData(e) {
+    const [key, id] = e.target.id.split('_');
+    __GLOBAL_PURCHASE.query[key] = id;
+    emptyUpNode();
+    await fetchSubscriptions();
+  }
+
+  /**
+ * @description handle filter
+ */
+  settings[2].addEventListener('change', (e) => {
+    const val = Number.parseInt(e.target.value);
+    if (!val) {
+      delete __GLOBAL_PURCHASE.query['active'];
+    } else {
+      __GLOBAL_PURCHASE.query["active"] = { 0: null, 1: true, 2: false }[val];
+    }
+    emptyUpNode();
+    fetchSubscriptions();
+  });
+
+  settings[3].addEventListener('change', (e) => {
+    const val = e.target.value;
+    emptyUpNode();
+    __GLOBAL_PURCHASE["table"] = val;
+    showSubscription(__GLOBAL_PURCHASE[val]);
+  });
+  /**FILTER FUNCTIONS ENDS */
 
   const pushToDropdown = (arr, dropdown) => {
     if (!arr || !arr.length) return;
@@ -59,14 +133,11 @@ Subscription:${data.expiresAt}
   }
 
   const createSubscriptionNode = (subscription, i) => {
-    if (!subscription?.user?.email || !subscription?.course) {
-      __GLOBAL_PURCHASE.invalidSubscriptions.push(subscription);
-      return i;
-    }
+
     const clone = template.content.cloneNode(true);
     clone.querySelector('.index').textContent = i + 1;
     clone.querySelector('.email').textContent =
-      subscription?.user?.email || 'No user found';
+      subscription?.user?.email || '-';
     //modifiy course column based on value [start]
     clone.querySelector('.course').textContent =
       subscription?.course?.name || '-';
@@ -94,32 +165,33 @@ Subscription:${data.expiresAt}
         'click',
         async () => await deleteSubscription(subscription._id)
       );
-
-    __GLOBAL_PURCHASE.subscriptions.push(subscription);
     studentDetail.append(clone);
     return i + 1;
   };
 
-  const showSubscription = (subbscription = __GLOBAL_PURCHASE.purchases) => {
-    if (!subbscription || !subbscription?.length) return;
+  const showSubscription = (subscriptions, allowed) => {
     let i = 0;
-    subbscription.forEach((sub) => {
-      i = createSubscriptionNode(sub, i)
+    subscriptions.forEach((sub) => {
+      i = createSubscriptionNode(sub, i, allowed)
     });
   };
 
   const fetchSubscriptions = async () => {
     try {
       const queryString = new URLSearchParams(__GLOBAL_PURCHASE.query).toString();
-      //queryString =  queryString ? `?${queryString}` : "";
       const res = await fetch(`/api/v1/subscriptions?${queryString}`);
       const subs = await res.json();
       if (subs.status === 'error' || subs.status === 'fail') {
         throw new Error(subs.message);
       }
       const data = subs?.data?.subscriptions;
-      __GLOBAL_PURCHASE.purchases = data;
-      showSubscription(data);
+      __GLOBAL_PURCHASE["invalidSubscriptions"] = [];
+      __GLOBAL_PURCHASE["subscriptions"] = [];
+      data.forEach(data => {
+        const subType = (!data.user || !data.course) ? "invalidSubscriptions" : "subscriptions";
+        __GLOBAL_PURCHASE[subType].push(data);
+      })
+      showSubscription(__GLOBAL_PURCHASE[__GLOBAL_PURCHASE.table]);
     } catch (error) {
       console.log(error);
       tempAlert(error?.message, 5000, true);
@@ -165,7 +237,7 @@ Subscription:${data.expiresAt}
   const deleteSubscription = async (id) => {
     const okDelete = confirm("Are you sure you want to delete this subscription!");
     if (!okDelete) return;
-    search.value = 0;
+
     try {
       const res = await fetch(`/api/v1/subscriptions/${id}`, {
         method: 'DELETE',
@@ -174,12 +246,12 @@ Subscription:${data.expiresAt}
       if (subs.status === 'error' || subs.status === 'fail') {
         throw new Error(subs.message);
       }
-      const subscription = __GLOBAL_PURCHASE.purchases.filter(
+      const subscriptions = __GLOBAL_PURCHASE[__GLOBAL_PURCHASE.table].filter(
         (sub) => sub._id !== id
       );
-      __GLOBAL_PURCHASE.purchases = subscription;
+      __GLOBAL_PURCHASE[[__GLOBAL_PURCHASE.table]] = subscriptions;
       emptyUpNode();
-      showSubscription();
+      showSubscription(subscriptions);
       tempAlert('Deleted', 2000);
     } catch (error) {
       tempAlert(error?.message, 4000, true);
@@ -204,7 +276,7 @@ Subscription:${data.expiresAt}
       tempAlert('Edited', 3000);
       emptyUpNode();
       clear();
-      fetchSubscription();
+      await fetchSubscriptions();
     } catch (error) {
       tempAlert(error?.message, 4000, true);
     }
@@ -236,7 +308,6 @@ Subscription:${data.expiresAt}
 
   addSubscriptionForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    search.value = 0;
     const elements = addSubscriptionForm.elements;
     const userId = user?.options
       ?.namedItem(userInput?.value)
@@ -255,8 +326,8 @@ Subscription:${data.expiresAt}
 
     if (__GLOBAL_PURCHASE.edit)
       return editPurchase({
-        userId,
-        courseId,
+        user:userId,
+        course:courseId,
         boughtAt: new Date(boughtAt).getTime(),
         expiresAt: new Date(expiresAt).getTime(),
         paid: parseInt(paid),
@@ -294,9 +365,9 @@ Subscription:${data.expiresAt}
         paid: parseInt(subs?.data?.subscription?.paid),
       };
 
-      __GLOBAL_PURCHASE.purchases = [data, ...__GLOBAL_PURCHASE.purchases];
+      __GLOBAL_PURCHASE[__GLOBAL_PURCHASE.table] = [data, ...__GLOBAL_PURCHASE[__GLOBAL_PURCHASE.table]];
       emptyUpNode();
-      showSubscription();
+      showSubscription(__GLOBAL_PURCHASE[__GLOBAL_PURCHASE.table]);
       toggleModal(addSubscriptionModal);
       tempAlert('Added Subscription', 2000);
       userInput.value = '';
@@ -310,20 +381,6 @@ Subscription:${data.expiresAt}
     }
   });
 
-  /**
-   * @description handle filter
-   */
-  search.addEventListener('change', (e) => {
-    const val = Number.parseInt(e.target.value);
-    if (!val) {
-      delete __GLOBAL_PURCHASE.query['active'];
-    } else {
-      __GLOBAL_PURCHASE.query["active"] = { 0: null, 1: true, 2: false }[val];
-    }
-    emptyUpNode();
-    fetchSubscriptions();
-    //showSubscription();
-  });
 
 
   /**

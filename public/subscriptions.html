@@ -13,11 +13,13 @@
   <link rel="stylesheet" href="/public/assets/css/login.css" />
   <link rel="stylesheet" href="/public/assets/css/manageStudent.css" />
   <link rel="stylesheet" href="/public/assets/css/adminHeader.css" />
+  <link rel="stylesheet" href="/public/assets/css/settingContainer.css">
 
   <title>Subscriptions</title>
 </head>
 
 <body>
+  <!--section1: main header -->
   <div class="addModal">
     <div class="add_popup">
       <div class="close"><i class="fas fa-times delete"></i></div>
@@ -57,26 +59,37 @@
     </ul>
   </nav>
 
+  <!--section2: header container-->
   <header>
     <div class="heading">Subscriptions</div>
-    <div>
-      <a class="download" style="display: none"></a>
-      <a class="export"> <i class="fas fa-download download"></i>Export </a>
-    </div>
-  </header>
 
-  <div class="searchContainer">
-    <!--filter-->
-    <div class="filter">
-      
-    </div>
-    <!--paginate-->
-    <div class="paginate">
-      <span onclick="moveToNextPage(-1)"><i class="fas fa-arrow-left"></i></span>
-      <span id="pagecount">1</span>
-      <span onclick="moveToNextPage(1)"><i class="fas fa-arrow-right"></i></span>
-    </div>
+    <!--SETTING CONTAINER START-->
+    <div class="settingContainer">
+      <!--FILTER BY EMAIL AND NAME AND COURSE-->
+      <form class="setting searchForm" defaultValue="0">
+        <input id="users" type="text" name="searchValue" placeholder="Search User" />
+        <ul id="course-list" class="datalist">
 
+        </ul>
+      </form>
+      <form class="setting searchForm" defaultValue="0">
+        <input id="courses" type="text" name="searchValue" placeholder="Search Course" />
+        <ul id="course-list" class="datalist">
+        </ul>
+      </form>
+      <!--FILTER ACTIVE-->
+      <select id="filter" class="setting" defaultValue="0">
+        <option value="0">All</option>
+        <option value="1">Active</option>
+        <option value="2">Inactive</option>
+      </select>
+      <!--FILTER BY DATA-->
+      <select id="display" class="setting" defaultValue="0">
+        <option value="subscriptions">Subscriptions</option>
+        <option value="invalidSubscriptions">Missing Subscriptions</option>
+      </select>
+
+      <!--
     <div class="search-input">
       <select class="search" defaultValue="0">
         <option value="0">All</option>
@@ -84,8 +97,17 @@
         <option value="2">Inactive</option>
       </select>
     </div>
-  </div>
+    -->
+    </div>
+    <!--SETTING CONTAINER-->
 
+    <!--EXPORT DATA-->
+    <div>
+      <a class="download" style="display: none"></a>
+      <a class="export"> <i class="fas fa-download download"></i>Export </a>
+    </div>
+  </header>
+  <!--section 5: Data Container-->
   <main class="studentContainer">
     <div class="studentWrap">
       <section class="studentHeader">
