@@ -31,7 +31,7 @@ const subscriptionSchema = Schema({
   },
   active: Boolean,
   paid: {
-    type: Number,
+    type:String,
     required: true,
   },
 });

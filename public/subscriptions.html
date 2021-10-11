@@ -26,17 +26,19 @@
       <div>
         <p class="error"></p>
       </div>
-      <form class="form addStudent">
-        <input list="userList" name="user" class="userAdd input" placeholder="Select User" autocomplete="off"
-          id="nameList" required />
+      <form class="form addStudent subscriptions-form">
+        <label>User</label>
+        <input list="userList" name="user" class="userAdd input" autocomplete="off" id="nameList" required />
         <datalist id="userList" class="userDropdown"> </datalist>
-        <input list="course" name="course" class="courseAdd input" placeholder="Select Course" autocomplete="off"
-          id="courseList" required />
+        <label>Course</label>
+        <input list="course" name="course" class="courseAdd input" autocomplete="off" id="courseList" required />
         <datalist id="course" class="courseDropdown"> </datalist>
-        <input type="date" name="boughtAt" class="input boughtAtAdd" placeholder="Purchased At" required />
-        <input type="date" name="expiresAt" class="input expireAtAdd" placeholder="Expire At" required />
-
-        <input type="number" name="paid" class="input paid" placeholder="Amount Paid" required />
+        <label>Purchased Date</label>
+        <input type="date" name="boughtAt" class="input boughtAtAdd" required />
+        <label>Expiry Date</label>
+        <input type="date" name="expiresAt" class="input expireAtAdd" required />
+        <label>Amount</label>
+        <input type="text" name="paid" class="input paid" required />
         <div class="input activeContainer" style="display: none">
           <input type="checkbox" id="active" name="active" /><label for="active">Active</label>
         </div>
@@ -112,6 +114,7 @@
     <div class="studentWrap">
       <section class="studentHeader">
         <div>#</div>
+        <div>Name</div>
         <div>Email</div>
         <div>Course</div>
         <div>Purchased At</div>
@@ -126,6 +129,7 @@
   <template>
     <div class="detailHeader">
       <div class="index no"></div>
+      <div class="name"></div>
       <div class="email"></div>
       <div class="course"></div>
       <div class="boughtAt no"></div>

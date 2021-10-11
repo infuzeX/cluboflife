@@ -17,7 +17,7 @@ exports.createSubscription = catchAsync(async (req, res, next) => {
       new AppError('User has already subscribed to this course', 401)
     );
 
-  const subscription = await Subscription.create({
+  const subscription = await new Subscription({
     user: req.body.userId,
     course: req.body.courseId,
     boughtAt: req.body.boughtAt,
@@ -25,7 +25,7 @@ exports.createSubscription = catchAsync(async (req, res, next) => {
     createdAt: Date.now(),
     active: true,
     paid: req.body.paid,
-  });
+  }).populate([{ path: 'course', select: 'name' }, { path: 'user', select: 'name email' }]);
   return res.status(200).json({ status: 'success', data: { subscription } });
 });
 

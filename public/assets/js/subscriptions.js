@@ -6,7 +6,7 @@
     edit: '',
     invalidSubscriptions: [], //list of deleteed user or course subscription
     subscriptions: [], //list of subscriptions
-    query: {sort:'-boughtAt'},
+    query: { sort: '-boughtAt' },
     table: 'subscriptions'
   };
 
@@ -136,6 +136,8 @@ Subscription:${data.expiresAt}
 
     const clone = template.content.cloneNode(true);
     clone.querySelector('.index').textContent = i + 1;
+    clone.querySelector('.name').textContent =
+      subscription?.user?.name || '-';
     clone.querySelector('.email').textContent =
       subscription?.user?.email || '-';
     //modifiy course column based on value [start]
@@ -326,11 +328,11 @@ Subscription:${data.expiresAt}
 
     if (__GLOBAL_PURCHASE.edit)
       return editPurchase({
-        user:userId,
-        course:courseId,
+        user: userId,
+        course: courseId,
         boughtAt: new Date(boughtAt).getTime(),
         expiresAt: new Date(expiresAt).getTime(),
-        paid: parseInt(paid),
+        paid: paid,
         active,
       });
 
@@ -345,7 +347,7 @@ Subscription:${data.expiresAt}
           courseId,
           boughtAt,
           expiresAt,
-          paid: parseInt(paid),
+          paid: paid,
         }),
       });
       const subs = await res.json();
@@ -358,11 +360,11 @@ Subscription:${data.expiresAt}
           _id: subs?.data?.subscription?.course,
           name: courseInput?.value,
         },
-        user: { _id: subs?.data?.subscription?.user, email: userInput?.value },
+        user: { _id: subs?.data?.subscription?.user, email: userInput?.value, name: subs?.data?.subscription?.user?.name },
         boughtAt,
         expiresAt,
         active: true,
-        paid: parseInt(subs?.data?.subscription?.paid),
+        paid: subs?.data?.subscription?.paid,
       };
 
       __GLOBAL_PURCHASE[__GLOBAL_PURCHASE.table] = [data, ...__GLOBAL_PURCHASE[__GLOBAL_PURCHASE.table]];
