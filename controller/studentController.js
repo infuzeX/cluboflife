@@ -22,7 +22,6 @@ exports.fetchUsers = catchAsync(async (req, res, next) => {
     .filter()
     .limitFields()
     .sort()
-    .paginate();
   const students = await feature.query;
   return res.status(200).json({
     status: 'success',

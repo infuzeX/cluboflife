@@ -149,16 +149,19 @@ exports.protectPage = (req, res, next) => {
   }
 };
 
-exports.protectAdminPage = (req, res, next) => {
-  if (req.user.role !== 'admin') return res.redirect('/dashboard');
-  return next();
-};
+exports.allowedTo = (role) => {
+  return (req, res, next) => {
+    if (req.user.role !== role) return res.redirect(req.user.role !== "student" ? "/admin/dashboard" : "/dashboard");
+    return next();
+  };
+}
 
 exports.protectLoginPage = (req, res, next) => {
   const token = req.cookies?.token;
   if (!token) return next();
+  const user = jwt.verify(token, secret);
   const dashboardRoute =
-    req.user?.role === 'admin' ? '/admin/dashboard' : '/dashboard';
+    user?.role === 'admin' ? '/admin/dashboard' : '/dashboard';
   return res.redirect(dashboardRoute);
 };
 

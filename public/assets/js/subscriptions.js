@@ -182,8 +182,8 @@
     return `
 Name:${data.user.name},
 Email:${data.user.email},
-Course:${data.cousrse?.name || 'Not Available'},
-Course Code: ${data.cousrse?.courseCode || 'Not Available'},
+Course:${data.course?.name || 'Not Available'},
+Course Code: ${data.course?.courseCode || 'Not Available'},
 Subscription:${data.expiresAt}
       `
   }

@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const path = require('path');
 const {
-  protectAdminPage,
+  allowedTo,
   protectLoginPage,
   protectPage,
 } = require('../controller/authController');
@@ -11,27 +11,27 @@ router.get('/login', protectLoginPage, (req, res) => {
   res.sendFile(file);
 });
 
-router.get('/dashboard', protectPage, protectAdminPage, (req, res) => {
+router.get('/dashboard', protectPage, allowedTo('admin'), (req, res) => {
   const file = path.resolve('public/dashboard.html');
   res.sendFile(file);
 });
 
-router.get('/manage-student', protectPage, protectAdminPage, (req, res) => {
+router.get('/manage-student', protectPage, allowedTo('admin'), (req, res) => {
   const file = path.resolve('public/manageStudent.html');
   res.sendFile(file);
 });
 
-router.get('/manage-course', protectPage, protectAdminPage, (req, res) => {
+router.get('/manage-course', protectPage, allowedTo('admin'), (req, res) => {
   const file = path.resolve('public/course-dashboard.html');
   res.sendFile(file);
 });
 
-router.get('/subscriptions', protectPage, protectAdminPage, (req, res) => {
+router.get('/subscriptions', protectPage, allowedTo('admin'), (req, res) => {
   const file = path.resolve('public/subscriptions.html');
   res.sendFile(file);
 });
 
-router.get('/notifications', protectPage, protectAdminPage, (req, res) => {
+router.get('/notifications', protectPage, allowedTo('admin'), (req, res) => {
   const file = path.resolve('public/notifications.html');
   res.sendFile(file);
 });

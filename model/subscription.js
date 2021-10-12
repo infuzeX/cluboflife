@@ -8,11 +8,13 @@ const subscriptionSchema = Schema({
     type: Date,
     required: true,
   },
+  forever: Boolean,
   expiresAt: {
     type: Date,
     required: true,
     validate: {
       validator: function (el) {
+        if (this.forever) return true;
         return new Date(this.expiresAt).getTime() > Date.now();
       },
       message: 'Expiry Date Should be greater than Current Date'
@@ -31,7 +33,7 @@ const subscriptionSchema = Schema({
   },
   active: Boolean,
   paid: {
-    type:String,
+    type: String,
     required: true,
   },
 });

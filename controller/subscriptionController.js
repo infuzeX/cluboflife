@@ -21,6 +21,7 @@ exports.createSubscription = catchAsync(async (req, res, next) => {
     user: req.body.userId,
     course: req.body.courseId,
     boughtAt: req.body.boughtAt,
+    forever: req.body.forever,
     expiresAt: req.body.expiresAt,
     createdAt: Date.now(),
     active: true,
@@ -110,6 +111,7 @@ exports.hasUserSubscribed = catchAsync(async (req, res, next) => {
     active: true,
   });
   if (!hasSubscribed) return res.redirect('/dashboard');
+  if (hasSubscribed.forever) return next();
   if (new Date(hasSubscribed.expiresAt).getTime() <= Date.now()) {
     hasSubscribed.active = false;
     await hasSubscribed.save({ validateBeforeSave: false });

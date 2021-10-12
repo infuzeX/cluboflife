@@ -3,6 +3,7 @@ const path = require('path');
 const {
   protectLoginPage,
   protectPage,
+  allowedTo,
   protectForgotPage,
 } = require('../controller/authController');
 const { hasUserSubscribed } = require('../controller/subscriptionController');
@@ -23,17 +24,17 @@ router.get('/forgotPassword', protectLoginPage, (req, res) => {
   res.sendFile(file);
 });
 
-router.get('/profile', protectPage, (req, res) => {
+router.get('/profile', protectPage, allowedTo('student'), (req, res) => {
   const file = path.resolve('public/yourProfile.html');
   res.sendFile(file);
 });
 
-router.get('/account', protectPage, (req, res) => {
+router.get('/account', protectPage, allowedTo('student'), (req, res) => {
   const file = path.resolve('public/yourProfile.html');
   res.sendFile(file);
 });
 
-router.get('/dashboard', protectPage, (req, res) => {
+router.get('/dashboard', protectPage, allowedTo('student'), (req, res) => {
   const file = path.resolve('public/allCourses.html');
   res.sendFile(file);
 });
@@ -46,6 +47,7 @@ router.get('/reset-password/:token', (req, res) => {
 router.get(
   '/courses/:courseCode',
   protectPage,
+  allowedTo('student'),
   hasUserSubscribed,
   (req, res) => {
     const file = path.resolve(`public/courses/${req.params.courseCode}/index.html`);

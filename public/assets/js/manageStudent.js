@@ -90,6 +90,8 @@
     return retVal;
   }
   async function deleteStudent(id) {
+    const isOk = confirm("Are you sure you want to delete student?");
+    if(!isOk) return;
     try {
       const res = await fetch(`/api/v1/users/${id}`, { method: 'DELETE' });
       const user = await res.json();
@@ -165,7 +167,7 @@
       const email = element['email'].value;
       const password = element['password'].value;
 
-      if (!name || !email || !password || !createdAt) {
+      if (!name || !email || !password) {
         return (error[0].textContent = 'Please Fill all fields');
       }
 
@@ -187,8 +189,8 @@
     const element = editForm.elements;
     const name = element['name'].value;
     const email = element['email'].value;
-    if (!name || !email || !createdAt) {
-      console.log(name, email, createdAt);
+    if (!name || !email) {
+      console.log(name, email);
       return (error[1].textContent = 'Please Fill all fields');
     }
     try {
@@ -197,7 +199,7 @@
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email, createdAt }),
+        body: JSON.stringify({ name, email }),
       });
       const user = await res.json();
       if (user.status === 'error' || user.status === 'fail') {
