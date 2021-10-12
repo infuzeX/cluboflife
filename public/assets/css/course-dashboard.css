@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    background-color: rgb(242, 243, 245);
     color: rgb(16, 12, 89);
     top: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -141,13 +140,55 @@ body {
 
 .course-parent-flex {
     width: 90%;
+    max-width: 2000px;
     padding: 0 2.5%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content:left;
     margin: auto;
 }
 
+.course {
+    width: 22%;
+    margin:1.25%;
+    border:2px solid rgb(242, 243, 245);
+}
+.course > img {
+    width: 100%;
+    height:150px;
+}
+.course > div {
+    width:90%;
+    padding:5%;
+}
+.course > div > h3 {
+    margin-top: 0;
+    height:45px;
+}
+
+.course > div > .subtitle {
+    font-size: 0.9rem;
+    height: 70px;
+}
+
+.course > div > .instructor > span:nth-child(1) {
+   color: grey;
+   font-size: 0.9rem;
+}
+.course > div > ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    margin:30px 0 0 0;
+}
+.course > div > ul > li {
+    margin:0;
+}
+.course > div > ul > li > a {
+    text-decoration: none;
+}
+/*
 .course-child-parent {
     width: 47.5%;
     display: flex;
@@ -203,7 +244,7 @@ body {
     cursor: pointer;
     padding: 16px;
 }
-
+*/
 /* course dash 
 .course-parent-flex{
     display: flex;
@@ -440,6 +481,7 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+    /*
     .course-child img {
         width: 100%;
         height: fit-content;
@@ -458,7 +500,7 @@ body {
         width: 361px;
         margin-left: 14px;
         margin-bottom: 12px;
-    }
+    }*/
     .author {
         margin: auto;
         font-size: 1.3rem;
@@ -480,13 +522,14 @@ body {
         top: 308px;
         height: fit-content;
     }
+    /*
     .course-parent-flex {
         margin: auto;
         margin-top: 89px;
     }
     .course-child-parent {
         flex-wrap: nowrap;
-    }
+    }*/
     .new-coures {
         margin: auto;
         position: inherit;

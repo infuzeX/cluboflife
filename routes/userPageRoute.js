@@ -12,10 +12,11 @@ router.get('/', protectLoginPage, (req, res) => {
   res.sendFile(file);
 });
 
+/*
 router.get('/signup', protectLoginPage, (req, res) => {
   const file = path.resolve('public/createAccount.html');
   res.sendFile(file);
-});
+});*/
 
 router.get('/forgotPassword', protectLoginPage, (req, res) => {
   const file = path.resolve('public/forgotPassword.html');

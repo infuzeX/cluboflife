@@ -42,37 +42,33 @@
   const createCourseNode = (course) => {
     const clone = template.content.cloneNode(true);
     const data = course.name + course._id;
-    clone.querySelector('.course-child-parent').setAttribute('id', data);
+    clone.querySelector('.course').setAttribute('id', data);
     clone.querySelector('img').src = course?.image;
     clone.querySelector('h3').textContent = course?.name;
-    clone.querySelector('.subtitle').textContent = course?.description;
+    clone.querySelector('.subtitle').textContent = course?.description.slice(0, 90) + "...";
     clone.querySelector('.author').textContent = course?.instructor;
-    clone.querySelector('.status').textContent = course?.publish
-      ? 'Published'
-      : 'Not Published';
-    clone.querySelector('.share').href = course?.courseLink;
-    const more = clone.querySelector('.moremenu');
-    const smallMenu = clone.querySelector('.small-menu');
+
+    const shareButton = clone.querySelector('.share');
     const deleteButton = clone.querySelector('.delete');
     const editButton = clone.querySelector('.edit');
 
     deleteButton.setAttribute('data-id', course._id);
 
     editButton.addEventListener('click', () => {
-      smallMenu.classList.toggle('none');
       _GLOBAL_NAMESPACE.course = { ...course };
       editModal();
     });
 
     deleteButton.addEventListener('click', function () {
-      // deleteCourse(course._id, data);
       _GLOBAL_NAMESPACE.deleteId = course?._id;
       document.querySelector('.delete-course span').textContent = `${course?.name
         } course ${course?.instructor ? `by ${course?.instructor}` : ''}`;
-      smallMenu.classList.toggle('none');
       toggleDelete();
     });
-    more.addEventListener('click', () => smallMenu.classList.toggle('none'));
+
+    shareButton.addEventListener('click', () => {
+      window.location.href = course.courseLink;
+    })
     courseContainer.appendChild(clone);
   };
 

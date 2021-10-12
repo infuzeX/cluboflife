@@ -5,15 +5,29 @@ class APIFeatures {
   }
 
   filter() {
+
     let queryObj = { ...this.queryString };
     ['sort', 'page', 'limit', 'fields'].forEach(
       (prop) => delete queryObj[prop]
     );
+    
     let queryStr = JSON.stringify(queryObj).replace(
-      /\b(gte|gt|lte|lt|regex)\b/g,
+      /\b(gte|gt|lte|lt|regex|options|or|and)\b/g,
       (match) => `$${match}`
     );
-    this.query = this.query.find(JSON.parse(queryStr));
+    queryObj = JSON.parse(queryStr);
+
+    ['$or', '$and'].forEach(oper => {
+      const query = [];
+      if (queryObj[oper]) {
+        for (let prop in queryObj[oper]) {
+          query.push({ [prop]: queryObj[oper][prop] });
+        }
+        queryObj[oper] = query;
+      }
+    })
+
+    this.query = this.query.find(queryObj);
     return this;
   }
 

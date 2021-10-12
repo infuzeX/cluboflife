@@ -7,7 +7,8 @@
     invalidSubscriptions: [], //list of deleteed user or course subscription
     subscriptions: [], //list of subscriptions
     query: { sort: '-boughtAt' },
-    table: 'subscriptions'
+    table: 'subscriptions',
+    datalist: {}
   };
 
   const addSubscriptionForm = document.querySelector('.addStudent');
@@ -25,9 +26,37 @@
   const template = document.querySelector('template');
   const studentDetail = document.querySelector('.studentDetail');
   const addSubscriptionModal = document.querySelector('.addModal');
-  //const search = document.querySelector('.search'); //handle filter;
   const exportCSV = document.querySelector('.export');
   const downloadCSV = document.querySelector('.download');
+  //NEW TABLE
+  const tabledata = document.querySelector('.tabledata');
+  const buildTableRow = (data) => {
+    const tr = document.createElement('tr');
+    tr.classList.add('content');
+    for (let key in data) {
+      let id = null;
+      const td = document.createElement('td');
+      if (key === "_id") {
+        id = data[key];
+        continue;
+      } else if (["expiresAt", "boughtAt"].includes(key)) {
+        td.textContent = new Date(data[key]).toLocaleDateString();
+      } else if (["createdAt"].includes(key)) {
+        continue;
+      } else if ("user" === key) {
+        const td1 = document.createElement('td');
+        td1.textContent = data[key].name;
+        tr.appendChild(td1);
+        td.textContent = data[key].email;
+      } else if ("course" === key) {
+        td.textContent = data[key].name;
+      } else {
+        td.textContent = data[key];
+      }
+      tr.appendChild(td);
+    }
+    tabledata.appendChild(tr);
+  }
   //SETTINGS
   const settings = [...document.querySelectorAll('.setting')];
 
@@ -46,8 +75,24 @@
         return;
       }
       //fetch data
-      const queryString = e.target.id === 'users' ? `email[regex]=^${searchValue}` : `name[regex]=${searchValue}`;
-      const response = await fetch(`/api/v1/${e.target.id}?${queryString}&fields=name`);
+
+      const buildQuery = (queryId, searchValue) => {
+        var queryStr = ""
+        const queries = {
+          'users': ['name', 'email'],
+          'courses': ['name', 'courseCode']
+        }[queryId]
+        queries.forEach(queryKey => {
+          queryStr += `or[${queryKey}][regex]=${searchValue}&or[${queryKey}][options]=i&`;
+        });
+        return queryStr
+      }
+
+      //`name[regex]=${searchValue}&name[options]=i&fields=name,email` : `name[regex]=${searchValue}&name[options]=i&fields=name,courseCode`
+      console.log("Building Queries!");
+      const queryString = buildQuery(e.target.id, searchValue);
+      console.log(queryString);
+      const response = await fetch(`/api/v1/${e.target.id}?${queryString}`);
       const res = await response.json();
       if (['error', 'fail'].includes(res.status)) {
         throw new Error(subs.message);
@@ -55,13 +100,22 @@
       const data = res?.data[e.target.id] || res?.data['students'];
       parent.children[1].innerHTML = ""
       //display data
+      console.log(data);
       data.forEach(data => {
         const list = document.createElement('li');
-        list.textContent = data.name;
         list.id = `${e.target.id.slice(0, e.target.id.length - 1)}_${data._id}`;
         list.onclick = findByData;
+        const child1 = document.createElement('span')
+        child1.textContent = data.name;
+        child1.id = `${e.target.id.slice(0, e.target.id.length - 1)}_${data._id}`;
+        const child2 = document.createElement('span');
+        child2.id = `${e.target.id.slice(0, e.target.id.length - 1)}_${data._id}`;;
+        child2.textContent = data.courseCode || data.email;
+        list.appendChild(child1)
+        list.appendChild(child2);
         parent.children[1].appendChild(list);
       })
+      __GLOBAL_PURCHASE.datalist[e.target.id.slice(0, e.target.id.length - 1)] = parent.children[1];
 
     } catch (error) {
       tempAlert(error?.message, 5000, true);
@@ -76,8 +130,10 @@
   async function findByData(e) {
     const [key, id] = e.target.id.split('_');
     __GLOBAL_PURCHASE.query[key] = id;
+    console.log(__GLOBAL_PURCHASE);
     emptyUpNode();
     await fetchSubscriptions();
+    __GLOBAL_PURCHASE.datalist[key].innerHTML = "";
   }
 
   /**
@@ -134,6 +190,10 @@ Subscription:${data.expiresAt}
 
   const createSubscriptionNode = (subscription, i) => {
 
+    /**
+     * new table data
+     */
+    //buildTableRow({ index: i, ...subscription });
     const clone = template.content.cloneNode(true);
     clone.querySelector('.index').textContent = i + 1;
     clone.querySelector('.name').textContent =

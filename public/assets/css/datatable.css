@@ -1,0 +1,11 @@
+table {
+    width: 90%;
+    margin: 10px auto;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+.content > td {
+    width: fit-content !important;
+}
