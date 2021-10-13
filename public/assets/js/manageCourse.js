@@ -135,7 +135,7 @@
 
   fetchCourse();
 
-  const form = document.querySelector('.field-div');
+  const form = document.querySelector('.course-form');
   const error = document.querySelector('.error');
 
   const printErrorMessage = (e) => (error.textContent = e);
@@ -205,7 +205,7 @@
     const instructor = element['instructor'].value;
     const courseCode = element['code'].value;
     const courseLink = element['link'].value;
-    const publish = element['publish'].checked;
+    //const publish = element['publish'].checked;
     const image = element['image'].value;
     const data = {
       name,
@@ -215,7 +215,7 @@
       courseCode,
       courseLink,
       image,
-      publish
+      //publish
     };
     if (
       !name ||
@@ -256,7 +256,7 @@
     courseLink.value = course?.courseLink;
     imagePath.value = course?.image;
     title.innerHTML = 'Edit Course';
-    publish.checked = course?.publish;
+    //publish.checked = true
     add();
   }
 

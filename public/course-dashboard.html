@@ -29,6 +29,7 @@
     </ul>
   </nav>
 
+  <!--delete course popup-->
   <section class="delete-course none">
     <div class="delete-course_popup">
       <p>Are you sure that you want to delete <span></span>?</p>
@@ -38,161 +39,71 @@
       </div>
     </div>
   </section>
+  <!--new course popup-->
   <section class="new-coures none">
-    <div class="admin">
-      <div class="cross"><i class="fas fa-times"></i></div>
 
-      <hr />
+    <div class="admin">
+      <div class="title">ADD Course</div>
+      <div class="cross"><i class="fas fa-times"></i></div>
     </div>
+    <hr />
     <div class="add-course">
-      <form class="field-div">
-        <div class="title">ADD Course</div>
+      <form class="course-form">
         <p class='error'></p>
         <input type="text" name="course" id="" placeholder="Course Name" class="course" required />
         <input type="text" name="subtitle" id="" placeholder="Subtitle" class="subtitle" />
-        Start Date<input type="date" name='createdAt' class="createdAt" required />
+        <label>Start Date</label>
+        <input type="date" name='createdAt' class="createdAt" required />
         <input type="text" name="instructor" id="" required class="instructor" placeholder="Instructor name" />
         <input type="text" name="code" id="" placeholder="Course Code" class="code" required />
         <input type="text" name="link" id="" placeholder="Course Buy Link" class="link" />
         <input type="text" name='image' placeholder="Image Path" class="image" />
+        <!--
         <div class='checkbox'>
           <input type='checkbox' name='publish' id='publish' checked /> <label for="publish">Publish</label>
-        </div>
+        </div>-->
+        <button type="submit">Submit</button>
+      </form>
     </div>
-    <div class="field-div">
-      <button type="submit">Submit</button>
-    </div>
-    </form>
   </section>
-  <div class="sidenav">
-    <div class="closebtn">
-      <i class="fas fa-times"></i>
-    </div>
-    <div class="side-list">
-      <a href="#">
-        <div>option1</div>
-      </a>
-      <a href="#">
-        <div>option2</div>
-      </a>
-      <a href="#">
-        <div>option3</div>
-      </a>
-      <a href="#">
-        <div>option4</div>
-      </a>
-      <a href="#">
-        <div>option5</div>
-      </a>
-      <a href="#">
-        <div>option6</div>
-      </a>
-      <a href="#">
-        <div>option7</div>
-      </a>
-    </div>
-  </div>
+
   <section id="main">
 
     <div class="heading">
       <h3>Courses</h3>
       <form>
         <input id="searchjr" type="text" placeholder="Search.." class="searchCourse" />
-        <!--
-          <button type="submit" onclick="hell()">
-            <i class="fas fa-search"></i>
-          </button>
-          -->
       </form>
     </div>
 
     <main>
       <!--Courses List-->
       <div class="course-parent-flex">
-        <!--course card 1-->
-        <div class="course">
-          <img src="/public/assets/images/blood.jpg" alt="img" />
-          <div class="course-txt">
-            <h3>Sacred Life Returns</h3>
-            <p class="subtitle">
-              Joseph Pepe Danza Joseph Pepe Danza v Joseph Pepe Danza Joseph Pepe DanzaJoseph Pepe
-              Danza
-            </p>
-            <p class="instructor"><span><i class="fa fa-user"></i>&nbsp;Instructor</span>&nbsp;<span>Abdullah</span></p>
-            <ul>
-              <li><i class="fas fa-pen"></i></li>
-              <li><i class='fas fa-trash'></i></li>
-              <li><i class='fas fa-share'></i></li>
-            </ul>
-          </div>
-        </div>
-        <!--course card 1-->
+
 
       </div>
       <!--Courses List-->
     </main>
     <!--Course Template-->
     <template>
-  <!--course card 1-->
-  <div class="course">
-    <img src="/public/assets/images/blood.jpg" alt="img" />
-    <div class="course-txt">
-      <h3>Sacred Life Returns</h3>
-      <p class="subtitle">
-        Joseph Pepe Danza Joseph Pepe Danza v Joseph Pepe Danza Joseph Pepe DanzaJoseph Pepe
-        Danza
-      </p>
-      <p class="instructor"><span><i class="fa fa-user"></i>&nbsp;Instructor</span>&nbsp;<span class="author">Abdullah</span></p>
-      <ul>
-        <li class="edit"><i class="fas fa-pen"></i></li>
-        <li class="delete"><i class='fas fa-trash'></i></li>
-        <li class="share"><i class='fas fa-share'></i></li>
-      </ul>
-    </div>
-  </div>
-  <!--course card 1-->
-      <!--
-      <div class="course-child-parent">
-
-        <div class="course-child">
-          <img src="/public/assets/images/blood.jpg" alt="img" />
-          <div class="course-txt">
-            <h3></h3>
-            <h4 class="author"></h4>
-            <p class="subtitle"></p>
-          </div>
-
-          <div class="status">Published</div>
-          <div class="moremenu">
-            <i class="fas fa-ellipsis-v"></i>
-          </div>
-        </div>
-
-        <div class="none small-menu">
+      <!--course card 1-->
+      <div class="course course-card">
+        <img src="/public/assets/images/blood.jpg" alt="img" />
+        <div class="course-txt">
+          <h3>Sacred Life Returns</h3>
+          <p class="subtitle">
+            Joseph Pepe Danza Joseph Pepe Danza v Joseph Pepe Danza Joseph Pepe DanzaJoseph Pepe
+            Danza
+          </p>
+          <p class="instructor"><span><i class="fa fa-user"></i>&nbsp;Instructor</span>&nbsp;<span
+              class="author">Abdullah</span></p>
           <ul>
-            <li>
-              <a class="edit">
-                <i class="fas fa-pen"></i>&nbsp;
-                <span>EDIT</span>
-              </a>
-            </li>
-            <li>
-              <a class='delete'>
-                <i class="fas fa-trash"></i>&nbsp;
-                <span>DELETE</span>
-              </a>
-            </li>
-            <li>
-              <a class="share">
-                <i class="fas fa-share-alt"></i>&nbsp;
-                <span>SHARE</span>
-              </a>
-            </li>
+            <li class="edit"><i class="fas fa-pen"></i></li>
+            <li class="delete"><i class='fas fa-trash'></i></li>
+            <li class="share"><i class='fas fa-share'></i></li>
           </ul>
         </div>
-
       </div>
-    -->
     </template>
     <!--Course Template-->
   </section>
@@ -200,34 +111,21 @@
   <script src="/public/assets/js/manageCourse.js"></script>
   <script src="/public/assets/js/logout.js"></script>
   <script>
-    let sideNav = document.getElementById('sideNav');
-    let sidenav = document.querySelector('.sidenav');
-    let closebtn = document.querySelector('.closebtn');
-    console.log(closebtn);
-    sideNav.addEventListener('click', function () {
-      sidenav.classList.add('vis');
-    });
-    closebtn.addEventListener('click', function () {
-      sidenav.classList.remove('vis');
-    });
-
-
-
 
     //for search
     document.querySelector(".searchCourse").addEventListener("keyup", () => {
       const ins = document.getElementsByClassName('author');
-      const dash = document.querySelectorAll('.course-child-parent');
+      const dash = document.querySelectorAll('.course-card');
       const courseName = document.querySelectorAll('.course-txt h3');
       const searchText = document
         .getElementById('searchjr')
         .value.toUpperCase();
-      console.log(searchText, courseName);
       for (let i = 0; i < courseName.length; i++) {
         const courseName = document.querySelectorAll('.course-txt h3')[i];
         console.log(courseName);
         if (courseName) {
           let textValue = courseName.textContent || courseName.innerHTML;
+          console.log(searchText, courseName.textContent, textValue.toUpperCase().indexOf(searchText))
           if (textValue.toUpperCase().indexOf(searchText) > -1) {
             dash[i].style.display = '';
           } else {
@@ -236,13 +134,6 @@
         }
       }
     })
-
-      // function hell() {
-
-      // }
-
-
-
 
   </script>
   <script src="/public/assets/js/goBack.js"></script>
