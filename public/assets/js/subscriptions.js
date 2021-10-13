@@ -6,7 +6,7 @@
     edit: '',
     invalidSubscriptions: [], //list of deleteed user or course subscription
     subscriptions: [], //list of subscriptions
-    query: { sort: '-boughtAt' },
+    query: { sort: '-boughtAt,-expiresAt,-paid' },
     table: 'subscriptions',
     datalist: {}
   };
@@ -28,6 +28,19 @@
   const addSubscriptionModal = document.querySelector('.addModal');
   const exportCSV = document.querySelector('.export');
   const downloadCSV = document.querySelector('.download');
+  [...document.querySelectorAll('.sort')].forEach(sort => {
+    sort.onclick = function (e) {
+      const isUp = e.target.id.startsWith('-');
+      const newProp = isUp ? e.target.id.slice(1) : `-${e.target.id}`;
+      if (!e.target.id) return;
+      //update state
+      __GLOBAL_PURCHASE.query.sort = __GLOBAL_PURCHASE.query.sort.replace(e.target.id, newProp)
+      e.target.id = newProp;
+      e.target.children[0].className = `fas fa-arrow-${isUp ? 'down' : 'up'}`;
+      emptyUpNode();
+      fetchSubscriptions();
+    }
+  });
   //NEW TABLE
   const tabledata = document.querySelector('.tabledata');
   const buildTableRow = (data) => {

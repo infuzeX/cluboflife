@@ -39,7 +39,8 @@
         <input type="date" name="boughtAt" class="input boughtAtAdd" required />
         <label>Expiry Date</label>
         <input style="margin:0" type="date" name="expiresAt" class="input expireAtAdd" />
-        <span style="font-size: 0.8rem;color:#333;word-wrap: break-word;margin-bottom:10px;">Unlimited Access without Expiry Date</span>
+        <span style="font-size: 0.8rem;color:#333;word-wrap: break-word;margin-bottom:10px;">Unlimited Access without
+          Expiry Date</span>
         <label>Amount</label>
         <input type="text" name="paid" class="input paid" required />
         <div class="input activeContainer" style="display: none">
@@ -67,7 +68,6 @@
   <!--section2: header container-->
   <header>
     <div class="heading">Subscriptions</div>
-
     <!--SETTING CONTAINER START-->
     <div class="settingContainer">
       <!--FILTER BY EMAIL AND NAME AND COURSE-->
@@ -119,9 +119,13 @@
         <div>Name</div>
         <div>Email</div>
         <div>Course</div>
-        <div>Purchased At</div>
-        <div>Expires At</div>
-        <div>Paid</div>
+        <div id="-boughtAt" style="position:relative;z-index:1;cursor: pointer;" class="sort">Purchased At&nbsp;<i
+            class="fas fa-arrow-up"></i></div>
+        <div id="-expiresAt" style="position:relative;z-index:1;cursor: pointer;" class="sort">Expires At&nbsp;<i
+            class="fas fa-arrow-up"></i></div>
+        <div id="-paid" style="position:relative;z-index:1;cursor: pointer;" class="sort">Paid&nbsp;<i
+            class="fas fa-arrow-up"></i>
+        </div>
         <div>Active</div>
         <div>Edit</div>
       </section>
