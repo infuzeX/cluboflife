@@ -12,7 +12,9 @@ body {
   padding: 0 5rem;
 
 }
-
+.table-index {
+  width:4rem !important;
+}
 .studentHeader,.detailHeader{
   display: flex;
   justify-content: space-between;

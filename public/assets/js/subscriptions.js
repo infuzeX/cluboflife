@@ -85,7 +85,7 @@
         queries.forEach(queryKey => {
           queryStr += `or[${queryKey}][regex]=${searchValue}&or[${queryKey}][options]=i&`;
         });
-        return queryStr
+        return queryId === "users" ? queryStr + "role=student" : queryStr;
       }
 
       //`name[regex]=${searchValue}&name[options]=i&fields=name,email` : `name[regex]=${searchValue}&name[options]=i&fields=name,courseCode`
@@ -208,8 +208,8 @@ Subscription:${data.expiresAt}
     //modifiy course column based on value [end]
     clone.querySelector('.boughtAt').textContent =
       subscription?.boughtAt && genDate(subscription?.boughtAt);
-    clone.querySelector('.expiresAt').textContent =
-      subscription?.expiresAt && genDate(subscription?.expiresAt);
+    clone.querySelector('.expiresAt').innerHTML =
+      subscription.expiresAt ? genDate(subscription?.expiresAt) : "Never";
     clone.querySelector('.paid').textContent = subscription?.paid;
     clone.querySelector('.active').textContent = subscription?.active;
 
@@ -382,7 +382,7 @@ Subscription:${data.expiresAt}
     const paid = elements['paid'].value;
     const active = elements['active'].checked;
     console.log(active);
-    if (!userId || !courseId || !boughtAt || !expiresAt || !paid) {
+    if (!userId || !courseId || !boughtAt || !paid) {
       return tempAlert('Please fill all fields', 4000, true);
     }
 

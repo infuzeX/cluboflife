@@ -8,13 +8,12 @@ const subscriptionSchema = Schema({
     type: Date,
     required: true,
   },
-  forever: Boolean,
   expiresAt: {
     type: Date,
-    required: true,
     validate: {
       validator: function (el) {
-        if (this.forever) return true;
+        console.log(el);
+        if (!this.expiresAt) return true;
         return new Date(this.expiresAt).getTime() > Date.now();
       },
       message: 'Expiry Date Should be greater than Current Date'
@@ -26,6 +25,7 @@ const subscriptionSchema = Schema({
     required: true,
     validate: {
       validator: function (el) {
+        if(!this.expiresAt) return true;
         return new Date(this.expiresAt).getTime() > new Date(el).getTime()
       },
       message: 'Expiry Date Should be greater than creation Date'

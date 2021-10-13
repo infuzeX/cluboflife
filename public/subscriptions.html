@@ -14,8 +14,9 @@
   <link rel="stylesheet" href="/public/assets/css/manageStudent.css" />
   <link rel="stylesheet" href="/public/assets/css/adminHeader.css" />
   <link rel="stylesheet" href="/public/assets/css/settingContainer.css" />
+  <!--
   <link rel="stylesheet" href="/public/assets/css/datatable.css" />
-
+-->
   <title>Subscriptions</title>
 </head>
 
@@ -28,16 +29,17 @@
         <p class="error"></p>
       </div>
       <form class="form addStudent subscriptions-form">
-        <label>User</label>
+        <label>Select User</label>
         <input list="userList" name="user" class="userAdd input" autocomplete="off" id="nameList" required />
         <datalist id="userList" class="userDropdown"> </datalist>
-        <label>Course</label>
+        <label>Select Course</label>
         <input list="course" name="course" class="courseAdd input" autocomplete="off" id="courseList" required />
         <datalist id="course" class="courseDropdown"> </datalist>
         <label>Purchased Date</label>
         <input type="date" name="boughtAt" class="input boughtAtAdd" required />
         <label>Expiry Date</label>
-        <input type="date" name="expiresAt" class="input expireAtAdd" required />
+        <input style="margin:0" type="date" name="expiresAt" class="input expireAtAdd" />
+        <span style="font-size: 0.8rem;color:#333;word-wrap: break-word;margin-bottom:10px;">Unlimited Access without Expiry Date</span>
         <label>Amount</label>
         <input type="text" name="paid" class="input paid" required />
         <div class="input activeContainer" style="display: none">
@@ -113,7 +115,7 @@
   <main class="studentContainer">
     <div class="studentWrap">
       <section class="studentHeader">
-        <div>#</div>
+        <div class="table-index">#</div>
         <div>Name</div>
         <div>Email</div>
         <div>Course</div>
@@ -128,7 +130,7 @@
   </main>
   <template>
     <div class="detailHeader">
-      <div class="index no"></div>
+      <div class="index no table-index"></div>
       <div class="name"></div>
       <div class="email"></div>
       <div class="course"></div>

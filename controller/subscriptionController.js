@@ -1,4 +1,5 @@
 const Subscription = require('../model/subscription');
+const user = require('../model/user');
 
 const APIFeature = require('../utils/apifeatures');
 const AppError = require('../utils/appError');
@@ -7,6 +8,9 @@ const { subscriptionColumn } = require('../utils/column');
 const exportSheet = require('../utils/export');
 
 exports.createSubscription = catchAsync(async (req, res, next) => {
+  //verify student
+  const __user = await user.findOne({ _id: req.body.userId }).select('name');
+  if (!user) return next('User Not Found!', 404);
   const hasSubscribed = await Subscription.findOne({
     user: req.body.userId,
     course: req.body.courseId,
@@ -21,13 +25,16 @@ exports.createSubscription = catchAsync(async (req, res, next) => {
     user: req.body.userId,
     course: req.body.courseId,
     boughtAt: req.body.boughtAt,
-    forever: req.body.forever,
-    expiresAt: req.body.expiresAt,
+    expiresAt: req.body.expiresAt === "" ? undefined : req.body.expiresAt,
     createdAt: Date.now(),
     active: true,
     paid: req.body.paid,
-  }).populate([{ path: 'course', select: 'name' }, { path: 'user', select: 'name email' }]);
-  return res.status(200).json({ status: 'success', data: { subscription } });
+  }).save();
+
+  subscription["user"] = { _id: __user._id, name: __user.name }
+  return res.status(200).json({
+    status: 'success', data: {subscription}
+  });
 });
 
 exports.fetchSubscriptions = catchAsync(async (req, res, next) => {
@@ -111,7 +118,7 @@ exports.hasUserSubscribed = catchAsync(async (req, res, next) => {
     active: true,
   });
   if (!hasSubscribed) return res.redirect('/dashboard');
-  if (hasSubscribed.forever) return next();
+  if (!hasSubscribed.expiresAt) return next();
   if (new Date(hasSubscribed.expiresAt).getTime() <= Date.now()) {
     hasSubscribed.active = false;
     await hasSubscribed.save({ validateBeforeSave: false });

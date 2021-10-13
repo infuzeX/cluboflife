@@ -102,7 +102,7 @@
     clone.querySelector('.course').textContent = product?.course?.name || "Not Available";
     clone.querySelector('.course').style.color = product?.course ? "black" : "grey";
     clone.querySelector('.boughtAt').textContent = genDate(product?.boughtAt);
-    clone.querySelector('.expiresAt').textContent = genDate(product?.expiresAt);
+    clone.querySelector('.expiresAt').textContent = !product.expiresAt ? "Never" : genDate(product?.expiresAt);
     clone.querySelector('.paid').textContent = product?.paid;
     clone.querySelector('.active').textContent = product?.active;
 

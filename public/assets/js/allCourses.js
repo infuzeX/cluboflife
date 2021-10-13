@@ -14,7 +14,7 @@ const createProductNode = (product) => {
   clone.querySelector('h3').textContent = scaleText(product?.course?.name, 50);
   clone.querySelector('#subtitle').textContent = scaleText(product?.course?.description, 100);
   clone.querySelector('.foot-cont').children[0].innerHTML = `<i class="fas fa-user"></i>&nbsp;${product.course.instructor}`;
-  clone.querySelector('.foot-cont').children[1].innerHTML = `<i class="fas fa-clock"></i>&nbsp;${numberOfDays(product.expiresAt)}`;;
+  clone.querySelector('.foot-cont').children[1].innerHTML = `<i class="fas fa-clock"></i>&nbsp;${!product.expiresAt ? "Unlimited Access":numberOfDays(product.expiresAt)}`;;
   clone.querySelector('#courseRoute').setAttribute('href', courseRoute);
   courseContainer.append(clone);
 };

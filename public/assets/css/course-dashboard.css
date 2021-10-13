@@ -89,6 +89,7 @@ body {
 }
 
 .course {
+    cursor: pointer;
     width: 90%;
     margin: 1.25% auto;
     border: 2px solid rgb(242, 243, 245);

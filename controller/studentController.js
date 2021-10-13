@@ -1,10 +1,12 @@
 const User = require('../model/user');
+const Subscription = require('../model/subscription');
 
 const APIFeature = require('../utils/apifeatures');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const { userColumn } = require('../utils/column');
 const exportSheet = require('../utils/export');
+
 
 exports.userSignup = catchAsync(async (req, res, next) => {
   const user = await User.create({
@@ -58,6 +60,8 @@ exports.updateUser = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteUser = catchAsync(async (req, res, next) => {
+  //delete users subscriptions first
+  await Subscription.deleteMany({ user: req.params.userId });
   const result = await User.deleteOne({ _id: req.params.userId });
   if (!result.deletedCount) return next(new AppError('User not found!', 404));
   return res.status(200).json({ status: 'success', data: null });
@@ -69,7 +73,6 @@ exports.exportUsers = catchAsync(async (req, res, next) => {
     .filter()
     .limitFields()
     .sort()
-    .paginate()
     .lean();
   const students = await feature.query;
   if (!students.length)

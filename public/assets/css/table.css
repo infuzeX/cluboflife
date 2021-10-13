@@ -28,7 +28,7 @@
 .studentHeader div, .detailHeader div {
   font-size: 16px;
   font-weight: normal;
-  width: 16%;
+  width:16%;
   display: flex;
 }
 
