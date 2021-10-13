@@ -195,6 +195,16 @@
   const genDate = (date) => {
     return date ? date?.split('T')[0] : '';
   };
+  const convertInUSD = (amount) => {
+    amount = Number.parseInt(amount);
+    if (isNaN(amount)) return undefined;
+    return (amount / 100);
+  }
+  const convertInCents = (amount) => {
+    amount = Number.parseFloat(amount);
+    if (isNaN(amount)) return undefined;
+    return Math.round(amount * 100)
+  }
 
   const copySubscription = (data) => {
     return `
@@ -228,7 +238,7 @@ Subscription:${data.expiresAt}
       subscription?.boughtAt && genDate(subscription?.boughtAt);
     clone.querySelector('.expiresAt').innerHTML =
       subscription.expiresAt ? genDate(subscription?.expiresAt) : "Never";
-    clone.querySelector('.paid').textContent = subscription?.paid;
+    clone.querySelector('.paid').textContent = convertInUSD(subscription?.paid);
     clone.querySelector('.active').textContent = subscription?.active;
 
     clone.querySelector('.copy').addEventListener('click', () => {
@@ -368,7 +378,7 @@ Subscription:${data.expiresAt}
     courseInput.value = sub.course?.name || '';
     boughtInput.value = sub.boughtAt && genDate(sub.boughtAt);
     expiresInput.value = sub.expiresAt && genDate(sub.expiresAt);
-    paidInput.value = sub.paid;
+    paidInput.value = (Number.parseInt(sub.paid) / 100);
     activeContainer.style.display = 'block';
     activeInput.checked = sub.active;
     toggleModal(addSubscriptionModal);
@@ -397,7 +407,7 @@ Subscription:${data.expiresAt}
       ?.getAttribute('data-id');
     const boughtAt = elements['boughtAt'].value;
     const expiresAt = elements['expiresAt'].value;
-    const paid = elements['paid'].value;
+    const paid = convertInCents(elements['paid'].value);
     const active = elements['active'].checked;
     console.log(active);
     if (!userId || !courseId || !boughtAt || !paid) {
