@@ -448,12 +448,18 @@ Subscription:${data.expiresAt}
           _id: subs?.data?.subscription?.course,
           name: courseInput?.value,
         },
-        user: { _id: subs?.data?.subscription?.user, email: userInput?.value, name: subs?.data?.subscription?.user?.name },
+        user: {
+          _id: subs?.data?.user?._id,
+          name: subs?.data?.user?.name,
+          email: subs.data?.user?.email
+        },
         boughtAt,
         expiresAt,
         active: true,
         paid: subs?.data?.subscription?.paid,
       };
+
+      console.log(data);
 
       __GLOBAL_PURCHASE[__GLOBAL_PURCHASE.table] = [data, ...__GLOBAL_PURCHASE[__GLOBAL_PURCHASE.table]];
       emptyUpNode();

@@ -9,7 +9,7 @@ const exportSheet = require('../utils/export');
 
 exports.createSubscription = catchAsync(async (req, res, next) => {
   //verify student
-  const __user = await user.findOne({ _id: req.body.userId }).select('name');
+  const __user = await user.findOne({ _id: req.body.userId }).select('name email');
   if (!user) return next('User Not Found!', 404);
   const hasSubscribed = await Subscription.findOne({
     user: req.body.userId,
@@ -21,19 +21,19 @@ exports.createSubscription = catchAsync(async (req, res, next) => {
       new AppError('User has already subscribed to this course', 401)
     );
 
-  const subscription = await new Subscription({
+  const subscription = await Subscription.create({
     user: req.body.userId,
     course: req.body.courseId,
     boughtAt: req.body.boughtAt,
     expiresAt: req.body.expiresAt === "" ? undefined : req.body.expiresAt,
     createdAt: Date.now(),
     active: true,
-    paid: req.body.paid,
-  }).save();
+    paid: req.body.paid
+  })
 
-  subscription["user"] = { _id: __user._id, name: __user.name }
+
   return res.status(200).json({
-    status: 'success', data: {subscription}
+    status: 'success', data: { subscription, user: { _id: __user._id, name: __user.name, email: __user.email } }
   });
 });
 

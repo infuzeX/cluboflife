@@ -16,6 +16,7 @@ exports.userSignup = catchAsync(async (req, res, next) => {
     password: req.body.password,
     createdAt: Date.now(),
   });
+
   return res.status(200).json({ status: 'success', data: { user } });
 });
 
