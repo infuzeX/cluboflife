@@ -8,7 +8,7 @@ html, body {
 nav {
     background: url('./assets/images/beach.jpg');
     background: linear-gradient( 0deg, rgba(22, 21, 22, 0.39), rgba(34, 33, 33, 0.794)), url('./assets/images/beach.jpg');
-    height: 40vh;
+    height: 60vh;
     /* filter: grayscale(0.5) blur(10px); */
     background-repeat: round;
 }
@@ -159,7 +159,12 @@ nav p {
     text-decoration: none;
     padding:5px;
     margin:15px auto;
-    border-bottom:2px solid #333;
+    border:2px solid #333;
+    border-radius: 10px;
+}
+.course>.course-content>a:hover {
+    background-color: #333;
+    color: #fff;
 }
 
 .course>.course-content>.foot-cont {
@@ -174,10 +179,10 @@ nav p {
     margin: auto 0;
 }
 
-.course:hover {
+/*.course:hover {
     transform: scale(1.1);
     transition: all 0.9s;
-}
+}*/
 
 .perc {
     display: flex;

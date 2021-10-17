@@ -9,7 +9,7 @@
     color:#FBFBFD;
 }
 #nav{
-    background-image: url(img1.jpg);
+    background:url('/public/assets/images/beach.jpg');
     background-position:center;
     background-repeat: no-repeat;
     background-size: cover;
