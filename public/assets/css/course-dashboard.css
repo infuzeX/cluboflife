@@ -107,12 +107,14 @@ body {
 
 .course>div>h3 {
     margin-top: 0;
+    margin-bottom: 0;
     height: 45px;
 }
 
 .course>div>.subtitle {
     font-size: 0.9rem;
     height: 70px;
+    margin: 0;
 }
 
 .course>div>.instructor>span:nth-child(1) {

@@ -30,11 +30,9 @@
       </div>
       <form class="form addStudent subscriptions-form">
         <label>Select User</label>
-        <input list="userList" name="user" class="userAdd input" autocomplete="off" id="nameList" required />
-        <datalist id="userList" class="userDropdown"> </datalist>
+        <select name="user" class="select input userDropdown"></select>
         <label>Select Course</label>
-        <input list="course" name="course" class="courseAdd input" autocomplete="off" id="courseList" required />
-        <datalist id="course" class="courseDropdown"> </datalist>
+        <select name="course" class="select input courseDropdown"></select>
         <label>Purchased Date</label>
         <input type="date" name="boughtAt" class="input boughtAtAdd" required />
         <label>Expiry Date</label>

@@ -12,12 +12,15 @@
   };
 
   const addSubscriptionForm = document.querySelector('.addStudent');
+  //form select fields dropdown
   const userDropdown = document.querySelectorAll('.userDropdown');
-  const coursDropdown = document.querySelectorAll('.courseDropdown');
-  const userInput = document.querySelector('#nameList');
-  const courseInput = document.querySelector('#courseList');
+  const courseDropdown = document.querySelectorAll('.courseDropdown');
+  //form input fields
+  //const userInput = document.querySelector('#nameList');
+  //const courseInput = document.querySelector('#courseList');
   const boughtInput = document.querySelector('.boughtAtAdd');
   const expiresInput = document.querySelector('.expireAtAdd');
+  //from input fields
   const user = document.querySelector('#userList');
   const course = document.querySelector('#course');
   const paidInput = document.querySelector('.paid');
@@ -176,18 +179,14 @@
   });
   /**FILTER FUNCTIONS ENDS */
 
-  const pushToDropdown = (arr, dropdown) => {
+  const pushToDropdown = (arr, dropdowns) => {
     if (!arr || !arr.length) return;
     arr.forEach((item) => {
       const option = document.createElement('option');
-      option.setAttribute('data-id', item._id);
-      option.textContent = item?.email || item.name;
-      option.value = item.email || item.name;
-      option.label = item.email || item.name;
-      option.setAttribute('id', item?.email || item.name);
-      dropdown.forEach((menu) => menu.append(option));
+      option.value = item._id;
+      option.textContent = item.name;
+      dropdowns.forEach(dropdown => dropdown.appendChild(option));
     });
-    console.log(dropdown, arr);
   };
 
   const emptyUpNode = () => (studentDetail.innerHTML = '');
@@ -313,7 +312,7 @@ Subscription:${data.expiresAt}
       if (course.status === 'error' || course.status === 'fail') {
         throw new Error(course.message);
       }
-      pushToDropdown(course?.data?.courses, coursDropdown);
+      pushToDropdown(course?.data?.courses, courseDropdown);
       __GLOBAL_PURCHASE.courses = [...course?.data?.courses];
     } catch (error) {
       console.log(error);
@@ -372,10 +371,18 @@ Subscription:${data.expiresAt}
     }
   };
 
+  function selectOption(dropdown, value, isSelected) {
+    [...dropdown[0].children].forEach(option => {
+      if (option.value === value) option.selected = isSelected;
+    })
+  }
+
   function onEdit(sub) {
     __GLOBAL_PURCHASE.edit = sub._id;
-    userInput.value = sub.user?.email || '';
-    courseInput.value = sub.course?.name || '';
+    //userInput.value = sub.user?.email || '';
+    selectOption(userDropdown, sub.user._id, true)
+    //courseInput.value = sub.course?.name || '';
+    selectOption(courseDropdown, sub.course._id, true);
     boughtInput.value = sub.boughtAt && genDate(sub.boughtAt);
     expiresInput.value = sub.expiresAt && genDate(sub.expiresAt);
     paidInput.value = (Number.parseInt(sub.paid) / 100);
@@ -386,8 +393,8 @@ Subscription:${data.expiresAt}
 
   function clear() {
     __GLOBAL_PURCHASE.edit = '';
-    userInput.value = '';
-    courseInput.value = '';
+    //userInput.value = '';
+    ///courseInput.value = '';
     boughtInput.value = '';
     expiresInput.value = '';
     paidInput.value = '';
@@ -399,12 +406,12 @@ Subscription:${data.expiresAt}
   addSubscriptionForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const elements = addSubscriptionForm.elements;
-    const userId = user?.options
+    const userId = elements["user"].value; /*user?.options
       ?.namedItem(userInput?.value)
-      ?.getAttribute('data-id');
-    const courseId = course?.options
+      ?.getAttribute('data-id');*/
+    const courseId = elements["course"].value/*course?.options
       ?.namedItem(courseInput?.value)
-      ?.getAttribute('data-id');
+      ?.getAttribute('data-id');*/
     const boughtAt = elements['boughtAt'].value;
     const expiresAt = elements['expiresAt'].value;
     const paid = convertInCents(elements['paid'].value);
@@ -466,8 +473,8 @@ Subscription:${data.expiresAt}
       showSubscription(__GLOBAL_PURCHASE[__GLOBAL_PURCHASE.table]);
       toggleModal(addSubscriptionModal);
       tempAlert('Added Subscription', 2000);
-      userInput.value = '';
-      courseInput.value = '';
+      //userInput.value = '';
+      //courseInput.value = '';
       boughtInput.value = '';
       expiresInput.value = '';
       paidInput.value = '';

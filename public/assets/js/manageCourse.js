@@ -45,6 +45,7 @@
     clone.querySelector('.course').setAttribute('id', data);
     clone.querySelector('img').src = course?.image;
     clone.querySelector('h3').textContent = course?.name;
+    clone.querySelector('.course-code').textContent = course?.courseCode;
     clone.querySelector('.subtitle').textContent = course?.description.slice(0, 90) + "...";
     clone.querySelector('.author').textContent = course?.instructor;
 

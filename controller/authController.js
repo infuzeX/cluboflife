@@ -84,7 +84,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   const decoded = jwt.verify(token, emailSecret);
   if (!decoded) return next(new AppError('Link expired', 401));
   const user = await User.findOne({ _id: decoded.userId }).select('password');
-  if (!user) return next(new AppError('Link expired', 401));
+  if (!user) return next(new AppError('User not found', 401));
   user.password = password;
   await user.save();
   return res.status(200).json({ status: 'success' });
