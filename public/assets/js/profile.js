@@ -92,6 +92,11 @@
   const genDate = (date) => {
     return date ? date?.split('T')[0] : '';
   };
+  const convertInUSD = (amount) => {
+    amount = Number.parseInt(amount);
+    if (isNaN(amount)) return undefined;
+    return (amount / 100);
+  }
   const createProductNode = (product, i) => {
     const clone = template.content.cloneNode(true);
     if (!product?.course) {
@@ -103,7 +108,7 @@
     clone.querySelector('.course').style.color = product?.course ? "black" : "grey";
     clone.querySelector('.boughtAt').textContent = genDate(product?.boughtAt);
     clone.querySelector('.expiresAt').textContent = !product.expiresAt ? "Never" : genDate(product?.expiresAt);
-    clone.querySelector('.paid').textContent = product?.paid;
+    clone.querySelector('.paid').textContent = convertInUSD(product?.paid);
     clone.querySelector('.active').textContent = product?.active;
 
     courseContainer.append(clone);
@@ -131,8 +136,9 @@
 
   getOrder();
 
-  //Notifications
+  //Notifications is temperoray hidden
   const notificationsEl = document.querySelector('.notifications');
+  notificationsEl.style.display = "none";
   const showNotifications = (notifications) => {
     let lists = "";
     notifications.forEach(data => {
@@ -163,7 +169,7 @@
     }
   };
 
-  getNotifications()
+  //getNotifications()
 })();
 
 const tabs = document.querySelectorAll('.tabs');

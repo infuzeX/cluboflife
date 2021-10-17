@@ -31,7 +31,6 @@ exports.createSubscription = catchAsync(async (req, res, next) => {
     paid: req.body.paid
   })
 
-
   return res.status(200).json({
     status: 'success', data: { subscription, user: { _id: __user._id, name: __user.name, email: __user.email } }
   });
