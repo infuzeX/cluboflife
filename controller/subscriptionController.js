@@ -6,10 +6,9 @@ const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const { subscriptionColumn } = require('../utils/column');
 const exportSheet = require('../utils/export');
+const sendMail = require('../utils/email')
 
 exports.createSubscription = catchAsync(async (req, res, next) => {
-  //verify student
-  const __user = await user.findOne({ _id: req.body.userId }).select('name email');
   if (!user) return next('User Not Found!', 404);
   const hasSubscribed = await Subscription.findOne({
     user: req.body.userId,
@@ -31,8 +30,43 @@ exports.createSubscription = catchAsync(async (req, res, next) => {
     paid: req.body.paid
   })
 
+  const sub = await Subscription.populate(subscription, [
+    { path: 'course', select: 'name courseCode' },
+    { path: 'user', select: 'name email' }
+  ]);
+
+  if (!sub.user || !sub.course) {
+    await subscription.remove();
+    console.log("subscription deleted");
+    return next(new AppError(`Incorrect data! please check selected course and user`, 400));
+  }
+
+  let mailSent = false;
+  try {
+    await sendMail({
+      email: sub.user.email,
+      subject: "Club Of Life Course Subscription!",
+      message: `
+Hey ${sub.user.name}!
+
+Thanks for buying our course!
+
+Course Details
+
+Course Name: ${sub.course.name}
+Course Code: ${sub.course.courseCode}
+Amount: ${sub.paid / 100} USD
+Subcription Expires On: ${new Date(subscription.expiresAt).toLocaleDateString() || "Unlimited Access"}
+`
+    });
+    mailSent = true;
+  } catch (err) {
+    mailSent = false;
+    console.log(err.message)
+  }
+
   return res.status(200).json({
-    status: 'success', data: { subscription, user: { _id: __user._id, name: __user.name, email: __user.email } }
+    status: 'success', data: { subscription: sub, mailSent }
   });
 });
 

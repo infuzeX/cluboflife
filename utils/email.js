@@ -1,7 +1,6 @@
 const nodemailer = require('nodemailer');
 
 const sendMail = async (options) => {
-  console.log(options);
   //create transporter
   const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
@@ -14,7 +13,7 @@ const sendMail = async (options) => {
 
   //Define email options
   const mailOptions = {
-    from: `WayToStock <${process.env.EMAIL_USERNAME}>`,
+    from: `Club Of Life <${process.env.EMAIL_USERNAME}>`,
     to: options.email,
     subject: options.subject,
     text: options.message,

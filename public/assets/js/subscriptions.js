@@ -445,13 +445,13 @@ Subscription:${data.expiresAt}
       const data = {
         _id: subs?.data?.subscription?._id,
         course: {
-          _id: subs?.data?.subscription?.course,
-          name: courseInput?.value,
+          _id: subs?.data?.subscription?.course?._id,
+          name: subs?.data?.subscription?.course?.name
         },
         user: {
-          _id: subs?.data?.user?._id,
-          name: subs?.data?.user?.name,
-          email: subs.data?.user?.email
+          _id: subs?.data?.subscription?.user?._id,
+          name: subs?.data?.subscription?.user?.name,
+          email: subs.data?.subscription?.user?.email
         },
         boughtAt,
         expiresAt,

@@ -6,9 +6,11 @@ const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const { userColumn } = require('../utils/column');
 const exportSheet = require('../utils/export');
+const sendMail = require('../utils/email');
 
 
 exports.userSignup = catchAsync(async (req, res, next) => {
+  let mailSent = false;
   const user = await User.create({
     name: req.body.name,
     email: req.body.email,
@@ -17,7 +19,27 @@ exports.userSignup = catchAsync(async (req, res, next) => {
     createdAt: Date.now(),
   });
 
-  return res.status(200).json({ status: 'success', data: { user } });
+  try {
+    await sendMail({
+      email: req.body.email,
+      subject: "Club Of Life Login Credentials!",
+      message: `
+      CREDENTIALS
+        
+      Name: ${req.body.name}
+      Email: ${req.body.email}
+      Password: ${req.body.password}
+
+      Note: Please Do Not Share This Credentials With Anyone!
+      `
+    });
+    mailSent = true;
+  } catch (err) {
+    mailSent = false;
+    console.log(err.message)
+  }
+
+  return res.status(200).json({ status: 'success', data: { user, mailSent } });
 });
 
 exports.fetchUsers = catchAsync(async (req, res, next) => {
