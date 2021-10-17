@@ -62,7 +62,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   try {
     await sendEmail({
       email: user.email,
-      subject: 'Password Reset Valid only for 30 min',
+      subject: 'Password Reset Valid only for 5 min',
       message,
     });
 
