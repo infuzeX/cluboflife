@@ -66,10 +66,8 @@
         } course ${course?.instructor ? `by ${course?.instructor}` : ''}`;
       toggleDelete();
     });
-
-    shareButton.addEventListener('click', () => {
-      window.location.href = course.courseLink;
-    })
+    
+    shareButton.children[0].setAttribute('href', course.courseLink);
     courseContainer.appendChild(clone);
   };
 
